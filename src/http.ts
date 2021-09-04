@@ -8,7 +8,7 @@ export interface httpResponse {
     data: string
 }
 
-export function httpRequest(reqOpts: RequestOptions | string | URL, body: any): Promise<httpResponse> {
+export function httpRequest(reqOpts: RequestOptions | string | URL, body?: any): Promise<httpResponse> {
 
 
 
@@ -34,7 +34,9 @@ export function httpRequest(reqOpts: RequestOptions | string | URL, body: any): 
             reject(err);
         });
 
-        req.write(body);
+        if(body)
+            req.write(body);
+
         req.flushHeaders();
         req.end();
 
