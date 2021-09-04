@@ -1,15 +1,23 @@
 {
-  "name": "bundutils",
+  "name": "iggs-utils",
   "version": "1.0.0",
-  "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"tsc"
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^16.7.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexrr2iggs/iggs-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexrr2iggs/iggs-utils/issues"
+  },
+  "homepage": "https://github.com/alexrr2iggs/iggs-utils#readme",
+  "description": ""
 }
