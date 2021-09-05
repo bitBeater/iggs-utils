@@ -2,23 +2,25 @@ import { ClientRequest, get, IncomingMessage, request, RequestOptions } from 'ht
 import { request as httpsRequest, get as httpsGet } from 'https'
 import { stringify } from 'querystring';
 
+export interface HttpRequestOptions extends RequestOptions {
+    url?: string
+    searchParams?: { [key: string]: string }
+}
+
 
 export interface httpResponse {
     response: IncomingMessage,
     data: string
 }
 
-export function httpRequest(reqOpts: RequestOptions | string | URL, body?: any): Promise<httpResponse> {
-
-
-
+export function httpRequest(reqOpts: HttpRequestOptions | string | URL, body?: any): Promise<httpResponse> {
 
     const retVAl = new Promise<httpResponse>((resolve, reject) => {
 
-
+        const requestOpts: RequestOptions | string | URL = adaptrequestOpts(reqOpts);
         const reqFn = getRequestFn(reqOpts)
 
-        const req = reqFn(reqOpts, (response) => {
+        const req = reqFn(requestOpts, (response) => {
             let data = '';
             // a data chunk has been received.
             response.on('data', (chunk) => {
@@ -34,7 +36,7 @@ export function httpRequest(reqOpts: RequestOptions | string | URL, body?: any):
             reject(err);
         });
 
-        if(body)
+        if (body)
             req.write(body);
 
         req.flushHeaders();
@@ -87,19 +89,39 @@ export function objToCookies(obj: any): string {
     return retVal;
 }
 
-export function cookiesToObj(cookiesStr:string): object {
-    if(!cookiesStr) return
+export function cookiesToObj(cookiesStr: string): object {
+    if (!cookiesStr) return
 
-    let cookiesObj:any = {};
-    let cookiesArr=cookiesStr.split(';');
+    let cookiesObj: any = {};
+    let cookiesArr = cookiesStr.split(';');
 
-    for (const cookieStr of cookiesArr){
-        const [key,value] = cookieStr.split('=');
-        cookiesObj[key.trim()]=value.trim();
+    for (const cookieStr of cookiesArr) {
+        const [key, value] = cookieStr.split('=');
+        cookiesObj[key.trim()] = value.trim();
     }
 
     return cookiesObj;
 }
 
+
+function adaptrequestOpts(reqOpts: string | HttpRequestOptions | URL): string | RequestOptions | URL {
+    if (!reqOpts) return
+
+    if (typeof reqOpts === 'string' || reqOpts instanceof URL) return reqOpts
+
+    if (!reqOpts.url) return reqOpts
+
+
+    const url = new URL(reqOpts.url);
+    reqOpts.protocol = url.protocol;
+    reqOpts.port = url.port;
+    reqOpts.host = url.host;
+    reqOpts.hostname = url.hostname;
+    reqOpts.path = url.pathname;
+    if (reqOpts?.searchParams)
+        reqOpts.path +=  '?' + stringify(reqOpts?.searchParams);
+
+    return reqOpts;
+}
 //---------------------------------------------------------------------------------------------------------------------------------
 
