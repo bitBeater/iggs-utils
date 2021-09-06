@@ -17,10 +17,10 @@ export function httpRequest(reqOpts: HttpRequestOptions | string | URL, body?: a
 
     const retVAl = new Promise<httpResponse>((resolve, reject) => {
 
-        const requestOpts: RequestOptions | string | URL = adaptrequestOpts(reqOpts);
+        reqOpts = adaptRequestOpts(reqOpts);
         const reqFn = getRequestFn(reqOpts)
 
-        const req = reqFn(requestOpts, (response) => {
+        const req = reqFn(reqOpts, (response) => {
             let data = '';
             // a data chunk has been received.
             response.on('data', (chunk) => {
@@ -104,7 +104,7 @@ export function cookiesToObj(cookiesStr: string): object {
 }
 
 
-function adaptrequestOpts(reqOpts: string | HttpRequestOptions | URL): string | RequestOptions | URL {
+function adaptRequestOpts(reqOpts: string | HttpRequestOptions | URL): string | RequestOptions | URL {
     if (!reqOpts) return
 
     if (typeof reqOpts === 'string' || reqOpts instanceof URL) return reqOpts
