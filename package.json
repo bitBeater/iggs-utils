@@ -1,7 +1,7 @@
 {
   "name": "iggs-utils",
   "version": "1.0.6",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc"
   },
