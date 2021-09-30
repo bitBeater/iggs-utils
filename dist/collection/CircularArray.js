@@ -11,7 +11,7 @@ var CircularArray = /** @class */ (function () {
         this.array = items || [];
     }
     CircularArray.prototype.get = function (index) {
-        this.currentIndex = (index % this.array.length + this.array.length) % this.array.length;
+        this.currentIndex = ((index % this.array.length) + this.array.length) % this.array.length;
         return this.array[this.currentIndex];
     };
     CircularArray.prototype.left = function () {

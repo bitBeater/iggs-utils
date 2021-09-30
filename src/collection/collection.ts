@@ -1,1 +1,1 @@
-export {CircularArray} from "./CircularArray"
+export { CircularArray } from './CircularArray';

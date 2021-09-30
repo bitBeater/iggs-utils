@@ -1,127 +1,114 @@
-import { ClientRequest, get, IncomingMessage, request, RequestOptions } from 'http'
-import { request as httpsRequest, get as httpsGet } from 'https'
+import { ClientRequest, get, IncomingMessage, request, RequestOptions } from 'http';
+import { request as httpsRequest, get as httpsGet } from 'https';
 import { stringify } from 'querystring';
+import { URL } from 'url';
 
 export interface HttpRequestOptions extends RequestOptions {
-    url?: string
-    searchParams?: { [key: string]: string }
+	url?: string;
+	searchParams?: { [key: string]: string };
 }
 
-
 export interface httpResponse {
-    response: IncomingMessage,
-    data: string
+	response: IncomingMessage;
+	data: string;
 }
 
 export function httpRequest(reqOpts: HttpRequestOptions | string | URL, body?: any): Promise<httpResponse> {
+	const retVAl = new Promise<httpResponse>((resolve, reject) => {
+		reqOpts = adaptRequestOpts(reqOpts);
+		const reqFn = getRequestFn(reqOpts);
 
-    const retVAl = new Promise<httpResponse>((resolve, reject) => {
+		const req = reqFn(reqOpts, response => {
+			let data = '';
+			// a data chunk has been received.
+			response.on('data', chunk => {
+				data += chunk;
+			});
 
-        reqOpts = adaptRequestOpts(reqOpts);
-        const reqFn = getRequestFn(reqOpts)
+			// complete response has been received.
+			response.on('end', () => {
+				resolve({ response, data });
+			});
+		}).on('error', err => {
+			reject(err);
+		});
 
-        const req = reqFn(reqOpts, (response) => {
-            let data = '';
-            // a data chunk has been received.
-            response.on('data', (chunk) => {
-                data += chunk;
-            });
+		if (body) req.write(body);
 
-            // complete response has been received.
-            response.on('end', () => {
-                resolve({ response, data })
-            });
+		req.flushHeaders();
+		req.end();
+	});
 
-        }).on("error", (err) => {
-            reject(err);
-        });
-
-        if (body)
-            req.write(body);
-
-        req.flushHeaders();
-        req.end();
-
-    });
-
-    return retVAl;
+	return retVAl;
 }
 
-
 function getProtocol(req: RequestOptions | string | URL): 'https' | 'http' {
+	let rq = req;
 
-    let rq = req;
+	if (typeof rq === 'string') {
+		rq = new URL(rq);
+	}
 
-    if (typeof rq === 'string') {
-        rq = new URL(rq)
-    }
-
-    return rq?.protocol?.replace(/\:/gm, '') as 'https' | 'http'
+	return rq?.protocol?.replace(/\:/gm, '') as 'https' | 'http';
 }
 
 function getRequestFn(req: RequestOptions | string | URL): (options: RequestOptions | string | URL, callback?: (res: IncomingMessage) => void) => ClientRequest {
-    const protocol = getProtocol(req)
+	const protocol = getProtocol(req);
 
-    if (typeof req === 'string' || req instanceof URL) {
-        if (protocol === 'http') return get;
-        if (protocol === 'https') return httpsGet;
-        return get
-    }
+	if (typeof req === 'string' || req instanceof URL) {
+		if (protocol === 'http') return get;
+		if (protocol === 'https') return httpsGet;
+		return get;
+	}
 
-    if (protocol === 'http') return request;
-    if (protocol === 'https') return httpsRequest;
+	if (protocol === 'http') return request;
+	if (protocol === 'https') return httpsRequest;
 
-    return request
+	return request;
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------
 
 export function objToCookies(obj: any): string {
-    let retVal = ''
-    let cookies: string[] = []
+	let retVal = '';
+	let cookies: string[] = [];
 
-    for (const key of Object.keys(obj))
-        if (obj[key])
-            cookies.push(`${key}=${obj[key]}`)
+	for (const key of Object.keys(obj)) if (obj[key]) cookies.push(`${key}=${obj[key]}`);
 
-    retVal = cookies.join(';');
+	retVal = cookies.join(';');
 
-    return retVal;
+	return retVal;
 }
 
 export function cookiesToObj(cookiesStr: string): object {
-    if (!cookiesStr) return
+	if (!cookiesStr) return;
 
-    let cookiesObj: any = {};
-    let cookiesArr = cookiesStr.split(';');
+	let cookiesObj: any = {};
+	let cookiesArr = cookiesStr.split(';');
 
-    for (const cookieStr of cookiesArr) {
-        const [key, value] = cookieStr.split('=');
-        cookiesObj[key.trim()] = value.trim();
-    }
+	for (const cookieStr of cookiesArr) {
+		const [key, value] = cookieStr.split('=');
+		cookiesObj[key.trim()] = value.trim();
+	}
 
-    return cookiesObj;
+	return cookiesObj;
 }
-
 
 function adaptRequestOpts(reqOpts: string | HttpRequestOptions | URL): string | RequestOptions | URL {
-    if (!reqOpts) return
+	if (!reqOpts) return;
 
-    if (typeof reqOpts === 'string' || reqOpts instanceof URL) return reqOpts
+	if (typeof reqOpts === 'string' || reqOpts instanceof URL) return reqOpts;
 
-    if (!reqOpts.url) return reqOpts
+	if (!reqOpts.url) return reqOpts;
 
+	const url = new URL(reqOpts.url);
+	reqOpts.protocol = url.protocol;
+	reqOpts.port = url.port;
+	reqOpts.host = url.host;
+	reqOpts.hostname = url.hostname;
+	reqOpts.path = url.pathname;
+	if (reqOpts?.searchParams) reqOpts.path += '?' + stringify(reqOpts?.searchParams);
 
-    const url = new URL(reqOpts.url);
-    reqOpts.protocol = url.protocol;
-    reqOpts.port = url.port;
-    reqOpts.host = url.host;
-    reqOpts.hostname = url.hostname;
-    reqOpts.path = url.pathname;
-    if (reqOpts?.searchParams)
-        reqOpts.path +=  '?' + stringify(reqOpts?.searchParams);
-
-    return reqOpts;
+	return reqOpts;
 }
 //---------------------------------------------------------------------------------------------------------------------------------
-

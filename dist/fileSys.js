@@ -4,7 +4,7 @@ exports.fileLines = exports.insertBetweenPlacweHolders = exports.readJson = expo
 var fs_1 = require("fs");
 var os_1 = require("os");
 var path_1 = require("path");
-exports.DESKTOP_PATH = path_1.join(os_1.homedir(), "Desktop");
+exports.DESKTOP_PATH = path_1.join(os_1.homedir(), 'Desktop');
 function writeObjectToDesktop(fileName, object) {
     fs_1.writeFileSync(exports.DESKTOP_PATH + "/" + fileName, JSON.stringify(object));
 }

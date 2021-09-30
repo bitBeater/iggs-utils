@@ -1,5 +1,6 @@
 /// <reference types="node" />
 import { IncomingMessage, RequestOptions } from 'http';
+import { URL } from 'url';
 export interface HttpRequestOptions extends RequestOptions {
     url?: string;
     searchParams?: {
