@@ -1,10 +1,19 @@
-import { readFileSync } from 'fs';
-import { readFile } from 'fs/promises';
+import { readFileSync} from 'fs';
 import { join } from 'path';
 
 export function getConf<T>(path: string): Promise<T> {
 	if (!path) path = join(__dirname, 'config.json');
-	return readFile(path).then(f => JSON.parse(f.toString('utf-8')));
+
+	return  new Promise((resolve, reject) => {
+		
+			try {
+				resolve(JSON.parse(readFileSync(path).toString('utf-8')));
+				
+			} catch (error) {
+				reject(error)
+			}
+		
+	  });
 }
 
 export function getConfSync<T>(path: string): T {
