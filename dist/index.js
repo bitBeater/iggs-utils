@@ -19,11 +19,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.conf = exports.collection = exports.http = exports.bytes = exports.fileSys = exports.cons = void 0;
+exports.math = exports.conf = exports.collection = exports.http = exports.bytes = exports.fileSys = exports.cons = void 0;
 exports.cons = __importStar(require("./cons"));
 exports.fileSys = __importStar(require("./fileSys"));
 exports.bytes = __importStar(require("./bytes"));
 exports.http = __importStar(require("./http"));
 exports.collection = __importStar(require("./collection/collection"));
 exports.conf = __importStar(require("./conf"));
+exports.math = __importStar(require("./math"));
 //# sourceMappingURL=../src/dist/index.js.map
