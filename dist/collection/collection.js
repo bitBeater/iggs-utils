@@ -14,4 +14,4 @@ exports.CircularArray = void 0;
 var CircularArray_1 = require("./CircularArray");
 Object.defineProperty(exports, "CircularArray", { enumerable: true, get: function () { return CircularArray_1.CircularArray; } });
 __exportStar(require("./collectionOpperations"), exports);
-//# sourceMappingURL=../../src/dist/collection/collection.js.map
+//# sourceMappingURL=collection.js.map

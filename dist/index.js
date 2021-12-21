@@ -28,4 +28,4 @@ exports.collection = __importStar(require("./collection/collection"));
 exports.conf = __importStar(require("./conf"));
 exports.math = __importStar(require("./math"));
 exports.json = __importStar(require("./json"));
-//# sourceMappingURL=../src/dist/index.js.map
+//# sourceMappingURL=index.js.map

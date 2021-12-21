@@ -51,4 +51,4 @@ function calculatePercent(value, percent) {
     return value + value * (percent / 100);
 }
 exports.calculatePercent = calculatePercent;
-//# sourceMappingURL=../src/dist/math.js.map
+//# sourceMappingURL=math.js.map

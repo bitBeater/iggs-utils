@@ -37,4 +37,4 @@ export declare function percDiff(start: number, end: number): number;
  * ```
  */
 export declare function calculatePercent(value: number, percent: number): number;
-//# sourceMappingURL=../src/dist/math.d.ts.map
+//# sourceMappingURL=math.d.ts.map

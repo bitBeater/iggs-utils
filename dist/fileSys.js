@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.existsFile = exports.deserealizeObject = exports.serealizeObject = exports.readGZip = exports.writeGZip = exports.fileLines = exports.insertBetweenPlacweHolders = exports.readJson = exports.writeJson = exports.write = exports.writeToDesktop = exports.writeObjectToDesktop = exports.DESKTOP_PATH = void 0;
+exports.exists = exports.deserealizeObject = exports.serealizeObject = exports.readGZip = exports.writeGZip = exports.fileLines = exports.insertBetweenPlacweHolders = exports.readJson = exports.writeJson = exports.write = exports.writeToDesktop = exports.writeObjectToDesktop = exports.DESKTOP_PATH = void 0;
 var fs_1 = require("fs");
 var promises_1 = require("fs/promises");
 var os_1 = require("os");
@@ -81,10 +81,10 @@ function deserealizeObject(filePath) {
     return JSON.parse(readGZip(filePath).toString());
 }
 exports.deserealizeObject = deserealizeObject;
-var existsFile = function (path) {
+var exists = function (path) {
     return promises_1.stat(path)
         .then(function () { return true; })
         .catch(function () { return false; });
 };
-exports.existsFile = existsFile;
-//# sourceMappingURL=../src/dist/fileSys.js.map
+exports.exists = exists;
+//# sourceMappingURL=fileSys.js.map

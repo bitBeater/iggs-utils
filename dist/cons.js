@@ -48,4 +48,4 @@ function printObj(obj) {
     }
 }
 exports.printObj = printObj;
-//# sourceMappingURL=../src/dist/cons.js.map
+//# sourceMappingURL=cons.js.map

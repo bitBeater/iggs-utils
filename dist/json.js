@@ -8,4 +8,4 @@ function parse(txt) {
     return JSON.parse(txt, parseDate);
 }
 exports.parse = parse;
-//# sourceMappingURL=../src/dist/json.js.map
+//# sourceMappingURL=json.js.map

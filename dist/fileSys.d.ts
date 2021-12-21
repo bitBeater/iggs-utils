@@ -16,5 +16,5 @@ export declare function readGZip(path: string, readFileOptions?: {
 }, zlibOptions?: ZlibOptions): Buffer;
 export declare function serealizeObject(filePath: string, object: any): void;
 export declare function deserealizeObject(filePath: string): any;
-export declare const existsFile: (path: string) => Promise<boolean>;
-//# sourceMappingURL=../src/dist/fileSys.d.ts.map
+export declare const exists: (path: string) => Promise<boolean>;
+//# sourceMappingURL=fileSys.d.ts.map

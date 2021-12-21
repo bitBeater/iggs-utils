@@ -7,4 +7,4 @@ export declare class CircularArray<T> {
     right(): T;
     peek(): T;
 }
-//# sourceMappingURL=../../src/dist/collection/CircularArray.d.ts.map
+//# sourceMappingURL=CircularArray.d.ts.map

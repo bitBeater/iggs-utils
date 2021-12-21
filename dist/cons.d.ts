@@ -31,4 +31,4 @@ export declare const logColors: {
     };
 };
 export declare function printObj(obj: any): void;
-//# sourceMappingURL=../src/dist/cons.d.ts.map
+//# sourceMappingURL=cons.d.ts.map

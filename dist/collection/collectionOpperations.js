@@ -16,4 +16,4 @@ function arrayDifferences(a1, a2) {
     return retVal;
 }
 exports.arrayDifferences = arrayDifferences;
-//# sourceMappingURL=../../src/dist/collection/collectionOpperations.js.map
+//# sourceMappingURL=collectionOpperations.js.map

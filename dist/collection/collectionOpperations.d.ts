@@ -5,4 +5,4 @@
  * @returns return the array difference a1-a2
  */
 export declare function arrayDifferences(a1?: number[], a2?: number[]): number[];
-//# sourceMappingURL=../../src/dist/collection/collectionOpperations.d.ts.map
+//# sourceMappingURL=collectionOpperations.d.ts.map
