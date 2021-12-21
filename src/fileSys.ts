@@ -1,6 +1,9 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync, WriteFileOptions, writeFileSync } from 'fs';
+import { stat } from 'fs/promises';
 import { homedir } from 'os';
 import { join } from 'path';
+
+import { gzipSync, unzipSync, ZlibOptions } from 'zlib';
 
 export const DESKTOP_PATH = join(homedir(), 'Desktop');
 
@@ -57,3 +60,24 @@ export function fileLines(path: string, lineSeparator = /[\n|\r]/): string[] {
 		console.error(error);
 	}
 }
+
+export function writeGZip(filePath: string, data: string | Buffer, writeFileOptions?: WriteFileOptions, zLibOptions?: ZlibOptions) {
+	const buffer = data instanceof Buffer ? data : Buffer.from(data);
+	const zippBuffer = gzipSync(buffer, zLibOptions);
+	writeFileSync(filePath, zippBuffer, writeFileOptions);
+}
+
+export function readGZip(path: string, readFileOptions?: { encoding?: null; flag?: string }, zlibOptions?: ZlibOptions): Buffer {
+	const data = readFileSync(path, readFileOptions);
+	return unzipSync(data, zlibOptions);
+}
+
+export function serealizeObject(filePath: string, object: any) {
+	writeGZip(filePath, JSON.stringify(object));
+}
+
+export function deserealizeObject(filePath: string) {
+	return JSON.parse(readGZip(filePath).toString());
+}
+
+export const existsFile:(path:string)=>Promise<boolean> = (path:string)=> stat(path).then(()=> true).catch( () => false );
