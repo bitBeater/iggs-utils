@@ -80,4 +80,7 @@ export function deserealizeObject(filePath: string) {
 	return JSON.parse(readGZip(filePath).toString());
 }
 
-export const existsFile:(path:string)=>Promise<boolean> = (path:string)=> stat(path).then(()=> true).catch( () => false );
+export const existsFile: (path: string) => Promise<boolean> = (path: string) =>
+	stat(path)
+		.then(() => true)
+		.catch(() => false);

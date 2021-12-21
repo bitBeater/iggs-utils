@@ -1,5 +1,5 @@
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.calculatePercent = exports.percDiff = exports.round = void 0;
 /**
  *
@@ -8,11 +8,9 @@ exports.calculatePercent = exports.percDiff = exports.round = void 0;
  * @returns the rounded number
  */
 function round(n, positions) {
-	if (positions === void 0) {
-		positions = 0;
-	}
-	var exp = Math.pow(10, positions);
-	return Math.round(n * exp) / exp;
+    if (positions === void 0) { positions = 0; }
+    var exp = Math.pow(10, positions);
+    return Math.round(n * exp) / exp;
 }
 exports.round = round;
 /**
@@ -31,7 +29,7 @@ exports.round = round;
  * ```
  */
 function percDiff(start, end) {
-	return (end - start) / (start / 100);
+    return (end - start) / (start / 100);
 }
 exports.percDiff = percDiff;
 /**
@@ -50,7 +48,7 @@ exports.percDiff = percDiff;
  * ```
  */
 function calculatePercent(value, percent) {
-	return value + value * (percent / 100);
+    return value + value * (percent / 100);
 }
 exports.calculatePercent = calculatePercent;
 //# sourceMappingURL=../src/dist/math.js.map

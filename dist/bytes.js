@@ -1,5 +1,5 @@
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.YB = exports.ZB = exports.EB = exports.PB = exports.TB = exports.GB = exports.MB = exports.kB = void 0;
 /**chilo--byte*/
 exports.kB = Math.pow(2, 10);

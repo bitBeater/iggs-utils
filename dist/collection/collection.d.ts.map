@@ -1,1 +1,1 @@
-{"version":3,"file":"collection.d.ts","sourceRoot":"./dist/","sources":["collection/collection.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAE,MAAM,iBAAiB,CAAC"}
+{"version":3,"file":"collection.d.ts","sourceRoot":"./dist/","sources":["collection/collection.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAE,MAAM,iBAAiB,CAAC;AAChD,cAAc,yBAAyB,CAAC"}

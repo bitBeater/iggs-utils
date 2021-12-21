@@ -1,2 +1,2 @@
 export { CircularArray } from './CircularArray';
-export * from './collectionOpperations'
+export * from './collectionOpperations';
