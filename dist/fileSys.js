@@ -84,7 +84,11 @@ exports.deserealizeObject = deserealizeObject;
 var exists = function (path) {
     return promises_1.stat(path)
         .then(function () { return true; })
-        .catch(function () { return false; });
+        .catch(function (e) {
+        if (e.code === 'ENOENT')
+            return false;
+        throw e;
+    });
 };
 exports.exists = exists;
 //# sourceMappingURL=fileSys.js.map

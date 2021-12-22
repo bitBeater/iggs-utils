@@ -83,4 +83,7 @@ export function deserealizeObject(filePath: string) {
 export const exists: (path: string) => Promise<boolean> = (path: string) =>
 	stat(path)
 		.then(() => true)
-		.catch(() => false);
+		.catch(e => {
+			if (e.code === 'ENOENT') return false;
+			throw e;
+		});
