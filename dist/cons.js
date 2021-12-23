@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.printObj = exports.logColors = exports.printNl = void 0;
-function printNl(n) {
-    if (n === void 0) { n = 5; }
-    for (var i = 0; i < n; i++) {
+function printNl(n = 5) {
+    for (let i = 0; i < n; i++) {
         console.log();
     }
 }
@@ -42,8 +41,7 @@ exports.logColors = {
     }
 };
 function printObj(obj) {
-    for (var _i = 0, _a = Object.keys(obj); _i < _a.length; _i++) {
-        var key = _a[_i];
+    for (const key of Object.keys(obj)) {
         console.log(key, ' : ', obj[key]);
     }
 }

@@ -7,9 +7,8 @@ exports.calculatePercent = exports.percDiff = exports.round = void 0;
  * @param positions decimal positions depth to round
  * @returns the rounded number
  */
-function round(n, positions) {
-    if (positions === void 0) { positions = 0; }
-    var exp = Math.pow(10, positions);
+function round(n, positions = 0) {
+    const exp = Math.pow(10, positions);
     return Math.round(n * exp) / exp;
 }
 exports.round = round;

@@ -6,4 +6,6 @@ export * as collection from './collection/collection';
 export * as conf from './conf';
 export * as math from './math';
 export * as json from './json';
+export * as CSV from './CSV';
+export * as object from './object';
 //# sourceMappingURL=index.d.ts.map

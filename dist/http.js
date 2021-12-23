@@ -1,25 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cookiesToObj = exports.objToCookies = exports.httpRequest = void 0;
-var http_1 = require("http");
-var https_1 = require("https");
-var querystring_1 = require("querystring");
-var url_1 = require("url");
+const http_1 = require("http");
+const https_1 = require("https");
+const querystring_1 = require("querystring");
+const url_1 = require("url");
 function httpRequest(reqOpts, body) {
-    var retVAl = new Promise(function (resolve, reject) {
+    const retVAl = new Promise((resolve, reject) => {
         reqOpts = adaptRequestOpts(reqOpts);
-        var reqFn = getRequestFn(reqOpts);
-        var req = reqFn(reqOpts, function (response) {
-            var data = '';
+        const reqFn = getRequestFn(reqOpts);
+        const req = reqFn(reqOpts, response => {
+            let data = '';
             // a data chunk has been received.
-            response.on('data', function (chunk) {
+            response.on('data', chunk => {
                 data += chunk;
             });
             // complete response has been received.
-            response.on('end', function () {
-                resolve({ response: response, data: data });
+            response.on('end', () => {
+                resolve({ response, data });
             });
-        }).on('error', function (err) {
+        }).on('error', err => {
             reject(err);
         });
         if (body)
@@ -32,14 +32,14 @@ function httpRequest(reqOpts, body) {
 exports.httpRequest = httpRequest;
 function getProtocol(req) {
     var _a;
-    var rq = req;
+    let rq = req;
     if (typeof rq === 'string') {
         rq = new url_1.URL(rq);
     }
     return (_a = rq === null || rq === void 0 ? void 0 : rq.protocol) === null || _a === void 0 ? void 0 : _a.replace(/\:/gm, '');
 }
 function getRequestFn(req) {
-    var protocol = getProtocol(req);
+    const protocol = getProtocol(req);
     if (typeof req === 'string' || req instanceof url_1.URL) {
         if (protocol === 'http')
             return http_1.get;
@@ -55,13 +55,11 @@ function getRequestFn(req) {
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 function objToCookies(obj) {
-    var retVal = '';
-    var cookies = [];
-    for (var _i = 0, _a = Object.keys(obj); _i < _a.length; _i++) {
-        var key = _a[_i];
+    let retVal = '';
+    let cookies = [];
+    for (const key of Object.keys(obj))
         if (obj[key])
-            cookies.push(key + "=" + obj[key]);
-    }
+            cookies.push(`${key}=${obj[key]}`);
     retVal = cookies.join(';');
     return retVal;
 }
@@ -69,11 +67,10 @@ exports.objToCookies = objToCookies;
 function cookiesToObj(cookiesStr) {
     if (!cookiesStr)
         return;
-    var cookiesObj = {};
-    var cookiesArr = cookiesStr.split(';');
-    for (var _i = 0, cookiesArr_1 = cookiesArr; _i < cookiesArr_1.length; _i++) {
-        var cookieStr = cookiesArr_1[_i];
-        var _a = cookieStr.split('='), key = _a[0], value = _a[1];
+    let cookiesObj = {};
+    let cookiesArr = cookiesStr.split(';');
+    for (const cookieStr of cookiesArr) {
+        const [key, value] = cookieStr.split('=');
         cookiesObj[key.trim()] = value.trim();
     }
     return cookiesObj;
@@ -86,7 +83,7 @@ function adaptRequestOpts(reqOpts) {
         return reqOpts;
     if (!reqOpts.url)
         return reqOpts;
-    var url = new url_1.URL(reqOpts.url);
+    const url = new url_1.URL(reqOpts.url);
     reqOpts.protocol = url.protocol;
     reqOpts.port = url.port;
     reqOpts.host = url.host;
