@@ -1,7 +1,7 @@
-import { existsSync, mkdirSync, readFileSync, WriteFileOptions, writeFileSync } from 'fs';
-import { stat } from 'fs/promises';
+import { existsSync, mkdirSync, ObjectEncodingOptions, PathLike, readFileSync, WriteFileOptions, writeFileSync } from 'fs';
+import { FileHandle, FlagAndOpenMode, stat, appendFile as append, mkdir } from 'fs/promises';
 import { homedir } from 'os';
-import { join } from 'path';
+import { dirname, join } from 'path';
 
 import { gzipSync, unzipSync, ZlibOptions } from 'zlib';
 
@@ -87,3 +87,17 @@ export const exists: (path: string) => Promise<boolean> = (path: string) =>
 			if (e.code === 'ENOENT') return false;
 			throw e;
 		});
+
+/**
+ * add to file, if the file or folder does not exist it will be recursively created
+ * @param path
+ * @param data
+ * @param options
+ * @returns
+ */
+export function appendFile(path: PathLike | FileHandle, data: string | Uint8Array, options?: (ObjectEncodingOptions & FlagAndOpenMode) | BufferEncoding | null): Promise<void> {
+	return append(path, data, options).catch(error => {
+		if (error.code === 'ENOENT') return mkdir(dirname(path.toString()), { recursive: true }).then(() => append(path, data, options));
+		return error;
+	});
+}

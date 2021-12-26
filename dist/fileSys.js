@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.exists = exports.deserealizeObject = exports.serealizeObject = exports.readGZip = exports.writeGZip = exports.fileLines = exports.insertBetweenPlacweHolders = exports.readJson = exports.writeJson = exports.write = exports.writeToDesktop = exports.writeObjectToDesktop = exports.DESKTOP_PATH = void 0;
+exports.appendFile = exports.exists = exports.deserealizeObject = exports.serealizeObject = exports.readGZip = exports.writeGZip = exports.fileLines = exports.insertBetweenPlacweHolders = exports.readJson = exports.writeJson = exports.write = exports.writeToDesktop = exports.writeObjectToDesktop = exports.DESKTOP_PATH = void 0;
 const fs_1 = require("fs");
 const promises_1 = require("fs/promises");
 const os_1 = require("os");
@@ -88,4 +88,19 @@ const exists = (path) => promises_1.stat(path)
     throw e;
 });
 exports.exists = exists;
+/**
+ * add to file, if the file or folder does not exist it will be recursively created
+ * @param path
+ * @param data
+ * @param options
+ * @returns
+ */
+function appendFile(path, data, options) {
+    return promises_1.appendFile(path, data, options).catch(error => {
+        if (error.code === 'ENOENT')
+            return promises_1.mkdir(path_1.dirname(path.toString()), { recursive: true }).then(() => promises_1.appendFile(path, data, options));
+        return error;
+    });
+}
+exports.appendFile = appendFile;
 //# sourceMappingURL=fileSys.js.map

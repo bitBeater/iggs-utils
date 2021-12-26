@@ -1,5 +1,6 @@
 /// <reference types="node" />
-import { WriteFileOptions } from 'fs';
+import { ObjectEncodingOptions, PathLike, WriteFileOptions } from 'fs';
+import { FileHandle, FlagAndOpenMode } from 'fs/promises';
 import { ZlibOptions } from 'zlib';
 export declare const DESKTOP_PATH: string;
 export declare function writeObjectToDesktop(fileName: string, object: any): void;
@@ -17,4 +18,12 @@ export declare function readGZip(path: string, readFileOptions?: {
 export declare function serealizeObject(filePath: string, object: any): void;
 export declare function deserealizeObject(filePath: string): any;
 export declare const exists: (path: string) => Promise<boolean>;
+/**
+ * add to file, if the file or folder does not exist it will be recursively created
+ * @param path
+ * @param data
+ * @param options
+ * @returns
+ */
+export declare function appendFile(path: PathLike | FileHandle, data: string | Uint8Array, options?: (ObjectEncodingOptions & FlagAndOpenMode) | BufferEncoding | null): Promise<void>;
 //# sourceMappingURL=fileSys.d.ts.map
