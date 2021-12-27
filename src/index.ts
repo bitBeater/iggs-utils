@@ -9,3 +9,4 @@ export * as json from './json';
 export * as CSV from './CSV';
 export * as object from './object';
 export * as time from './time';
+export * as reviver from './revivers';
