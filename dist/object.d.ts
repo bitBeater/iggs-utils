@@ -35,7 +35,7 @@ export interface PathKeysOptions {
  * //	 'nestedObject.arr' ]
  * ```
  *
- *  * @example <caption>Omitting first level</caption>
+ *@example <caption>Omitting first level</caption>
  * ```js
  * const object={
  * 	str:"hello",

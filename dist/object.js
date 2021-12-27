@@ -33,7 +33,7 @@ exports.getPathKeys = void 0;
  * //	 'nestedObject.arr' ]
  * ```
  *
- *  * @example <caption>Omitting first level</caption>
+ *@example <caption>Omitting first level</caption>
  * ```js
  * const object={
  * 	str:"hello",
