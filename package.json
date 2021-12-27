@@ -1,6 +1,6 @@
 {
   "name": "iggs-utils",
-  "version": "1.1.21",
+  "version": "1.1.22",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc"
@@ -10,7 +10,8 @@
   "dependencies": {
     "@types/lodash": "^4.14.178",
     "@types/node": "^16.7.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "typedoc-plugin-markdown": "^3.11.8"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
     "url": "https://github.com/alexrr2iggs/iggs-utils/issues"
   },
   "homepage": "https://github.com/alexrr2iggs/iggs-utils#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "typedoc": "^0.22.10"
+  }
 }
