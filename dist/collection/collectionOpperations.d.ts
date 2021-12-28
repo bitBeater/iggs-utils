@@ -40,7 +40,7 @@ export declare function forEachConsTouple<T>(array: T[], fn: (item1: T, item2: T
  *   @example <caption>check array of objects, with compareFn</caption>
  * ```js
  *  isSorted([{ x:1}, { x:2}, { x:3}], (o1,o2)=> o1.x-o2.x) // true
- *	isSorted([{ x:1}, { x:3}, { x:2}], (o1,o2)=> o1.x-o2.x) // false
+ *  isSorted([{ x:1}, { x:3}, { x:2}], (o1,o2)=> o1.x-o2.x) // false
  * ```
  *
  * @param array array to check if is sorted
