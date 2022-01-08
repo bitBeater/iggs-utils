@@ -69,9 +69,16 @@ exports.calculatePercent = calculatePercent;
  * @link https://en.wikipedia.org/wiki/Weighted_arithmetic_mean
  */
 function weightedArithmeticMean(value, weight) {
+    /**
+     *
+     * I tried to optimize the performance to the maximum, to do this:
+     * - I used the var because it is slightly faster than the let
+     * - the for loop also in this case is slightly faster than the while, and much faster than the methods of the array reduce or the forEach
+     * - Looping the array backwards is slightly faster than looping it from the start: https://stackoverflow.com/questions/8689573/why-is-iterating-through-an-array-backwards-faster-than-forwards
+     */
     var totWeightedValue = 0;
     var totWeight = 0;
-    for (var i = value.length - 1; i; i--) {
+    for (var i = value.length - 1; i >= 0; i--) {
         totWeightedValue += value[i] * weight[i];
         totWeight += weight[i];
     }
