@@ -26,7 +26,7 @@ export function writeJson(path: string, object: any) {
 	writeFileSync(path, JSON.stringify(object));
 }
 
-export function readJson(path: string): any {
+export function readJson<T>(path: string): T {
 	const data = readFileSync(path);
 	if (!data) return;
 
