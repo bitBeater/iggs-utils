@@ -6,31 +6,37 @@
  * const maxSize=3;
  * const evictingDequeue = new EvictingDequeue<number>(maxSize,[1,2,3]);
  *
- * evictingDequeue.getItems();    // [1,2,3]
- * evictingDequeue.push(4);       // [2,3,4]
- * evictingDequeue.unshift(5);    // [5,2,3]
+ *	evictingDequeue;			// [1,2,3]
+ *	evictingDequeue.push(4);	// [2,3,4]
+ *	evictingDequeue.unshift(5); // [5,2,3]
  *
  * ```
  */
-export class EvictingDequeue<T> {
-	private items: T[] = [];
-	constructor(private readonly length: number, items?: T[]) {
-		if (items?.length) for (var i = items.length - 1; i >= 0; i--) this.unshift(items[i]);
+export class EvictingDequeue<T> extends Array<T> {
+	readonly #maxLenght: number;
+	constructor(maxLenght: number, items: T[]) {
+		super();
+		this.#maxLenght = maxLenght;
+		this.push(...(items || []));
 	}
 
-	push(item: T) {
-		this.items.push(item);
-		const overflow = this.items.length - this.length;
-		if (overflow > 0) this.items.shift();
+	push(...item: T[]) {
+		super.push(...item);
+		var overflow = this.length - this.#maxLenght;
+		for (; overflow > 0; overflow--) this.shift();
+
+		return this.length;
 	}
 
-	unshift(item: T) {
-		this.items.unshift(item);
-		const overflow = this.items.length - this.length;
-		if (overflow > 0) this.items.pop();
+	unshift(...item: T[]) {
+		super.unshift(...item);
+		var overflow = this.length - this.#maxLenght;
+		for (; overflow > 0; overflow--) this.pop();
+
+		return this.length;
 	}
 
-	public getItems(): T[] {
-		return [...this.items];
+	get maxLenght() {
+		return this.#maxLenght;
 	}
 }

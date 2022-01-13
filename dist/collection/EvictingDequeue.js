@@ -1,4 +1,18 @@
 "use strict";
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+};
+var _maxLenght;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EvictingDequeue = void 0;
 /**
@@ -9,35 +23,37 @@ exports.EvictingDequeue = void 0;
  * const maxSize=3;
  * const evictingDequeue = new EvictingDequeue<number>(maxSize,[1,2,3]);
  *
- * evictingDequeue.getItems();    // [1,2,3]
- * evictingDequeue.push(4);       // [2,3,4]
- * evictingDequeue.unshift(5);    // [5,2,3]
+ *	evictingDequeue;			// [1,2,3]
+ *	evictingDequeue.push(4);	// [2,3,4]
+ *	evictingDequeue.unshift(5); // [5,2,3]
  *
  * ```
  */
-class EvictingDequeue {
-    constructor(length, items) {
-        this.length = length;
-        this.items = [];
-        if (items === null || items === void 0 ? void 0 : items.length)
-            for (var i = items.length - 1; i >= 0; i--)
-                this.unshift(items[i]);
+class EvictingDequeue extends Array {
+    constructor(maxLenght, items) {
+        super();
+        _maxLenght.set(this, void 0);
+        __classPrivateFieldSet(this, _maxLenght, maxLenght);
+        this.push(...(items || []));
     }
-    push(item) {
-        this.items.push(item);
-        const overflow = this.items.length - this.length;
-        if (overflow > 0)
-            this.items.shift();
+    push(...item) {
+        super.push(...item);
+        var overflow = this.length - __classPrivateFieldGet(this, _maxLenght);
+        for (; overflow > 0; overflow--)
+            this.shift();
+        return this.length;
     }
-    unshift(item) {
-        this.items.unshift(item);
-        const overflow = this.items.length - this.length;
-        if (overflow > 0)
-            this.items.pop();
+    unshift(...item) {
+        super.unshift(...item);
+        var overflow = this.length - __classPrivateFieldGet(this, _maxLenght);
+        for (; overflow > 0; overflow--)
+            this.pop();
+        return this.length;
     }
-    getItems() {
-        return [...this.items];
+    get maxLenght() {
+        return __classPrivateFieldGet(this, _maxLenght);
     }
 }
 exports.EvictingDequeue = EvictingDequeue;
+_maxLenght = new WeakMap();
 //# sourceMappingURL=EvictingDequeue.js.map
