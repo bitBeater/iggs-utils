@@ -26,4 +26,4 @@ export declare const exists: (path: string) => Promise<boolean>;
  * @returns
  */
 export declare function appendFile(path: PathLike | FileHandle, data: string | Uint8Array, options?: (ObjectEncodingOptions & FlagAndOpenMode) | BufferEncoding | null): Promise<void>;
-//# sourceMappingURL=fileSys.d.ts.map
+//# sourceMappingURL=../src/src/fileSys.d.ts.map

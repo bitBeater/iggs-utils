@@ -30,4 +30,4 @@ exports.math = __importStar(require("./math"));
 exports.object = __importStar(require("./object"));
 exports.time = __importStar(require("./time"));
 exports.reviver = __importStar(require("./revivers"));
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=../src/src/index.js.map

@@ -49,4 +49,4 @@ export declare const november: number;
 export declare const december: number;
 export declare const months: number[];
 export declare const leapMonths: number[];
-//# sourceMappingURL=time.d.ts.map
+//# sourceMappingURL=../src/src/time.d.ts.map
