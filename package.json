@@ -1,7 +1,7 @@
 {
   "name": "iggs-utils",
-  "version": "1.1.51",
-  "main": "dist/index.js.map",
+  "version": "1.1.52",
+  "main": "dist/index.js",
   "files": [
     "dist",
     "src"
