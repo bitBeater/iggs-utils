@@ -1,1 +1,1 @@
-{"version":3,"file":"CSV.d.ts","sourceRoot":"","sources":["../src/CSV.ts"],"names":[],"mappings":""}
+{"version":3,"file":"CSV.d.ts","sourceRoot":"./src/","sources":["CSV.ts"],"names":[],"mappings":""}
