@@ -14,4 +14,4 @@ export interface httpResponse {
 export declare function httpRequest(reqOpts: HttpRequestOptions | string | URL, body?: any): Promise<httpResponse>;
 export declare function objToCookies(obj: any): string;
 export declare function cookiesToObj(cookiesStr: string): object;
-//# sourceMappingURL=../src/src/http.d.ts.map
+//# sourceMappingURL=../src/dist/http.d.ts.map

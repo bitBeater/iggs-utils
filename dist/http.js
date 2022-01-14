@@ -94,4 +94,4 @@ function adaptRequestOpts(reqOpts) {
     return reqOpts;
 }
 //---------------------------------------------------------------------------------------------------------------------------------
-//# sourceMappingURL=../src/src/http.js.map
+//# sourceMappingURL=../src/dist/http.js.map

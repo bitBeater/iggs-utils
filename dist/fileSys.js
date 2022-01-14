@@ -103,4 +103,4 @@ function appendFile(path, data, options) {
     });
 }
 exports.appendFile = appendFile;
-//# sourceMappingURL=../src/src/fileSys.js.map
+//# sourceMappingURL=../src/dist/fileSys.js.map

@@ -18,4 +18,4 @@ export declare const ISO_8601StringtoDate: Reviver<Date>;
  * @link  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#using_the_reviver_parameter
  */
 export declare function mergeRevivers(...revivers: Reviver<any>[]): Reviver<any>;
-//# sourceMappingURL=../src/src/revivers.d.ts.map
+//# sourceMappingURL=../src/dist/revivers.d.ts.map

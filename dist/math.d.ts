@@ -56,4 +56,4 @@ export declare function calculatePercent(value: number, percent: number): number
  * @link https://en.wikipedia.org/wiki/Weighted_arithmetic_mean
  */
 export declare function weightedArithmeticMean(value: number[], weight: number[]): number;
-//# sourceMappingURL=../src/src/math.d.ts.map
+//# sourceMappingURL=../src/dist/math.d.ts.map

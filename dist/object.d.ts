@@ -62,4 +62,4 @@ export interface PathKeysOptions {
  * @returns
  */
 export declare function getPathKeys(obj: any, options?: PathKeysOptions): string[];
-//# sourceMappingURL=../src/src/object.d.ts.map
+//# sourceMappingURL=../src/dist/object.d.ts.map

@@ -31,4 +31,4 @@ function mergeRevivers(...revivers) {
     };
 }
 exports.mergeRevivers = mergeRevivers;
-//# sourceMappingURL=../src/src/revivers.js.map
+//# sourceMappingURL=../src/dist/revivers.js.map

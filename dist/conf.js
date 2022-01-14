@@ -22,4 +22,4 @@ function getConfSync(path) {
     return JSON.parse(fs_1.readFileSync(path).toString('utf-8'));
 }
 exports.getConfSync = getConfSync;
-//# sourceMappingURL=../src/src/conf.js.map
+//# sourceMappingURL=../src/dist/conf.js.map

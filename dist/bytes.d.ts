@@ -14,4 +14,4 @@ export declare const EB: number;
 export declare const ZB: number;
 /**yotta-byte*/
 export declare const YB: number;
-//# sourceMappingURL=../src/src/bytes.d.ts.map
+//# sourceMappingURL=../src/dist/bytes.d.ts.map

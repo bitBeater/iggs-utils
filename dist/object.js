@@ -86,4 +86,4 @@ function getPathKeys(obj, options) {
     return pathKeys;
 }
 exports.getPathKeys = getPathKeys;
-//# sourceMappingURL=../src/src/object.js.map
+//# sourceMappingURL=../src/dist/object.js.map
