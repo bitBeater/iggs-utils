@@ -19,4 +19,4 @@ export declare class EvictingDequeue<T> extends Array<T> {
     unshift(...item: T[]): number;
     get maxLenght(): number;
 }
-//# sourceMappingURL=../../src/dist/collection/EvictingDequeue.d.ts.map
+//# sourceMappingURL=EvictingDequeue.d.ts.map

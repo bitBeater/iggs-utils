@@ -52,4 +52,4 @@ exports.november = 30 * exports.day;
 exports.december = 31 * exports.day;
 exports.months = [exports.january, exports.february, exports.march, exports.april, exports.may, exports.june, exports.july, exports.august, exports.september, exports.october, exports.november, exports.december];
 exports.leapMonths = [exports.january, exports.leapFebruary, exports.march, exports.april, exports.may, exports.june, exports.july, exports.august, exports.september, exports.october, exports.november, exports.december];
-//# sourceMappingURL=../src/dist/time.js.map
+//# sourceMappingURL=time.js.map

@@ -85,4 +85,4 @@ function weightedArithmeticMean(value, weight) {
     return totWeightedValue / totWeight;
 }
 exports.weightedArithmeticMean = weightedArithmeticMean;
-//# sourceMappingURL=../src/dist/math.js.map
+//# sourceMappingURL=math.js.map

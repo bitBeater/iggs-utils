@@ -90,4 +90,4 @@
 // function unEscapeSeparator(value: string, separator = DEFAULT_SEPARATOR): string {
 // 	return value?.replace(new RegExp(ESCAPE_CHAR, 'g'), separator);
 // }
-//# sourceMappingURL=../src/dist/CSV.js.map
+//# sourceMappingURL=CSV.js.map

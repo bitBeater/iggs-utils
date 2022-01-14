@@ -47,4 +47,4 @@ export declare function forEachConsTouple<T>(array: T[], fn: (item1: T, item2: T
  * @param compareFn function to use for comparison operation
  */
 export declare function isSorted<T>(array: T[], compareFn?: (item1: T, item2: T) => number): boolean;
-//# sourceMappingURL=../../src/dist/collection/collectionOpperations.d.ts.map
+//# sourceMappingURL=collectionOpperations.d.ts.map

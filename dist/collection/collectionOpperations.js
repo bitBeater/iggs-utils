@@ -84,4 +84,4 @@ const genericSortFunction = (item1, item2) => {
         return 0;
     }
 };
-//# sourceMappingURL=../../src/dist/collection/collectionOpperations.js.map
+//# sourceMappingURL=collectionOpperations.js.map

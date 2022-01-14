@@ -56,4 +56,4 @@ class EvictingDequeue extends Array {
 }
 exports.EvictingDequeue = EvictingDequeue;
 _maxLenght = new WeakMap();
-//# sourceMappingURL=../../src/dist/collection/EvictingDequeue.js.map
+//# sourceMappingURL=EvictingDequeue.js.map

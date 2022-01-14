@@ -8,4 +8,4 @@ export * as math from './math';
 export * as object from './object';
 export * as time from './time';
 export * as reviver from './revivers';
-//# sourceMappingURL=../src/dist/index.d.ts.map
+//# sourceMappingURL=index.d.ts.map

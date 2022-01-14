@@ -25,4 +25,4 @@ class CircularArray {
     }
 }
 exports.CircularArray = CircularArray;
-//# sourceMappingURL=../../src/dist/collection/CircularArray.js.map
+//# sourceMappingURL=CircularArray.js.map

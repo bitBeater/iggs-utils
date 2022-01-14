@@ -17,4 +17,4 @@ exports.EB = Math.pow(2, 60);
 exports.ZB = Math.pow(2, 70);
 /**yotta-byte*/
 exports.YB = Math.pow(2, 80);
-//# sourceMappingURL=../src/dist/bytes.js.map
+//# sourceMappingURL=bytes.js.map
