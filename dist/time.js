@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.seccond = exports.millis = void 0;
+exports.splitIntervalByDuration = exports.isDurationBiggerThanInterval = exports.durationToSeconds = exports.durationToMilliSeconds = exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.seccond = exports.millis = void 0;
 /** in millis */
 exports.millis = 1;
 /** in millis */
@@ -52,4 +52,84 @@ exports.november = 30 * exports.day;
 exports.december = 31 * exports.day;
 exports.months = [exports.january, exports.february, exports.march, exports.april, exports.may, exports.june, exports.july, exports.august, exports.september, exports.october, exports.november, exports.december];
 exports.leapMonths = [exports.january, exports.leapFebruary, exports.march, exports.april, exports.may, exports.june, exports.july, exports.august, exports.september, exports.october, exports.november, exports.december];
+/**
+ * parse a duration into millisecconds
+ *
+ * @example
+ * ```js
+ * durationToMilliSeconds({seconds:1}) // => 1000
+ * durationToMilliSeconds({minutes:1}) // => 60_000
+ * durationToMilliSeconds({hours:1}) // => 3_600_000
+ * durationToMilliSeconds({minutes:1,seconds:1}) // => 61_000
+ * durationToMilliSeconds({hours:1,minutes:1,seconds:1}) // => 3_661_000
+ * ```
+ */
+function durationToMilliSeconds(duration) {
+    return ((duration === null || duration === void 0 ? void 0 : duration.years) || 0) * exports.year + ((duration === null || duration === void 0 ? void 0 : duration.months) || 0) * exports.month + ((duration === null || duration === void 0 ? void 0 : duration.weeks) || 0) * exports.week + ((duration === null || duration === void 0 ? void 0 : duration.days) || 0) * exports.day + ((duration === null || duration === void 0 ? void 0 : duration.hours) || 0) * exports.hour + ((duration === null || duration === void 0 ? void 0 : duration.minutes) || 0) * exports.minute + ((duration === null || duration === void 0 ? void 0 : duration.seconds) || 0) * exports.seccond;
+}
+exports.durationToMilliSeconds = durationToMilliSeconds;
+/**
+ * parse a duration into millisecconds
+ *
+ * @example
+ * ```js
+ * durationToMilliSeconds({seconds:1}) // => 1
+ * durationToMilliSeconds({minutes:1}) // => 60
+ * durationToMilliSeconds({hours:1}) // => 3_600
+ * durationToMilliSeconds({minutes:1,seconds:1}) // => 61
+ * durationToMilliSeconds({hours:1,minutes:1,seconds:1}) // => 3_661
+ * ```
+ */
+function durationToSeconds(duration) {
+    return durationToMilliSeconds(duration) / exports.seccond;
+}
+exports.durationToSeconds = durationToSeconds;
+/**
+ * check if the duration is larger than the interval
+ */
+function isDurationBiggerThanInterval(interval, duration) {
+    const intervalSeconds = Math.abs(interval.end.getTime() - interval.start.getTime()) / 1000;
+    const durationSeconds = durationToSeconds(duration);
+    return durationSeconds > intervalSeconds;
+}
+exports.isDurationBiggerThanInterval = isDurationBiggerThanInterval;
+/**
+ * divide the given interval into smaller intervals, each having the duration equal to the given duration
+ *
+ * @example
+ * ```js
+ * const start=new Date('2000-01-01');
+ * const end=new Date('2000-01-10');
+ *
+ * splitIntervalByDuration({start, end},{days:1});
+ * // [
+ * //   {start:2000-01-01, end:2000-01-02},
+ * //   {start:2000-01-02, end:2000-01-03},
+ * //   {start:2000-01-03, end:2000-01-04},
+ * //   {start:2000-01-04, end:2000-01-05},
+ * //   {start:2000-01-05, end:2000-01-06},
+ * //   {start:2000-01-06, end:2000-01-07},
+ * //   {start:2000-01-07, end:2000-01-08},
+ * //   {start:2000-01-08, end:2000-01-09},
+ * //   {start:2000-01-09, end:2000-01-10},
+ * // ]
+ * ```
+ */
+function splitIntervalByDuration(interval, duration) {
+    if (!(interval === null || interval === void 0 ? void 0 : interval.start) || !(interval === null || interval === void 0 ? void 0 : interval.end))
+        return;
+    if (isDurationBiggerThanInterval(interval, duration))
+        return [interval];
+    const intervals = [];
+    var start = interval.start;
+    while (start < interval.end) {
+        let end = new Date(start.getTime() + durationToMilliSeconds(duration));
+        if (end > interval.end)
+            end = interval.end;
+        intervals.push({ start, end });
+        start = end;
+    }
+    return intervals;
+}
+exports.splitIntervalByDuration = splitIntervalByDuration;
 //# sourceMappingURL=time.js.map

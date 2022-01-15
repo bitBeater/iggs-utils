@@ -52,3 +52,102 @@ export const december = 31 * day;
 export const months = [january, february, march, april, may, june, july, august, september, october, november, december];
 
 export const leapMonths = [january, leapFebruary, march, april, may, june, july, august, september, october, november, december];
+
+interface Duration {
+	years?: number;
+	months?: number;
+	weeks?: number;
+	days?: number;
+	hours?: number;
+	minutes?: number;
+	seconds?: number;
+}
+
+interface Interval {
+	start: Date;
+	end: Date;
+}
+/**
+ * parse a duration into millisecconds
+ *
+ * @example
+ * ```js
+ * durationToMilliSeconds({seconds:1}) // => 1000
+ * durationToMilliSeconds({minutes:1}) // => 60_000
+ * durationToMilliSeconds({hours:1}) // => 3_600_000
+ * durationToMilliSeconds({minutes:1,seconds:1}) // => 61_000
+ * durationToMilliSeconds({hours:1,minutes:1,seconds:1}) // => 3_661_000
+ * ```
+ */
+export function durationToMilliSeconds(duration: Duration): number {
+	return (duration?.years || 0) * year + (duration?.months || 0) * month + (duration?.weeks || 0) * week + (duration?.days || 0) * day + (duration?.hours || 0) * hour + (duration?.minutes || 0) * minute + (duration?.seconds || 0) * seccond;
+}
+
+/**
+ * parse a duration into millisecconds
+ *
+ * @example
+ * ```js
+ * durationToMilliSeconds({seconds:1}) // => 1
+ * durationToMilliSeconds({minutes:1}) // => 60
+ * durationToMilliSeconds({hours:1}) // => 3_600
+ * durationToMilliSeconds({minutes:1,seconds:1}) // => 61
+ * durationToMilliSeconds({hours:1,minutes:1,seconds:1}) // => 3_661
+ * ```
+ */
+export function durationToSeconds(duration: Duration): number {
+	return durationToMilliSeconds(duration) / seccond;
+}
+
+/**
+ * check if the duration is larger than the interval
+ */
+export function isDurationBiggerThanInterval(interval: Interval, duration: Duration): boolean {
+	const intervalSeconds = Math.abs(interval.end.getTime() - interval.start.getTime()) / 1000;
+	const durationSeconds = durationToSeconds(duration);
+
+	return durationSeconds > intervalSeconds;
+}
+
+/**
+ * divide the given interval into smaller intervals, each having the duration equal to the given duration
+ *
+ * @example
+ * ```js
+ * const start=new Date('2000-01-01');
+ * const end=new Date('2000-01-10');
+ *
+ * splitIntervalByDuration({start, end},{days:1});
+ * // [
+ * //   {start:2000-01-01, end:2000-01-02},
+ * //   {start:2000-01-02, end:2000-01-03},
+ * //   {start:2000-01-03, end:2000-01-04},
+ * //   {start:2000-01-04, end:2000-01-05},
+ * //   {start:2000-01-05, end:2000-01-06},
+ * //   {start:2000-01-06, end:2000-01-07},
+ * //   {start:2000-01-07, end:2000-01-08},
+ * //   {start:2000-01-08, end:2000-01-09},
+ * //   {start:2000-01-09, end:2000-01-10},
+ * // ]
+ * ```
+ */
+export function splitIntervalByDuration(interval: Interval, duration: Duration): Interval[] {
+	if (!interval?.start || !interval?.end) return;
+	if (isDurationBiggerThanInterval(interval, duration)) return [interval];
+
+	const intervals: Interval[] = [];
+
+	var start = interval.start;
+
+	while (start < interval.end) {
+		let end: Date = new Date(start.getTime() + durationToMilliSeconds(duration));
+
+		if (end > interval.end) end = interval.end;
+
+		intervals.push({ start, end });
+
+		start = end;
+	}
+
+	return intervals;
+}

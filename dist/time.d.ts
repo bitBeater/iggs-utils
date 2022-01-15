@@ -49,4 +49,71 @@ export declare const november: number;
 export declare const december: number;
 export declare const months: number[];
 export declare const leapMonths: number[];
+interface Duration {
+    years?: number;
+    months?: number;
+    weeks?: number;
+    days?: number;
+    hours?: number;
+    minutes?: number;
+    seconds?: number;
+}
+interface Interval {
+    start: Date;
+    end: Date;
+}
+/**
+ * parse a duration into millisecconds
+ *
+ * @example
+ * ```js
+ * durationToMilliSeconds({seconds:1}) // => 1000
+ * durationToMilliSeconds({minutes:1}) // => 60_000
+ * durationToMilliSeconds({hours:1}) // => 3_600_000
+ * durationToMilliSeconds({minutes:1,seconds:1}) // => 61_000
+ * durationToMilliSeconds({hours:1,minutes:1,seconds:1}) // => 3_661_000
+ * ```
+ */
+export declare function durationToMilliSeconds(duration: Duration): number;
+/**
+ * parse a duration into millisecconds
+ *
+ * @example
+ * ```js
+ * durationToMilliSeconds({seconds:1}) // => 1
+ * durationToMilliSeconds({minutes:1}) // => 60
+ * durationToMilliSeconds({hours:1}) // => 3_600
+ * durationToMilliSeconds({minutes:1,seconds:1}) // => 61
+ * durationToMilliSeconds({hours:1,minutes:1,seconds:1}) // => 3_661
+ * ```
+ */
+export declare function durationToSeconds(duration: Duration): number;
+/**
+ * check if the duration is larger than the interval
+ */
+export declare function isDurationBiggerThanInterval(interval: Interval, duration: Duration): boolean;
+/**
+ * divide the given interval into smaller intervals, each having the duration equal to the given duration
+ *
+ * @example
+ * ```js
+ * const start=new Date('2000-01-01');
+ * const end=new Date('2000-01-10');
+ *
+ * splitIntervalByDuration({start, end},{days:1});
+ * // [
+ * //   {start:2000-01-01, end:2000-01-02},
+ * //   {start:2000-01-02, end:2000-01-03},
+ * //   {start:2000-01-03, end:2000-01-04},
+ * //   {start:2000-01-04, end:2000-01-05},
+ * //   {start:2000-01-05, end:2000-01-06},
+ * //   {start:2000-01-06, end:2000-01-07},
+ * //   {start:2000-01-07, end:2000-01-08},
+ * //   {start:2000-01-08, end:2000-01-09},
+ * //   {start:2000-01-09, end:2000-01-10},
+ * // ]
+ * ```
+ */
+export declare function splitIntervalByDuration(interval: Interval, duration: Duration): Interval[];
+export {};
 //# sourceMappingURL=time.d.ts.map
