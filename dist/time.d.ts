@@ -115,5 +115,16 @@ export declare function isDurationBiggerThanInterval(interval: Interval, duratio
  * ```
  */
 export declare function splitIntervalByDuration(interval: Interval, duration: Duration): Interval[];
+/**
+ * multiply the given duration
+ *
+ * @example
+ * ```js
+ * const duration={moths:2, days:3, hours:4};
+ *
+ * multiplyDuration(duration:Duration,multiplier:number) // => {moths:4, days:6, hours:8}
+ * ```
+ */
+export declare function multiplyDuration(duration: Duration, multiplier: number): Duration;
 export {};
 //# sourceMappingURL=time.d.ts.map

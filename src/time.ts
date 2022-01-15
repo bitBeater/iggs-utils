@@ -151,3 +151,25 @@ export function splitIntervalByDuration(interval: Interval, duration: Duration):
 
 	return intervals;
 }
+
+/**
+ * multiply the given duration
+ *
+ * @example
+ * ```js
+ * const duration={moths:2, days:3, hours:4};
+ *
+ * multiplyDuration(duration:Duration,multiplier:number) // => {moths:4, days:6, hours:8}
+ * ```
+ */
+export function multiplyDuration(duration: Duration, multiplier: number): Duration {
+	return {
+		years: duration.years * multiplier,
+		months: duration.months * multiplier,
+		weeks: duration.weeks * multiplier,
+		days: duration.days * multiplier,
+		hours: duration.hours * multiplier,
+		minutes: duration.minutes * multiplier,
+		seconds: duration.seconds * multiplier
+	};
+}

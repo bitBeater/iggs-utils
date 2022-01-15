@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.splitIntervalByDuration = exports.isDurationBiggerThanInterval = exports.durationToSeconds = exports.durationToMilliSeconds = exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.seccond = exports.millis = void 0;
+exports.multiplyDuration = exports.splitIntervalByDuration = exports.isDurationBiggerThanInterval = exports.durationToSeconds = exports.durationToMilliSeconds = exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.seccond = exports.millis = void 0;
 /** in millis */
 exports.millis = 1;
 /** in millis */
@@ -132,4 +132,26 @@ function splitIntervalByDuration(interval, duration) {
     return intervals;
 }
 exports.splitIntervalByDuration = splitIntervalByDuration;
+/**
+ * multiply the given duration
+ *
+ * @example
+ * ```js
+ * const duration={moths:2, days:3, hours:4};
+ *
+ * multiplyDuration(duration:Duration,multiplier:number) // => {moths:4, days:6, hours:8}
+ * ```
+ */
+function multiplyDuration(duration, multiplier) {
+    return {
+        years: duration.years * multiplier,
+        months: duration.months * multiplier,
+        weeks: duration.weeks * multiplier,
+        days: duration.days * multiplier,
+        hours: duration.hours * multiplier,
+        minutes: duration.minutes * multiplier,
+        seconds: duration.seconds * multiplier
+    };
+}
+exports.multiplyDuration = multiplyDuration;
 //# sourceMappingURL=time.js.map
