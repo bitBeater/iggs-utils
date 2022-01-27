@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.weightedArithmeticMean = exports.calculatePercent = exports.percDiff = exports.round = void 0;
+exports.getNearestMultiple = exports.getPrecision = exports.weightedArithmeticMean = exports.calculatePercent = exports.percDiff = exports.round = void 0;
 /**
  *
  * @param n number to be rounded round
@@ -85,4 +85,38 @@ function weightedArithmeticMean(value, weight) {
     return totWeightedValue / totWeight;
 }
 exports.weightedArithmeticMean = weightedArithmeticMean;
+/**
+ * gets the precision of a number (how many decimal digits)
+ *
+ * @example
+ * ```js
+ * getPrecision(1.1) //1
+ * getPrecision(1.12) //2
+ * getPrecision(1) //0
+ * getPrecision(0) //0
+ * ```
+ */
+function getPrecision(n = 0) {
+    var _a, _b, _c;
+    return ((_c = (_b = (_a = n === null || n === void 0 ? void 0 : n.toString()) === null || _a === void 0 ? void 0 : _a.split('.')) === null || _b === void 0 ? void 0 : _b[1]) === null || _c === void 0 ? void 0 : _c.length) || 0;
+}
+exports.getPrecision = getPrecision;
+/**
+ *
+ * returns the nearest multiple of a number
+ * @example
+ * ```js
+ * getNearestMultiple(11, 2) // 12
+ * getNearestMultiple(11, 3) // 12
+ * getNearestMultiple(5,  2) // 6
+ * getNearestMultiple(0.5, 0.2)  // 0.4
+ * ```
+ */
+function getNearestMultiple(n, multiple) {
+    const log = n % multiple;
+    if (log >= multiple / 2)
+        return n + multiple - log;
+    return n - log;
+}
+exports.getNearestMultiple = getNearestMultiple;
 //# sourceMappingURL=math.js.map

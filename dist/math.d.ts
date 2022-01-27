@@ -56,4 +56,28 @@ export declare function calculatePercent(value: number, percent: number): number
  * @link https://en.wikipedia.org/wiki/Weighted_arithmetic_mean
  */
 export declare function weightedArithmeticMean(value: number[], weight: number[]): number;
+/**
+ * gets the precision of a number (how many decimal digits)
+ *
+ * @example
+ * ```js
+ * getPrecision(1.1) //1
+ * getPrecision(1.12) //2
+ * getPrecision(1) //0
+ * getPrecision(0) //0
+ * ```
+ */
+export declare function getPrecision(n?: number): number;
+/**
+ *
+ * returns the nearest multiple of a number
+ * @example
+ * ```js
+ * getNearestMultiple(11, 2) // 12
+ * getNearestMultiple(11, 3) // 12
+ * getNearestMultiple(5,  2) // 6
+ * getNearestMultiple(0.5, 0.2)  // 0.4
+ * ```
+ */
+export declare function getNearestMultiple(n: number, multiple: number): number;
 //# sourceMappingURL=math.d.ts.map

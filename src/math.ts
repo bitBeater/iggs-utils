@@ -84,3 +84,34 @@ export function weightedArithmeticMean(value: number[], weight: number[]): numbe
 
 	return totWeightedValue / totWeight;
 }
+/**
+ * gets the precision of a number (how many decimal digits)
+ *
+ * @example
+ * ```js
+ * getPrecision(1.1) //1
+ * getPrecision(1.12) //2
+ * getPrecision(1) //0
+ * getPrecision(0) //0
+ * ```
+ */
+export function getPrecision(n: number = 0): number {
+	return n?.toString()?.split('.')?.[1]?.length || 0;
+}
+
+/**
+ *
+ * returns the nearest multiple of a number
+ * @example
+ * ```js
+ * getNearestMultiple(11, 2) // 12
+ * getNearestMultiple(11, 3) // 12
+ * getNearestMultiple(5,  2) // 6
+ * getNearestMultiple(0.5, 0.2)  // 0.4
+ * ```
+ */
+export function getNearestMultiple(n: number, multiple: number): number {
+	const log = n % multiple;
+	if (log >= multiple / 2) return n + multiple - log;
+	return n - log;
+}
