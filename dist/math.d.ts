@@ -73,10 +73,12 @@ export declare function getPrecision(n?: number): number;
  * returns the nearest multiple of a number
  * @example
  * ```js
+ * getNearestMultiple(17, 5) // 15
  * getNearestMultiple(11, 2) // 12
- * getNearestMultiple(11, 3) // 12
+ * getNearestMultiple(8, 5)  // 10
  * getNearestMultiple(5,  2) // 6
- * getNearestMultiple(0.5, 0.2)  // 0.4
+ * getNearestMultiple(5,  0) // 0
+ * getNearestMultiple(0.5, 0.2) // 0.4
  * ```
  */
 export declare function getNearestMultiple(n: number, multiple: number): number;

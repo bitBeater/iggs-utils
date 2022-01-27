@@ -106,14 +106,16 @@ exports.getPrecision = getPrecision;
  * returns the nearest multiple of a number
  * @example
  * ```js
+ * getNearestMultiple(17, 5) // 15
  * getNearestMultiple(11, 2) // 12
- * getNearestMultiple(11, 3) // 12
+ * getNearestMultiple(8, 5)  // 10
  * getNearestMultiple(5,  2) // 6
- * getNearestMultiple(0.5, 0.2)  // 0.4
+ * getNearestMultiple(5,  0) // 0
+ * getNearestMultiple(0.5, 0.2) // 0.4
  * ```
  */
 function getNearestMultiple(n, multiple) {
-    const log = n % multiple;
+    const log = n % multiple || n;
     if (log >= multiple / 2)
         return n + multiple - log;
     return n - log;
