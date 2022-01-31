@@ -89,8 +89,9 @@ export function weightedArithmeticMean(value: number[], weight: number[]): numbe
  *
  * @example
  * ```js
- * getPrecision(1.1) //1
- * getPrecision(1.12) //2
+ * getPrecision(2.1)   //1
+ * getPrecision(9.65)  //2
+ * getPrecision(0.479) //3
  * getPrecision(1) //0
  * getPrecision(0) //0
  * ```
@@ -116,4 +117,23 @@ export function getNearestMultiple(n: number, multiple: number): number {
 	const log = n % multiple || n;
 	if (log >= multiple / 2) return n + multiple - log;
 	return n - log;
+}
+
+/**
+ *
+ * returns the nearest low multiple of a number, the result will always be less or equal to input number
+ * @example
+ * ```js
+ * getNearestLowMultiple(17, 5) // 15
+ * getNearestLowMultiple(11, 2) // 10
+ * getNearestLowMultiple(8, 5)  // 5
+ * getNearestLowMultiple(5,  2) // 4
+ * getNearestLowMultiple(5,  0) // 0
+ * getNearestLowMultiple(0.5, 0.2) // 0.4
+ * getNearestLowMultiple(0.7777777777777, 0.00001) // 0.77777
+ *
+ * ```
+ */
+export function getNearestLowMultiple(n: number, multiple: number): number {
+	return n - (n % multiple);
 }
