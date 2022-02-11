@@ -99,4 +99,13 @@ export declare function getNearestMultiple(n: number, multiple: number): number;
  * ```
  */
 export declare function getNearestLowMultiple(n: number, multiple: number): number;
+/**
+ * truncate decimal numbers to decimal places, without rounding
+ * @example
+ * ```js
+ * truncateDecimals(5.469, 2); // => 5.46
+ * truncateDecimals(5.461, 2); // => 5.46
+ * ```
+ */
+export declare function truncateDecimals(n: number, digits: number): number;
 //# sourceMappingURL=math.d.ts.map

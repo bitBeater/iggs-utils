@@ -137,3 +137,16 @@ export function getNearestMultiple(n: number, multiple: number): number {
 export function getNearestLowMultiple(n: number, multiple: number): number {
 	return n - (n % multiple);
 }
+
+/**
+ * truncate decimal numbers to decimal places, without rounding
+ * @example
+ * ```js
+ * truncateDecimals(5.469, 2); // => 5.46
+ * truncateDecimals(5.461, 2); // => 5.46
+ * ```
+ */
+export function truncateDecimals(n: number, digits: number) {
+	const multiplier = Math.pow(10, digits);
+	return Math.floor(n * multiplier) / multiplier;
+}

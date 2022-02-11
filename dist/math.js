@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getNearestLowMultiple = exports.getNearestMultiple = exports.getPrecision = exports.weightedArithmeticMean = exports.calculatePercent = exports.percDiff = exports.round = void 0;
+exports.truncateDecimals = exports.getNearestLowMultiple = exports.getNearestMultiple = exports.getPrecision = exports.weightedArithmeticMean = exports.calculatePercent = exports.percDiff = exports.round = void 0;
 /**
  *
  * @param n number to be rounded round
@@ -141,4 +141,17 @@ function getNearestLowMultiple(n, multiple) {
     return n - (n % multiple);
 }
 exports.getNearestLowMultiple = getNearestLowMultiple;
+/**
+ * truncate decimal numbers to decimal places, without rounding
+ * @example
+ * ```js
+ * truncateDecimals(5.469, 2); // => 5.46
+ * truncateDecimals(5.461, 2); // => 5.46
+ * ```
+ */
+function truncateDecimals(n, digits) {
+    const multiplier = Math.pow(10, digits);
+    return Math.floor(n * multiplier) / multiplier;
+}
+exports.truncateDecimals = truncateDecimals;
 //# sourceMappingURL=math.js.map
