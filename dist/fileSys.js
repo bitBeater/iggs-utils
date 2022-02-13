@@ -26,11 +26,11 @@ function writeJson(path, object) {
     fs_1.writeFileSync(path, JSON.stringify(object));
 }
 exports.writeJson = writeJson;
-function readJson(path) {
+function readJson(path, reviver) {
     const data = fs_1.readFileSync(path);
     if (!data)
         return;
-    const retVal = JSON.parse(data.toString());
+    const retVal = JSON.parse(data.toString(), reviver);
     return retVal;
 }
 exports.readJson = readJson;

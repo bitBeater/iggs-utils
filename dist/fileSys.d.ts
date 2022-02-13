@@ -2,12 +2,13 @@
 import { ObjectEncodingOptions, PathLike, WriteFileOptions } from 'fs';
 import { FileHandle, FlagAndOpenMode } from 'fs/promises';
 import { ZlibOptions } from 'zlib';
+import { Reviver } from './revivers';
 export declare const DESKTOP_PATH: string;
 export declare function writeObjectToDesktop(fileName: string, object: any): void;
 export declare function writeToDesktop(fileName: string, data: string | Buffer): void;
 export declare function write(dir: string, fileName: string, data: string | Buffer): void;
 export declare function writeJson(path: string, object: any): void;
-export declare function readJson<T>(path: string): T;
+export declare function readJson<T>(path: string, reviver?: Reviver<any>): T;
 export declare function insertBetweenPlacweHolders(filePath: string, data: string, beginPlaceHolder: string, endPlaceHolder: string): void;
 export declare function fileLines(path: string, lineSeparator?: RegExp): string[];
 export declare function writeGZip(filePath: string, data: string | Buffer, writeFileOptions?: WriteFileOptions, zLibOptions?: ZlibOptions): void;

@@ -4,6 +4,7 @@ import { homedir } from 'os';
 import { dirname, join } from 'path';
 
 import { gzipSync, unzipSync, ZlibOptions } from 'zlib';
+import { Reviver } from './revivers';
 
 export const DESKTOP_PATH = join(homedir(), 'Desktop');
 
@@ -26,11 +27,11 @@ export function writeJson(path: string, object: any) {
 	writeFileSync(path, JSON.stringify(object));
 }
 
-export function readJson<T>(path: string): T {
+export function readJson<T>(path: string, reviver?: Reviver<any>): T {
 	const data = readFileSync(path);
 	if (!data) return;
 
-	const retVal = JSON.parse(data.toString());
+	const retVal = JSON.parse(data.toString(), reviver);
 
 	return retVal;
 }
