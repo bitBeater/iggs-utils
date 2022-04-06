@@ -173,3 +173,39 @@ export function multiplyDuration(duration: Duration, multiplier: number): Durati
 		seconds: duration.seconds * multiplier
 	};
 }
+
+/**
+ * add the given durations
+ *
+ * @example
+ * ```js
+ * const duration1={moths:2, days:3, hours:4};
+ * const duration2={moths:2, days:3, hours:4};
+ * const duration3={moths:2, days:3, hours:4};
+ *
+ * addDurations(duration1,duration2,duration3) // => {moths:6, days:9, hours:12}
+ * ```
+ */
+export function addDurations(...durations: Duration[]): Duration {
+	const retval: Duration = {
+		years: 0,
+		months: 0,
+		weeks: 0,
+		days: 0,
+		hours: 0,
+		minutes: 0,
+		seconds: 0
+	};
+
+	for (const duration of durations) {
+		retval.years += duration.years || 0;
+		retval.months += duration.months || 0;
+		retval.weeks += duration.weeks || 0;
+		retval.days += duration.days || 0;
+		retval.hours += duration.hours || 0;
+		retval.minutes += duration.minutes || 0;
+		retval.seconds += duration.seconds || 0;
+	}
+
+	return retval;
+}

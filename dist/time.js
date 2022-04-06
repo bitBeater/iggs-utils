@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.multiplyDuration = exports.splitIntervalByDuration = exports.isDurationBiggerThanInterval = exports.durationToSeconds = exports.durationToMilliSeconds = exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.seccond = exports.millis = void 0;
+exports.addDurations = exports.multiplyDuration = exports.splitIntervalByDuration = exports.isDurationBiggerThanInterval = exports.durationToSeconds = exports.durationToMilliSeconds = exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.seccond = exports.millis = void 0;
 /** in millis */
 exports.millis = 1;
 /** in millis */
@@ -154,4 +154,38 @@ function multiplyDuration(duration, multiplier) {
     };
 }
 exports.multiplyDuration = multiplyDuration;
+/**
+ * add the given durations
+ *
+ * @example
+ * ```js
+ * const duration1={moths:2, days:3, hours:4};
+ * const duration2={moths:2, days:3, hours:4};
+ * const duration3={moths:2, days:3, hours:4};
+ *
+ * addDurations(duration1,duration2,duration3) // => {moths:6, days:9, hours:12}
+ * ```
+ */
+function addDurations(...durations) {
+    const retval = {
+        years: 0,
+        months: 0,
+        weeks: 0,
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+    };
+    for (const duration of durations) {
+        retval.years += duration.years || 0;
+        retval.months += duration.months || 0;
+        retval.weeks += duration.weeks || 0;
+        retval.days += duration.days || 0;
+        retval.hours += duration.hours || 0;
+        retval.minutes += duration.minutes || 0;
+        retval.seconds += duration.seconds || 0;
+    }
+    return retval;
+}
+exports.addDurations = addDurations;
 //# sourceMappingURL=time.js.map

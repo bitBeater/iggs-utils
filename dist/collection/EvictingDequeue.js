@@ -1,18 +1,16 @@
 "use strict";
-var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to set private field on non-instance");
-    }
-    privateMap.set(receiver, value);
-    return value;
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, privateMap) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to get private field on non-instance");
-    }
-    return privateMap.get(receiver);
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _maxLenght;
+var _EvictingDequeue_maxLenght;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EvictingDequeue = void 0;
 /**
@@ -32,28 +30,28 @@ exports.EvictingDequeue = void 0;
 class EvictingDequeue extends Array {
     constructor(maxLenght, items) {
         super();
-        _maxLenght.set(this, void 0);
-        __classPrivateFieldSet(this, _maxLenght, maxLenght);
+        _EvictingDequeue_maxLenght.set(this, void 0);
+        __classPrivateFieldSet(this, _EvictingDequeue_maxLenght, maxLenght, "f");
         this.push(...(items || []));
     }
     push(...item) {
         super.push(...item);
-        var overflow = this.length - __classPrivateFieldGet(this, _maxLenght);
+        var overflow = this.length - __classPrivateFieldGet(this, _EvictingDequeue_maxLenght, "f");
         for (; overflow > 0; overflow--)
             this.shift();
         return this.length;
     }
     unshift(...item) {
         super.unshift(...item);
-        var overflow = this.length - __classPrivateFieldGet(this, _maxLenght);
+        var overflow = this.length - __classPrivateFieldGet(this, _EvictingDequeue_maxLenght, "f");
         for (; overflow > 0; overflow--)
             this.pop();
         return this.length;
     }
     get maxLenght() {
-        return __classPrivateFieldGet(this, _maxLenght);
+        return __classPrivateFieldGet(this, _EvictingDequeue_maxLenght, "f");
     }
 }
 exports.EvictingDequeue = EvictingDequeue;
-_maxLenght = new WeakMap();
+_EvictingDequeue_maxLenght = new WeakMap();
 //# sourceMappingURL=EvictingDequeue.js.map

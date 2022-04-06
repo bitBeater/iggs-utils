@@ -90,7 +90,7 @@ function adaptRequestOpts(reqOpts) {
     reqOpts.hostname = url.hostname;
     reqOpts.path = url.pathname;
     if (reqOpts === null || reqOpts === void 0 ? void 0 : reqOpts.searchParams)
-        reqOpts.path += '?' + querystring_1.stringify(reqOpts === null || reqOpts === void 0 ? void 0 : reqOpts.searchParams);
+        reqOpts.path += '?' + (0, querystring_1.stringify)(reqOpts === null || reqOpts === void 0 ? void 0 : reqOpts.searchParams);
     return reqOpts;
 }
 //---------------------------------------------------------------------------------------------------------------------------------

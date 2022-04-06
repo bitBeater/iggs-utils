@@ -126,5 +126,18 @@ export declare function splitIntervalByDuration(interval: Interval, duration: Du
  * ```
  */
 export declare function multiplyDuration(duration: Duration, multiplier: number): Duration;
+/**
+ * add the given durations
+ *
+ * @example
+ * ```js
+ * const duration1={moths:2, days:3, hours:4};
+ * const duration2={moths:2, days:3, hours:4};
+ * const duration3={moths:2, days:3, hours:4};
+ *
+ * addDurations(duration1,duration2,duration3) // => {moths:6, days:9, hours:12}
+ * ```
+ */
+export declare function addDurations(...durations: Duration[]): Duration;
 export {};
 //# sourceMappingURL=time.d.ts.map
