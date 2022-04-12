@@ -33,7 +33,7 @@ export function httpRequest(reqOpts: HttpRequestOptions | string | URL, body?: a
 			reject(err);
 		});
 
-		if (body) req.write(body, e => reject(e));
+		if (body) req.write(body);
 
 		req.flushHeaders();
 		req.end();
