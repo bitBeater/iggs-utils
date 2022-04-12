@@ -1,5 +1,5 @@
 import { ClientRequest, get, IncomingMessage, request, RequestOptions } from 'http';
-import { request as httpsRequest, get as httpsGet } from 'https';
+import { get as httpsGet, request as httpsRequest } from 'https';
 import { stringify } from 'querystring';
 import { URL } from 'url';
 
@@ -33,7 +33,7 @@ export function httpRequest(reqOpts: HttpRequestOptions | string | URL, body?: a
 			reject(err);
 		});
 
-		if (body) req.write(body);
+		if (body) req.write(body, e => reject(e));
 
 		req.flushHeaders();
 		req.end();

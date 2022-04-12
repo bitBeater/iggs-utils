@@ -23,7 +23,7 @@ function httpRequest(reqOpts, body) {
             reject(err);
         });
         if (body)
-            req.write(body);
+            req.write(body, e => reject(e));
         req.flushHeaders();
         req.end();
     });
