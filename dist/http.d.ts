@@ -1,6 +1,7 @@
 /// <reference types="node" />
 import { IncomingMessage, RequestOptions } from 'http';
 import { URL } from 'url';
+import { Reviver } from './revivers';
 export interface HttpRequestOptions extends RequestOptions {
     url?: string;
     searchParams?: {
@@ -12,7 +13,7 @@ export interface httpResponse<T> {
     data: T;
 }
 export declare function httpRequest(reqOpts: HttpRequestOptions | string | URL, payload?: any): Promise<httpResponse<string>>;
-export declare function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?: object | string): Promise<httpResponse<T>>;
+export declare function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?: object | string, revivers?: Reviver<any>[]): Promise<httpResponse<T>>;
 export declare function objToCookies(obj: any): string;
 export declare function cookiesToObj(cookiesStr: string): object;
 export declare const httpHeaders: {

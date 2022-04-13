@@ -5,6 +5,7 @@ const http_1 = require("http");
 const https_1 = require("https");
 const querystring_1 = require("querystring");
 const url_1 = require("url");
+const revivers_1 = require("./revivers");
 function httpRequest(reqOpts, payload) {
     const retVAl = new Promise((resolve, reject) => {
         reqOpts = adaptRequestOpts(reqOpts);
@@ -30,7 +31,7 @@ function httpRequest(reqOpts, payload) {
     return retVAl;
 }
 exports.httpRequest = httpRequest;
-function httpJsonRequest(req, data) {
+function httpJsonRequest(req, data, revivers = []) {
     const payload = JSON.stringify(data);
     const reqOptions = toRequestOpts(req);
     const headers = Object.assign({}, (reqOptions.headers || {}));
@@ -38,8 +39,10 @@ function httpJsonRequest(req, data) {
     headers[exports.httpHeaders['Content-Length']] = payload.length;
     return httpRequest(req, payload).then(resp => {
         var _a;
-        if (resp.data && ((_a = resp === null || resp === void 0 ? void 0 : resp.response) === null || _a === void 0 ? void 0 : _a.headers[exports.httpHeaders['Content-Type']]) === 'application/json')
-            return Object.assign(Object.assign({}, resp), { data: JSON.parse(resp.data) });
+        if (resp.data && ((_a = resp === null || resp === void 0 ? void 0 : resp.response) === null || _a === void 0 ? void 0 : _a.headers[exports.httpHeaders['Content-Type']]) === 'application/json') {
+            const reviver = (0, revivers_1.mergeRevivers)(...revivers);
+            return Object.assign(Object.assign({}, resp), { data: JSON.parse(resp.data, reviver) });
+        }
         return resp;
     });
 }

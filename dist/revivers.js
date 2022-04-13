@@ -20,7 +20,7 @@ exports.ISO_8601StringtoDate = ISO_8601StringtoDate;
  */
 function mergeRevivers(...revivers) {
     if (!(revivers === null || revivers === void 0 ? void 0 : revivers.length))
-        throw new Error("can't merge revivers: revivers are required");
+        return;
     return (key, value) => {
         for (const reviver of revivers) {
             const revived = reviver(key, value);

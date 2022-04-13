@@ -2,6 +2,7 @@ import { ClientRequest, get, IncomingMessage, request, RequestOptions } from 'ht
 import { get as httpsGet, request as httpsRequest } from 'https';
 import { stringify } from 'querystring';
 import { URL } from 'url';
+import { mergeRevivers, Reviver } from './revivers';
 
 export interface HttpRequestOptions extends RequestOptions {
 	url?: string;
@@ -42,7 +43,7 @@ export function httpRequest(reqOpts: HttpRequestOptions | string | URL, payload?
 	return retVAl;
 }
 
-export function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?: object | string): Promise<httpResponse<T>> {
+export function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?: object | string, revivers: Reviver<any>[] = []): Promise<httpResponse<T>> {
 	const payload = JSON.stringify(data);
 	const reqOptions = toRequestOpts(req);
 	const headers = { ...(reqOptions.headers || {}) };
@@ -50,7 +51,11 @@ export function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?
 	headers[httpHeaders['Content-Length']] = payload.length;
 
 	return httpRequest(req, payload).then(resp => {
-		if (resp.data && resp?.response?.headers[httpHeaders['Content-Type']] === 'application/json') return { ...resp, data: JSON.parse(resp.data) };
+		if (resp.data && resp?.response?.headers[httpHeaders['Content-Type']] === 'application/json') {
+			const reviver = mergeRevivers(...revivers);
+			return { ...resp, data: JSON.parse(resp.data, reviver) };
+		}
+
 		return resp;
 	});
 }

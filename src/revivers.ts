@@ -22,7 +22,7 @@ export const ISO_8601StringtoDate: Reviver<Date> = (_key: string, value: any) =>
  * @link  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#using_the_reviver_parameter
  */
 export function mergeRevivers(...revivers: Reviver<any>[]): Reviver<any> {
-	if (!revivers?.length) throw new Error("can't merge revivers: revivers are required");
+	if (!revivers?.length) return;
 	return (key: string, value: any) => {
 		for (const reviver of revivers) {
 			const revived = reviver(key, value);
