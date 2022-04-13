@@ -37,6 +37,7 @@ function httpJsonRequest(req, data, revivers = []) {
     const headers = Object.assign({}, (reqOptions.headers || {}));
     headers[exports.httpHeaders['Content-Type']] = 'application/json';
     headers[exports.httpHeaders['Content-Length']] = payload.length;
+    reqOptions.headers = headers;
     return httpRequest(req, payload).then(resp => {
         var _a;
         if (resp.data && ((_a = resp === null || resp === void 0 ? void 0 : resp.response) === null || _a === void 0 ? void 0 : _a.headers[exports.httpHeaders['Content-Type']]) === 'application/json') {

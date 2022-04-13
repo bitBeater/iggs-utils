@@ -49,7 +49,7 @@ export function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?
 	const headers = { ...(reqOptions.headers || {}) };
 	headers[httpHeaders['Content-Type']] = 'application/json';
 	headers[httpHeaders['Content-Length']] = payload.length;
-
+	reqOptions.headers = headers;
 	return httpRequest(req, payload).then(resp => {
 		if (resp.data && resp?.response?.headers[httpHeaders['Content-Type']] === 'application/json') {
 			const reviver = mergeRevivers(...revivers);
