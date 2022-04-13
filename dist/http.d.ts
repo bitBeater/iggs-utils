@@ -7,12 +7,12 @@ export interface HttpRequestOptions extends RequestOptions {
         [key: string]: string;
     };
 }
-export interface httpResponse {
+export interface httpResponse<T> {
     response: IncomingMessage;
-    data: string;
+    data: T;
 }
-export declare function httpRequest(reqOpts: HttpRequestOptions | string | URL, payload?: any): Promise<httpResponse>;
-export declare function httpJsonRequest(req: HttpRequestOptions | string | URL, data?: object | string): Promise<httpResponse>;
+export declare function httpRequest(reqOpts: HttpRequestOptions | string | URL, payload?: any): Promise<httpResponse<string>>;
+export declare function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?: object | string): Promise<httpResponse<T>>;
 export declare function objToCookies(obj: any): string;
 export declare function cookiesToObj(cookiesStr: string): object;
 export declare const httpHeaders: {

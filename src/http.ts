@@ -8,13 +8,13 @@ export interface HttpRequestOptions extends RequestOptions {
 	searchParams?: { [key: string]: string };
 }
 
-export interface httpResponse {
+export interface httpResponse<T> {
 	response: IncomingMessage;
-	data: string;
+	data: T;
 }
 
-export function httpRequest(reqOpts: HttpRequestOptions | string | URL, payload?: any): Promise<httpResponse> {
-	const retVAl = new Promise<httpResponse>((resolve, reject) => {
+export function httpRequest(reqOpts: HttpRequestOptions | string | URL, payload?: any): Promise<httpResponse<string>> {
+	const retVAl = new Promise<httpResponse<string>>((resolve, reject) => {
 		reqOpts = adaptRequestOpts(reqOpts);
 		const reqFn = getRequestFn(reqOpts);
 
@@ -42,13 +42,17 @@ export function httpRequest(reqOpts: HttpRequestOptions | string | URL, payload?
 	return retVAl;
 }
 
-export function httpJsonRequest(req: HttpRequestOptions | string | URL, data?: object | string): Promise<httpResponse> {
+export function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?: object | string): Promise<httpResponse<T>> {
 	const payload = JSON.stringify(data);
 	const reqOptions = toRequestOpts(req);
 	const headers = { ...(reqOptions.headers || {}) };
 	headers[httpHeaders['Content-Type']] = 'application/json';
 	headers[httpHeaders['Content-Length']] = payload.length;
-	return httpRequest(req, payload);
+
+	return httpRequest(req, payload).then(resp => {
+		if (resp.data && resp?.response?.headers[httpHeaders['Content-Type']] === 'application/json') return { ...resp, data: JSON.parse(resp.data) };
+		return resp;
+	});
 }
 
 function getProtocol(req: RequestOptions | string | URL): 'https' | 'http' {

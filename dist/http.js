@@ -36,7 +36,12 @@ function httpJsonRequest(req, data) {
     const headers = Object.assign({}, (reqOptions.headers || {}));
     headers[exports.httpHeaders['Content-Type']] = 'application/json';
     headers[exports.httpHeaders['Content-Length']] = payload.length;
-    return httpRequest(req, payload);
+    return httpRequest(req, payload).then(resp => {
+        var _a;
+        if (resp.data && ((_a = resp === null || resp === void 0 ? void 0 : resp.response) === null || _a === void 0 ? void 0 : _a.headers[exports.httpHeaders['Content-Type']]) === 'application/json')
+            return Object.assign(Object.assign({}, resp), { data: JSON.parse(resp.data) });
+        return resp;
+    });
 }
 exports.httpJsonRequest = httpJsonRequest;
 function getProtocol(req) {
