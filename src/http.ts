@@ -48,7 +48,7 @@ export function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?
 	const reqOptions = toRequestOpts(req);
 	const headers = { ...(reqOptions.headers || {}) };
 	headers[httpHeaders['Content-Type']] = 'application/json; charset=utf-8';
-	headers[httpHeaders['Content-Length']] = payload.length;
+	headers[httpHeaders['Content-Length']] = payload?.length || 0;
 	reqOptions.headers = headers;
 	return httpRequest(req, payload).then(resp => {
 		if (resp?.data?.length && resp?.response?.headers?.[httpHeaders['Content-Type'].toLowerCase()]?.includes('application/json')) {
