@@ -47,11 +47,11 @@ export function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?
 	const payload = JSON.stringify(data);
 	const reqOptions = toRequestOpts(req);
 	const headers = { ...(reqOptions.headers || {}) };
-	headers[httpHeaders['Content-Type']] = 'application/json';
+	headers[httpHeaders['Content-Type']] = 'application/json; charset=utf-8';
 	headers[httpHeaders['Content-Length']] = payload.length;
 	reqOptions.headers = headers;
 	return httpRequest(req, payload).then(resp => {
-		if (resp.data && resp?.response?.headers[httpHeaders['Content-Type']] === 'application/json') {
+		if (resp?.data?.length && resp?.response?.headers?.[httpHeaders['Content-Type']]?.includes('application/json')) {
 			const reviver = mergeRevivers(...revivers);
 			return { ...resp, data: JSON.parse(resp.data, reviver) };
 		}

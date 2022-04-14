@@ -35,12 +35,12 @@ function httpJsonRequest(req, data, revivers = []) {
     const payload = JSON.stringify(data);
     const reqOptions = toRequestOpts(req);
     const headers = Object.assign({}, (reqOptions.headers || {}));
-    headers[exports.httpHeaders['Content-Type']] = 'application/json';
+    headers[exports.httpHeaders['Content-Type']] = 'application/json; charset=utf-8';
     headers[exports.httpHeaders['Content-Length']] = payload.length;
     reqOptions.headers = headers;
     return httpRequest(req, payload).then(resp => {
-        var _a;
-        if (resp.data && ((_a = resp === null || resp === void 0 ? void 0 : resp.response) === null || _a === void 0 ? void 0 : _a.headers[exports.httpHeaders['Content-Type']]) === 'application/json') {
+        var _a, _b, _c, _d;
+        if (((_a = resp === null || resp === void 0 ? void 0 : resp.data) === null || _a === void 0 ? void 0 : _a.length) && ((_d = (_c = (_b = resp === null || resp === void 0 ? void 0 : resp.response) === null || _b === void 0 ? void 0 : _b.headers) === null || _c === void 0 ? void 0 : _c[exports.httpHeaders['Content-Type']]) === null || _d === void 0 ? void 0 : _d.includes('application/json'))) {
             const reviver = (0, revivers_1.mergeRevivers)(...revivers);
             return Object.assign(Object.assign({}, resp), { data: JSON.parse(resp.data, reviver) });
         }
