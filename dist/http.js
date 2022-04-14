@@ -40,7 +40,7 @@ function httpJsonRequest(req, data, revivers = []) {
     reqOptions.headers = headers;
     return httpRequest(req, payload).then(resp => {
         var _a, _b, _c, _d;
-        if (((_a = resp === null || resp === void 0 ? void 0 : resp.data) === null || _a === void 0 ? void 0 : _a.length) && ((_d = (_c = (_b = resp === null || resp === void 0 ? void 0 : resp.response) === null || _b === void 0 ? void 0 : _b.headers) === null || _c === void 0 ? void 0 : _c[exports.httpHeaders['Content-Type']]) === null || _d === void 0 ? void 0 : _d.includes('application/json'))) {
+        if (((_a = resp === null || resp === void 0 ? void 0 : resp.data) === null || _a === void 0 ? void 0 : _a.length) && ((_d = (_c = (_b = resp === null || resp === void 0 ? void 0 : resp.response) === null || _b === void 0 ? void 0 : _b.headers) === null || _c === void 0 ? void 0 : _c[exports.httpHeaders['Content-Type'].toLowerCase()]) === null || _d === void 0 ? void 0 : _d.includes('application/json'))) {
             const reviver = (0, revivers_1.mergeRevivers)(...revivers);
             return Object.assign(Object.assign({}, resp), { data: JSON.parse(resp.data, reviver) });
         }

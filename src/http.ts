@@ -51,7 +51,7 @@ export function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?
 	headers[httpHeaders['Content-Length']] = payload.length;
 	reqOptions.headers = headers;
 	return httpRequest(req, payload).then(resp => {
-		if (resp?.data?.length && resp?.response?.headers?.[httpHeaders['Content-Type']]?.includes('application/json')) {
+		if (resp?.data?.length && resp?.response?.headers?.[httpHeaders['Content-Type'].toLowerCase()]?.includes('application/json')) {
 			const reviver = mergeRevivers(...revivers);
 			return { ...resp, data: JSON.parse(resp.data, reviver) };
 		}
