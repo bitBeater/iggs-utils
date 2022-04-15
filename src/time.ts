@@ -170,7 +170,7 @@ export function multiplyDuration(duration: Duration, multiplier: number): Durati
 		days: duration.days * multiplier,
 		hours: duration.hours * multiplier,
 		minutes: duration.minutes * multiplier,
-		seconds: duration.seconds * multiplier
+		seconds: duration.seconds * multiplier,
 	};
 }
 
@@ -194,7 +194,7 @@ export function addDurations(...durations: Duration[]): Duration {
 		days: 0,
 		hours: 0,
 		minutes: 0,
-		seconds: 0
+		seconds: 0,
 	};
 
 	for (const duration of durations) {
