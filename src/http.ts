@@ -147,6 +147,7 @@ function toRequestOpts(reqOpts: string | HttpRequestOptions | URL): RequestOptio
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------
+export type Method = 'CONNECT' | 'DELETE' | 'GET' | 'HEAD' | 'OPTIONS' | 'PATCH' | 'POST' | 'PUT' | 'TRACE';
 
 export const httpHeaders = {
 	'Accept-Datetime': 'Accept-Datetime',

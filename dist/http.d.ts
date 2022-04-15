@@ -16,6 +16,7 @@ export declare function httpRequest(reqOpts: HttpRequestOptions | string | URL, 
 export declare function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?: object | string, revivers?: Reviver<any>[]): Promise<httpResponse<T>>;
 export declare function objToCookies(obj: any): string;
 export declare function cookiesToObj(cookiesStr: string): object;
+export declare type Method = 'CONNECT' | 'DELETE' | 'GET' | 'HEAD' | 'OPTIONS' | 'PATCH' | 'POST' | 'PUT' | 'TRACE';
 export declare const httpHeaders: {
     'Accept-Datetime': string;
     'Accept-Encoding': string;

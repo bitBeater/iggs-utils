@@ -125,7 +125,6 @@ function toRequestOpts(reqOpts) {
     retVal.path = url.pathname;
     return retVal;
 }
-//---------------------------------------------------------------------------------------------------------------------------------
 exports.httpHeaders = {
     'Accept-Datetime': 'Accept-Datetime',
     'Accept-Encoding': 'Accept-Encoding',
