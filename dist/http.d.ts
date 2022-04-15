@@ -16,225 +16,259 @@ export declare function httpRequest(reqOpts: HttpRequestOptions | string | URL, 
 export declare function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?: object | string, revivers?: Reviver<any>[]): Promise<httpResponse<T>>;
 export declare function objToCookies(obj: any): string;
 export declare function cookiesToObj(cookiesStr: string): object;
-export declare type Method = 'CONNECT' | 'DELETE' | 'GET' | 'HEAD' | 'OPTIONS' | 'PATCH' | 'POST' | 'PUT' | 'TRACE';
-export declare const httpHeaders: {
-    'Accept-Datetime': string;
-    'Accept-Encoding': string;
-    'Accept-Features': string;
-    'Accept-Language': string;
-    'Accept-Patch': string;
-    'Accept-Post': string;
-    'Accept-Ranges': string;
-    'Access-Control': string;
-    'Access-Control-Allow-Credentials': string;
-    'Access-Control-Allow-Headers': string;
-    'Access-Control-Allow-Methods': string;
-    'Access-Control-Allow-Origin': string;
-    'Access-Control-Expose-Headers': string;
-    'Access-Control-Max-Age': string;
-    'Access-Control-Request-Headers': string;
-    'Access-Control-Request-Method': string;
-    Age: string;
-    Allow: string;
-    ALPN: string;
-    'Alt-Svc': string;
-    'Alt-Used': string;
-    Alternates: string;
-    'AMP-Cache-Transform': string;
-    'Apply-To-Redirect-Ref': string;
-    'Authentication-Control': string;
-    'Authentication-Info': string;
-    Authorization: string;
-    'C-Ext': string;
-    'C-Man': string;
-    'C-Opt': string;
-    'C-PEP': string;
-    'C-PEP-Info': string;
-    'Cache-Control': string;
-    'Cache-Status': string;
-    'Cal-Managed-ID': string;
-    'CalDAV-Timezones': string;
-    'CDN-Cache-Control': string;
-    'CDN-Loop': string;
-    'Cert-Not-After': string;
-    'Cert-Not-Before': string;
-    'Clear-Site-Data': string;
-    Close: string;
-    'Configuration-Context': string;
-    Connection: string;
-    'Content-Base': string;
-    'Content-Disposition': string;
-    'Content-Encoding': string;
-    'Content-ID': string;
-    'Content-Language': string;
-    'Content-Length': string;
-    'Content-Location': string;
-    'Content-MD5': string;
-    'Content-Range': string;
-    'Content-Script-Type': string;
-    'Content-Security-Policy': string;
-    'Content-Security-Policy-Report-Only': string;
-    'Content-Style-Type': string;
-    'Content-Transfer-Encoding': string;
-    'Content-Type': string;
-    'Content-Version': string;
-    Cookie: string;
-    Cookie2: string;
-    Cost: string;
-    'Cross-Origin-Embedder-Policy': string;
-    'Cross-Origin-Embedder-Policy-Report-Only': string;
-    'Cross-Origin-Opener-Policy': string;
-    'Cross-Origin-Opener-Policy-Report-Only': string;
-    'Cross-Origin-Resource-Policy': string;
-    DASL: string;
-    Date: string;
-    DAV: string;
-    'Default-Style': string;
-    'Delta-Base': string;
-    Depth: string;
-    'Derived-From': string;
-    Destination: string;
-    'Differential-ID': string;
-    Digest: string;
-    'Early-Data': string;
-    'EDIINT-Features': string;
-    ETag: string;
-    Expect: string;
-    'Expect-CT': string;
-    Expires: string;
-    Ext: string;
-    Forwarded: string;
-    From: string;
-    GetProfile: string;
-    Hobareg: string;
-    Host: string;
-    'HTTP2-Settings': string;
-    If: string;
-    'If-Match': string;
-    'If-Modified-Since': string;
-    'If-None-Match': string;
-    'If-Range': string;
-    'If-Schedule-Tag-Match': string;
-    'If-Unmodified-Since': string;
-    IM: string;
-    'Include-Referred-Token-Binding-ID': string;
-    Isolation: string;
-    'Keep-Alive': string;
-    Label: string;
-    'Last-Event-ID': string;
-    'Last-Modified': string;
-    Link: string;
-    Location: string;
-    'Lock-Token': string;
-    Man: string;
-    'Max-Forwards': string;
-    'Memento-Datetime': string;
-    'Message-ID': string;
-    Meter: string;
-    'Method-Check': string;
-    'Method-Check-Expires': string;
-    'MIME-Version': string;
-    Negotiate: string;
-    'OData-EntityId': string;
-    'OData-Isolation': string;
-    'OData-MaxVersion': string;
-    'OData-Version': string;
-    Opt: string;
-    'Optional-WWW-Authenticate': string;
-    'Ordering-Type': string;
-    Origin: string;
-    'Origin-Agent-Cluster': string;
-    OSCORE: string;
-    'OSLC-Core-Version': string;
-    Overwrite: string;
-    P3P: string;
-    PEP: string;
-    'Pep-Info': string;
-    'PICS-Label': string;
-    'Ping-From': string;
-    'Ping-To': string;
-    Position: string;
-    Pragma: string;
-    Prefer: string;
-    'Preference-Applied': string;
-    Priority: string;
-    ProfileObject: string;
-    Protocol: string;
-    'Protocol-Info': string;
-    'Protocol-Query': string;
-    'Protocol-Request': string;
-    'Proxy-Authenticate': string;
-    'Proxy-Authentication-Info': string;
-    'Proxy-Authorization': string;
-    'Proxy-Features': string;
-    'Proxy-Instruction': string;
-    'Proxy-Status': string;
-    Public: string;
-    'Public-Key-Pins': string;
-    'Public-Key-Pins-Report-Only': string;
-    Range: string;
-    'Redirect-Ref': string;
-    Referer: string;
-    'Referer-Root': string;
-    Refresh: string;
-    'Repeatability-Client-ID': string;
-    'Repeatability-First-Sent': string;
-    'Repeatability-Request-ID': string;
-    'Repeatability-Result': string;
-    'Replay-Nonce': string;
-    'Retry-After': string;
-    Safe: string;
-    'Schedule-Reply': string;
-    'Schedule-Tag': string;
-    'Sec-GPC': string;
-    'Sec-Token-Binding': string;
-    'Sec-WebSocket-Accept': string;
-    'Sec-WebSocket-Extensions': string;
-    'Sec-WebSocket-Key': string;
-    'Sec-WebSocket-Protocol': string;
-    'Sec-WebSocket-Version': string;
-    'Security-Scheme': string;
-    Server: string;
-    'Server-Timing': string;
-    'Set-Cookie': string;
-    'Set-Cookie2': string;
-    SetProfile: string;
-    SLUG: string;
-    SoapAction: string;
-    'Status-URI': string;
-    'Strict-Transport-Security': string;
-    Sunset: string;
-    'Surrogate-Capability': string;
-    'Surrogate-Control': string;
-    TCN: string;
-    TE: string;
-    Timeout: string;
-    'Timing-Allow-Origin': string;
-    Title: string;
-    Topic: string;
-    Traceparent: string;
-    Tracestate: string;
-    Trailer: string;
-    'Transfer-Encoding': string;
-    TTL: string;
-    Upgrade: string;
-    Urgency: string;
-    URI: string;
-    'User-Agent': string;
-    'Variant-Vary': string;
-    Vary: string;
-    Version: string;
-    Via: string;
-    'Want-Digest': string;
-    Warning: string;
-    'WWW-Authenticate': string;
-    'X-Content-Type-Options': string;
-    'X-Device-Accept': string;
-    'X-Device-Accept-Charset': string;
-    'X-Device-Accept-Encoding': string;
-    'X-Device-Accept-Language': string;
-    'X-Device-User-Agent': string;
-    'X-Frame-Options': string;
-    '*': string;
-};
+export declare enum Method {
+    ACL = "ACL",
+    BIND = "BIND",
+    CHECKOUT = "CHECKOUT",
+    CONNECT = "CONNECT",
+    COPY = "COPY",
+    DELETE = "DELETE",
+    GET = "GET",
+    HEAD = "HEAD",
+    LINK = "LINK",
+    LOCK = "LOCK",
+    'M-SEARCH' = "M-SEARCH",
+    MERGE = "MERGE",
+    MKACTIVITY = "MKACTIVITY",
+    MKCALENDAR = "MKCALENDAR",
+    MKCOL = "MKCOL",
+    MOVE = "MOVE",
+    NOTIFY = "NOTIFY",
+    OPTIONS = "OPTIONS",
+    PATCH = "PATCH",
+    POST = "POST",
+    PROPFIND = "PROPFIND",
+    PROPPATCH = "PROPPATCH",
+    PURGE = "PURGE",
+    PUT = "PUT",
+    REBIND = "REBIND",
+    REPORT = "REPORT",
+    SEARCH = "SEARCH",
+    SUBSCRIBE = "SUBSCRIBE",
+    TRACE = "TRACE",
+    UNBIND = "UNBIND",
+    UNLINK = "UNLINK",
+    UNLOCK = "UNLOCK",
+    UNSUBSCRIBE = "UNSUBSCRIBE"
+}
+export declare enum Header {
+    'Accept-Datetime' = "Accept-Datetime",
+    'Accept-Encoding' = "Accept-Encoding",
+    'Accept-Features' = "Accept-Features",
+    'Accept-Language' = "Accept-Language",
+    'Accept-Patch' = "Accept-Patch",
+    'Accept-Post' = "Accept-Post",
+    'Accept-Ranges' = "Accept-Ranges",
+    'Access-Control' = "Access-Control",
+    'Access-Control-Allow-Credentials' = "Access-Control-Allow-Credentials",
+    'Access-Control-Allow-Headers' = "Access-Control-Allow-Headers",
+    'Access-Control-Allow-Methods' = "Access-Control-Allow-Methods",
+    'Access-Control-Allow-Origin' = "Access-Control-Allow-Origin",
+    'Access-Control-Expose-Headers' = "Access-Control-Expose-Headers",
+    'Access-Control-Max-Age' = "Access-Control-Max-Age",
+    'Access-Control-Request-Headers' = "Access-Control-Request-Headers",
+    'Access-Control-Request-Method' = "Access-Control-Request-Method",
+    'Age' = "Age",
+    'Allow' = "Allow",
+    'ALPN' = "ALPN",
+    'Alt-Svc' = "Alt-Svc",
+    'Alt-Used' = "Alt-Used",
+    'Alternates' = "Alternates",
+    'AMP-Cache-Transform' = "AMP-Cache-Transform",
+    'Apply-To-Redirect-Ref' = "Apply-To-Redirect-Ref",
+    'Authentication-Control' = "Authentication-Control",
+    'Authentication-Info' = "Authentication-Info",
+    'Authorization' = "Authorization",
+    'C-Ext' = "C-Ext",
+    'C-Man' = "C-Man",
+    'C-Opt' = "C-Opt",
+    'C-PEP' = "C-PEP",
+    'C-PEP-Info' = "C-PEP-Info",
+    'Cache-Control' = "Cache-Control",
+    'Cache-Status' = "Cache-Status",
+    'Cal-Managed-ID' = "Cal-Managed-ID",
+    'CalDAV-Timezones' = "CalDAV-Timezones",
+    'CDN-Cache-Control' = "CDN-Cache-Control",
+    'CDN-Loop' = "CDN-Loop",
+    'Cert-Not-After' = "Cert-Not-After",
+    'Cert-Not-Before' = "Cert-Not-Before",
+    'Clear-Site-Data' = "Clear-Site-Data",
+    'Close' = "Close",
+    'Configuration-Context' = "Configuration-Context",
+    'Connection' = "Connection",
+    'Content-Base' = "Content-Base",
+    'Content-Disposition' = "Content-Disposition",
+    'Content-Encoding' = "Content-Encoding",
+    'Content-ID' = "Content-ID",
+    'Content-Language' = "Content-Language",
+    'Content-Length' = "Content-Length",
+    'Content-Location' = "Content-Location",
+    'Content-MD5' = "Content-MD5",
+    'Content-Range' = "Content-Range",
+    'Content-Script-Type' = "Content-Script-Type",
+    'Content-Security-Policy' = "Content-Security-Policy",
+    'Content-Security-Policy-Report-Only' = "Content-Security-Policy-Report-Only",
+    'Content-Style-Type' = "Content-Style-Type",
+    'Content-Transfer-Encoding' = "Content-Transfer-Encoding",
+    'Content-Type' = "Content-Type",
+    'Content-Version' = "Content-Version",
+    'Cookie' = "Cookie",
+    'Cookie2' = "Cookie2",
+    'Cost' = "Cost",
+    'Cross-Origin-Embedder-Policy' = "Cross-Origin-Embedder-Policy",
+    'Cross-Origin-Embedder-Policy-Report-Only' = "Cross-Origin-Embedder-Policy-Report-Only",
+    'Cross-Origin-Opener-Policy' = "Cross-Origin-Opener-Policy",
+    'Cross-Origin-Opener-Policy-Report-Only' = "Cross-Origin-Opener-Policy-Report-Only",
+    'Cross-Origin-Resource-Policy' = "Cross-Origin-Resource-Policy",
+    'DASL' = "DASL",
+    'Date' = "Date",
+    'DAV' = "DAV",
+    'Default-Style' = "Default-Style",
+    'Delta-Base' = "Delta-Base",
+    'Depth' = "Depth",
+    'Derived-From' = "Derived-From",
+    'Destination' = "Destination",
+    'Differential-ID' = "Differential-ID",
+    'Digest' = "Digest",
+    'Early-Data' = "Early-Data",
+    'EDIINT-Features' = "EDIINT-Features",
+    'ETag' = "ETag",
+    'Expect' = "Expect",
+    'Expect-CT' = "Expect-CT",
+    'Expires' = "Expires",
+    'Ext' = "Ext",
+    'Forwarded' = "Forwarded",
+    'From' = "From",
+    'GetProfile' = "GetProfile",
+    'Hobareg' = "Hobareg",
+    'Host' = "Host",
+    'HTTP2-Settings' = "HTTP2-Settings",
+    'If' = "If",
+    'If-Match' = "If-Match",
+    'If-Modified-Since' = "If-Modified-Since",
+    'If-None-Match' = "If-None-Match",
+    'If-Range' = "If-Range",
+    'If-Schedule-Tag-Match' = "If-Schedule-Tag-Match",
+    'If-Unmodified-Since' = "If-Unmodified-Since",
+    'IM' = "IM",
+    'Include-Referred-Token-Binding-ID' = "Include-Referred-Token-Binding-ID",
+    'Isolation' = "Isolation",
+    'Keep-Alive' = "Keep-Alive",
+    'Label' = "Label",
+    'Last-Event-ID' = "Last-Event-ID",
+    'Last-Modified' = "Last-Modified",
+    'Link' = "Link",
+    'Location' = "Location",
+    'Lock-Token' = "Lock-Token",
+    'Man' = "Man",
+    'Max-Forwards' = "Max-Forwards",
+    'Memento-Datetime' = "Memento-Datetime",
+    'Message-ID' = "Message-ID",
+    'Meter' = "Meter",
+    'Method-Check' = "Method-Check",
+    'Method-Check-Expires' = "Method-Check-Expires",
+    'MIME-Version' = "MIME-Version",
+    'Negotiate' = "Negotiate",
+    'OData-EntityId' = "OData-EntityId",
+    'OData-Isolation' = "OData-Isolation",
+    'OData-MaxVersion' = "OData-MaxVersion",
+    'OData-Version' = "OData-Version",
+    'Opt' = "Opt",
+    'Optional-WWW-Authenticate' = "Optional-WWW-Authenticate",
+    'Ordering-Type' = "Ordering-Type",
+    'Origin' = "Origin",
+    'Origin-Agent-Cluster' = "Origin-Agent-Cluster",
+    'OSCORE' = "OSCORE",
+    'OSLC-Core-Version' = "OSLC-Core-Version",
+    'Overwrite' = "Overwrite",
+    'P3P' = "P3P",
+    'PEP' = "PEP",
+    'Pep-Info' = "Pep-Info",
+    'PICS-Label' = "PICS-Label",
+    'Ping-From' = "Ping-From",
+    'Ping-To' = "Ping-To",
+    'Position' = "Position",
+    'Pragma' = "Pragma",
+    'Prefer' = "Prefer",
+    'Preference-Applied' = "Preference-Applied",
+    'Priority' = "Priority",
+    'ProfileObject' = "ProfileObject",
+    'Protocol' = "Protocol",
+    'Protocol-Info' = "Protocol-Info",
+    'Protocol-Query' = "Protocol-Query",
+    'Protocol-Request' = "Protocol-Request",
+    'Proxy-Authenticate' = "Proxy-Authenticate",
+    'Proxy-Authentication-Info' = "Proxy-Authentication-Info",
+    'Proxy-Authorization' = "Proxy-Authorization",
+    'Proxy-Features' = "Proxy-Features",
+    'Proxy-Instruction' = "Proxy-Instruction",
+    'Proxy-Status' = "Proxy-Status",
+    'Public' = "Public",
+    'Public-Key-Pins' = "Public-Key-Pins",
+    'Public-Key-Pins-Report-Only' = "Public-Key-Pins-Report-Only",
+    'Range' = "Range",
+    'Redirect-Ref' = "Redirect-Ref",
+    'Referer' = "Referer",
+    'Referer-Root' = "Referer-Root",
+    'Refresh' = "Refresh",
+    'Repeatability-Client-ID' = "Repeatability-Client-ID",
+    'Repeatability-First-Sent' = "Repeatability-First-Sent",
+    'Repeatability-Request-ID' = "Repeatability-Request-ID",
+    'Repeatability-Result' = "Repeatability-Result",
+    'Replay-Nonce' = "Replay-Nonce",
+    'Retry-After' = "Retry-After",
+    'Safe' = "Safe",
+    'Schedule-Reply' = "Schedule-Reply",
+    'Schedule-Tag' = "Schedule-Tag",
+    'Sec-GPC' = "Sec-GPC",
+    'Sec-Token-Binding' = "Sec-Token-Binding",
+    'Sec-WebSocket-Accept' = "Sec-WebSocket-Accept",
+    'Sec-WebSocket-Extensions' = "Sec-WebSocket-Extensions",
+    'Sec-WebSocket-Key' = "Sec-WebSocket-Key",
+    'Sec-WebSocket-Protocol' = "Sec-WebSocket-Protocol",
+    'Sec-WebSocket-Version' = "Sec-WebSocket-Version",
+    'Security-Scheme' = "Security-Scheme",
+    'Server' = "Server",
+    'Server-Timing' = "Server-Timing",
+    'Set-Cookie' = "Set-Cookie",
+    'Set-Cookie2' = "Set-Cookie2",
+    'SetProfile' = "SetProfile",
+    'SLUG' = "SLUG",
+    'SoapAction' = "SoapAction",
+    'Status-URI' = "Status-URI",
+    'Strict-Transport-Security' = "Strict-Transport-Security",
+    'Sunset' = "Sunset",
+    'Surrogate-Capability' = "Surrogate-Capability",
+    'Surrogate-Control' = "Surrogate-Control",
+    'TCN' = "TCN",
+    'TE' = "TE",
+    'Timeout' = "Timeout",
+    'Timing-Allow-Origin' = "Timing-Allow-Origin",
+    'Title' = "Title",
+    'Topic' = "Topic",
+    'Traceparent' = "Traceparent",
+    'Tracestate' = "Tracestate",
+    'Trailer' = "Trailer",
+    'Transfer-Encoding' = "Transfer-Encoding",
+    'TTL' = "TTL",
+    'Upgrade' = "Upgrade",
+    'Urgency' = "Urgency",
+    'URI' = "URI",
+    'User-Agent' = "User-Agent",
+    'Variant-Vary' = "Variant-Vary",
+    'Vary' = "Vary",
+    'Version' = "Version",
+    'Via' = "Via",
+    'Want-Digest' = "Want-Digest",
+    'Warning' = "Warning",
+    'WWW-Authenticate' = "WWW-Authenticate",
+    'X-Content-Type-Options' = "X-Content-Type-Options",
+    'X-Device-Accept' = "X-Device-Accept",
+    'X-Device-Accept-Charset' = "X-Device-Accept-Charset",
+    'X-Device-Accept-Encoding' = "X-Device-Accept-Encoding",
+    'X-Device-Accept-Language' = "X-Device-Accept-Language",
+    'X-Device-User-Agent' = "X-Device-User-Agent",
+    'X-Frame-Options' = "X-Frame-Options",
+    '*' = "*"
+}
 //# sourceMappingURL=http.d.ts.map
