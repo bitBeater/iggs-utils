@@ -150,7 +150,7 @@ function multiplyDuration(duration, multiplier) {
         days: duration.days * multiplier,
         hours: duration.hours * multiplier,
         minutes: duration.minutes * multiplier,
-        seconds: duration.seconds * multiplier
+        seconds: duration.seconds * multiplier,
     };
 }
 exports.multiplyDuration = multiplyDuration;
@@ -174,7 +174,7 @@ function addDurations(...durations) {
         days: 0,
         hours: 0,
         minutes: 0,
-        seconds: 0
+        seconds: 0,
     };
     for (const duration of durations) {
         retval.years += duration.years || 0;

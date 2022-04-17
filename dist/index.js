@@ -23,15 +23,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.reviver = exports.time = exports.object = exports.math = exports.conf = exports.collection = exports.http = exports.bytes = exports.fileSys = exports.cons = void 0;
-exports.cons = __importStar(require("./cons"));
-exports.fileSys = __importStar(require("./fileSys"));
+exports.time = exports.reviver = exports.object = exports.math = exports.log = exports.http = exports.fileSys = exports.cons = exports.conf = exports.collection = exports.bytes = void 0;
 exports.bytes = __importStar(require("./bytes"));
-exports.http = __importStar(require("./http"));
 exports.collection = __importStar(require("./collection/collection"));
 exports.conf = __importStar(require("./conf"));
+exports.cons = __importStar(require("./cons"));
+exports.fileSys = __importStar(require("./fileSys"));
+exports.http = __importStar(require("./http"));
+exports.log = __importStar(require("./logger"));
 exports.math = __importStar(require("./math"));
 exports.object = __importStar(require("./object"));
-exports.time = __importStar(require("./time"));
 exports.reviver = __importStar(require("./revivers"));
+exports.time = __importStar(require("./time"));
 //# sourceMappingURL=index.js.map

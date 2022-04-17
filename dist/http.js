@@ -126,6 +126,9 @@ function toRequestOpts(reqOpts) {
     return retVal;
 }
 //---------------------------------------------------------------------------------------------------------------------------------
+/**
+ * @link https://nodejs.dev/learn/the-nodejs-http-module#httpmethods
+ */
 var Method;
 (function (Method) {
     Method["ACL"] = "ACL";
@@ -162,6 +165,9 @@ var Method;
     Method["UNLOCK"] = "UNLOCK";
     Method["UNSUBSCRIBE"] = "UNSUBSCRIBE";
 })(Method = exports.Method || (exports.Method = {}));
+/**
+ * @link https://www.iana.org/assignments/http-fields/http-fields.xhtml
+ */
 var Header;
 (function (Header) {
     Header["Accept-Datetime"] = "Accept-Datetime";

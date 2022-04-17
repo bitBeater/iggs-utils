@@ -147,6 +147,9 @@ function toRequestOpts(reqOpts: string | HttpRequestOptions | URL): RequestOptio
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------
+/**
+ * @link https://nodejs.dev/learn/the-nodejs-http-module#httpmethods
+ */
 export enum Method {
 	ACL = 'ACL',
 	BIND = 'BIND',
@@ -183,6 +186,9 @@ export enum Method {
 	UNSUBSCRIBE = 'UNSUBSCRIBE',
 }
 
+/**
+ * @link https://www.iana.org/assignments/http-fields/http-fields.xhtml
+ */
 export enum Header {
 	'Accept-Datetime' = 'Accept-Datetime',
 	'Accept-Encoding' = 'Accept-Encoding',

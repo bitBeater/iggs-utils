@@ -16,6 +16,9 @@ export declare function httpRequest(reqOpts: HttpRequestOptions | string | URL, 
 export declare function httpJsonRequest<T>(req: HttpRequestOptions | string | URL, data?: object | string, revivers?: Reviver<any>[]): Promise<httpResponse<T>>;
 export declare function objToCookies(obj: any): string;
 export declare function cookiesToObj(cookiesStr: string): object;
+/**
+ * @link https://nodejs.dev/learn/the-nodejs-http-module#httpmethods
+ */
 export declare enum Method {
     ACL = "ACL",
     BIND = "BIND",
@@ -51,6 +54,9 @@ export declare enum Method {
     UNLOCK = "UNLOCK",
     UNSUBSCRIBE = "UNSUBSCRIBE"
 }
+/**
+ * @link https://www.iana.org/assignments/http-fields/http-fields.xhtml
+ */
 export declare enum Header {
     'Accept-Datetime' = "Accept-Datetime",
     'Accept-Encoding' = "Accept-Encoding",
