@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setLogLevel = exports.setLogger = exports.trace = exports.fatal = exports.error = exports.warn = exports.info = exports.debug = exports.LogLevel = void 0;
+exports.setLogLevel = exports.setLogger = exports.getLogger = exports.trace = exports.fatal = exports.error = exports.warn = exports.info = exports.debug = exports.LogLevel = void 0;
 var LogLevel;
 (function (LogLevel) {
     LogLevel[LogLevel["OFF"] = 0] = "OFF";
@@ -62,6 +62,8 @@ const fatal = (...data) => _logger.fatal(data);
 exports.fatal = fatal;
 const trace = (...data) => _logger.trace(data);
 exports.trace = trace;
+const getLogger = () => (Object.assign({}, _logger));
+exports.getLogger = getLogger;
 const setLogger = (logger) => {
     if (!logger)
         (0, exports.warn)('[LOGGER]', 'setting undefined logger');
