@@ -8,7 +8,18 @@ import { Replacer, Reviver } from './revivers';
 export declare const DESKTOP_PATH: string;
 export declare function writeObjectToDesktopSync(fileName: string, object: any): void;
 export declare function writeToDesktopSync(fileName: string, data: string | Buffer): void;
-export declare function writeSync(dir: string, fileName: string, data: string | Buffer): void;
+/**
+ * Returns `undefined`.
+ *
+ * If `data` is a plain object, it must have an own (not inherited) `toString`function property.
+ *
+ * The `mode` option only affects the newly created file. See {@link open} for more details.
+ *
+ * For detailed information, see the documentation of the asynchronous version of
+ * this API: {@link writeFile}.
+ * @param file filename or file descriptor
+ */
+export declare function writeSync(file: PathLike, data?: string | NodeJS.ArrayBufferView, options?: WriteFileOptions): void;
 export declare function writeJsonSync(path: string, object: any): void;
 export declare function readJsonSync<T>(path: string, reviver?: Reviver<any>): T;
 export declare function insertBetweenPlacweHoldersSync(filePath: string, data: string, beginPlaceHolder: string, endPlaceHolder: string): void;
@@ -20,6 +31,12 @@ export declare function readGZipSync(path: string, readFileOptions?: {
 }, zlibOptions?: ZlibOptions): Buffer;
 export declare function serealizeObjectSync(filePath: string, object: any): void;
 export declare function deserealizeObjectSync(filePath: string): any;
+/**
+ * Synchronous [`unlink(2)`](http://man7.org/linux/man-pages/man2/unlink.2.html). Returns `undefined`.
+ * @return `undefined` upon success.
+ * @see {@link unlinkSync}
+ */
+export declare function removeSync(path: PathLike): void;
 /**
  * check if file exists
  *
@@ -51,7 +68,7 @@ export declare function append(path: PathLike | FileHandle, data: string | Uint8
  * @see{@link mkdir}
  * @see{@link writeFile}
  */
-export declare function write(file: PathLike | FileHandle, data: string | NodeJS.ArrayBufferView | Iterable<string | NodeJS.ArrayBufferView> | AsyncIterable<string | NodeJS.ArrayBufferView> | Stream, options?: (ObjectEncodingOptions & {
+export declare function write(file: PathLike | FileHandle, data?: string | NodeJS.ArrayBufferView | Iterable<string | NodeJS.ArrayBufferView> | AsyncIterable<string | NodeJS.ArrayBufferView> | Stream, options?: (ObjectEncodingOptions & {
     mode?: Mode | undefined;
     flag?: OpenMode | undefined;
 } & Abortable) | BufferEncoding | null): Promise<void>;
@@ -85,4 +102,12 @@ export declare function writeJson(file: PathLike | FileHandle, obj: any, options
     mode?: Mode | undefined;
     flag?: OpenMode | undefined;
 } & Abortable) | BufferEncoding | null, replacer?: Replacer<any>, space?: string | number): Promise<void>;
+/**
+ * If `path` refers to a symbolic link, then the link is removed without affecting
+ * the file or directory to which that link refers. If the `path` refers to a file
+ * path that is not a symbolic link, the file is deleted. See the POSIX [`unlink(2)`](http://man7.org/linux/man-pages/man2/unlink.2.html) documentation for more detail.
+ * @return Fulfills with `undefined` upon success.
+ * @see {@link unlink}
+ */
+export declare function remove(path: PathLike): Promise<void>;
 //# sourceMappingURL=files.d.ts.map

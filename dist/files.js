@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.writeJson = exports.readJson = exports.write = exports.append = exports.exists = exports.deserealizeObjectSync = exports.serealizeObjectSync = exports.readGZipSync = exports.writeGZipSync = exports.fileLinesSync = exports.insertBetweenPlacweHoldersSync = exports.readJsonSync = exports.writeJsonSync = exports.writeSync = exports.writeToDesktopSync = exports.writeObjectToDesktopSync = exports.DESKTOP_PATH = void 0;
+exports.remove = exports.writeJson = exports.readJson = exports.write = exports.append = exports.exists = exports.removeSync = exports.deserealizeObjectSync = exports.serealizeObjectSync = exports.readGZipSync = exports.writeGZipSync = exports.fileLinesSync = exports.insertBetweenPlacweHoldersSync = exports.readJsonSync = exports.writeJsonSync = exports.writeSync = exports.writeToDesktopSync = exports.writeObjectToDesktopSync = exports.DESKTOP_PATH = void 0;
 const fs_1 = require("fs");
 const promises_1 = require("fs/promises");
 const os_1 = require("os");
@@ -16,11 +16,22 @@ function writeToDesktopSync(fileName, data) {
     (0, fs_1.writeFileSync)(`${exports.DESKTOP_PATH}/${fileName}`, data);
 }
 exports.writeToDesktopSync = writeToDesktopSync;
-function writeSync(dir, fileName, data) {
-    if (!(0, fs_1.existsSync)(dir)) {
-        (0, fs_1.mkdirSync)(dir);
-    }
-    (0, fs_1.writeFileSync)(`${dir}/${fileName}`, data);
+/**
+ * Returns `undefined`.
+ *
+ * If `data` is a plain object, it must have an own (not inherited) `toString`function property.
+ *
+ * The `mode` option only affects the newly created file. See {@link open} for more details.
+ *
+ * For detailed information, see the documentation of the asynchronous version of
+ * this API: {@link writeFile}.
+ * @param file filename or file descriptor
+ */
+function writeSync(file, data, options) {
+    const dirPath = (0, path_1.dirname)(file.toString());
+    if (!(0, fs_1.existsSync)(dirPath))
+        (0, fs_1.mkdirSync)((0, path_1.dirname)(dirPath));
+    (0, fs_1.writeFileSync)(file, data || '');
 }
 exports.writeSync = writeSync;
 function writeJsonSync(path, object) {
@@ -82,6 +93,21 @@ function deserealizeObjectSync(filePath) {
 }
 exports.deserealizeObjectSync = deserealizeObjectSync;
 /**
+ * Synchronous [`unlink(2)`](http://man7.org/linux/man-pages/man2/unlink.2.html). Returns `undefined`.
+ * @return `undefined` upon success.
+ * @see {@link unlinkSync}
+ */
+function removeSync(path) {
+    try {
+        (0, fs_1.unlinkSync)(path);
+    }
+    catch (e) {
+        if ((e === null || e === void 0 ? void 0 : e.code) !== 'ENOENT')
+            throw e;
+    }
+}
+exports.removeSync = removeSync;
+/**
  * check if file exists
  *
  *
@@ -133,7 +159,7 @@ function write(file, data, options) {
         let promise = (0, promises_2.of)();
         if (!exist)
             promise = (0, promises_1.mkdir)(dirPath, Object.assign(Object.assign({}, _opt), { recursive: true }));
-        return promise.then(() => (0, promises_1.writeFile)(file, data, options));
+        return promise.then(() => (0, promises_1.writeFile)(file, data || '', options));
     });
 }
 exports.write = write;
@@ -168,4 +194,15 @@ function writeJson(file, obj, options, replacer, space) {
     return write(file, data, options);
 }
 exports.writeJson = writeJson;
+/**
+ * If `path` refers to a symbolic link, then the link is removed without affecting
+ * the file or directory to which that link refers. If the `path` refers to a file
+ * path that is not a symbolic link, the file is deleted. See the POSIX [`unlink(2)`](http://man7.org/linux/man-pages/man2/unlink.2.html) documentation for more detail.
+ * @return Fulfills with `undefined` upon success.
+ * @see {@link unlink}
+ */
+function remove(path) {
+    return (0, promises_1.unlink)(path).catch(e => (e.code === 'ENOENT' ? undefined : e));
+}
+exports.remove = remove;
 //# sourceMappingURL=files.js.map
