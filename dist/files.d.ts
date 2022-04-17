@@ -79,7 +79,7 @@ export declare function readJson<T>(file: PathLike | FileHandle, options?: ({
  * @param space Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read.
  * @returns
  * @see {@link JSON.stringify}
- * @see
+ * @see {@link write}
  */
 export declare function writeJson(file: PathLike | FileHandle, obj: any, options?: (ObjectEncodingOptions & {
     mode?: Mode | undefined;

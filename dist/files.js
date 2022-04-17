@@ -161,7 +161,7 @@ exports.readJson = readJson;
  * @param space Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read.
  * @returns
  * @see {@link JSON.stringify}
- * @see
+ * @see {@link write}
  */
 function writeJson(file, obj, options, replacer, space) {
     const data = JSON.stringify(obj, replacer, space);

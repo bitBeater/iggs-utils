@@ -181,7 +181,7 @@ export function readJson<T>(
  * @param space Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read.
  * @returns
  * @see {@link JSON.stringify}
- * @see
+ * @see {@link write}
  */
 export function writeJson(
 	file: PathLike | FileHandle,
