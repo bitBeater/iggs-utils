@@ -1,12 +1,13 @@
 import { Abortable } from 'events';
 import { existsSync, mkdirSync, Mode, ObjectEncodingOptions, OpenMode, PathLike, readFileSync, WriteFileOptions, writeFileSync } from 'fs';
-import { appendFile as append, FileHandle, FlagAndOpenMode, mkdir, stat, writeFile } from 'fs/promises';
+import { appendFile, FileHandle, FlagAndOpenMode, mkdir, readFile, stat, writeFile } from 'fs/promises';
 import { homedir } from 'os';
 import { dirname, join } from 'path';
 import { Stream } from 'stream';
 
 import { gzipSync, unzipSync, ZlibOptions } from 'zlib';
-import { Reviver } from './revivers';
+import { of } from './promises';
+import { Replacer, Reviver } from './revivers';
 
 export const DESKTOP_PATH = join(homedir(), 'Desktop');
 
@@ -29,7 +30,7 @@ export function writeJsonSync(path: string, object: any) {
 	writeFileSync(path, JSON.stringify(object));
 }
 
-export function readJson<T>(path: string, reviver?: Reviver<any>): T {
+export function readJsonSync<T>(path: string, reviver?: Reviver<any>): T {
 	const data = readFileSync(path);
 	if (!data) return;
 
@@ -70,7 +71,7 @@ export function writeGZipSync(filePath: string, data: string | Buffer, writeFile
 	writeFileSync(filePath, zippBuffer, writeFileOptions);
 }
 
-export function readGZip(path: string, readFileOptions?: { encoding?: null; flag?: string }, zlibOptions?: ZlibOptions): Buffer {
+export function readGZipSync(path: string, readFileOptions?: { encoding?: null; flag?: string }, zlibOptions?: ZlibOptions): Buffer {
 	const data = readFileSync(path, readFileOptions);
 	return unzipSync(data, zlibOptions);
 }
@@ -79,15 +80,24 @@ export function serealizeObjectSync(filePath: string, object: any) {
 	writeGZipSync(filePath, JSON.stringify(object));
 }
 
-export function deserealizeObject(filePath: string) {
-	return JSON.parse(readGZip(filePath).toString());
+export function deserealizeObjectSync(filePath: string) {
+	return JSON.parse(readGZipSync(filePath).toString());
 }
 
-export const exists: (path: string) => Promise<boolean> = (path: string) =>
+/**
+ * check if file exists
+ *
+ *
+ * @param path file path
+ * @returns true if exists false otherwise
+ *
+ * @see{@link stat}
+ */
+export const exists = (path: PathLike): Promise<boolean> =>
 	stat(path)
 		.then(() => true)
 		.catch(e => {
-			if (e.code === 'ENOENT') return false;
+			if (e?.code === 'ENOENT') return false;
 			throw e;
 		});
 
@@ -98,8 +108,8 @@ export const exists: (path: string) => Promise<boolean> = (path: string) =>
  * @param options
  * @returns
  */
-export function appendFile(path: PathLike | FileHandle, data: string | Uint8Array, options?: (ObjectEncodingOptions & FlagAndOpenMode) | BufferEncoding | null): Promise<void> {
-	return append(path, data, options).catch(error => {
+export function append(path: PathLike | FileHandle, data: string | Uint8Array, options?: (ObjectEncodingOptions & FlagAndOpenMode) | BufferEncoding | null): Promise<void> {
+	return appendFile(path, data, options).catch(error => {
 		if (error.code === 'ENOENT') return mkdir(dirname(path.toString()), { recursive: true }).then(() => append(path, data, options));
 		return error;
 	});
@@ -107,10 +117,16 @@ export function appendFile(path: PathLike | FileHandle, data: string | Uint8Arra
 
 /**
  * write to file, if the folder does not exist it will be recursively created
- * @param path
+ *
+ * @param file filename or `FileHandle`
  * @param data
  * @param options
- * @returns
+ * @return Fulfills with `undefined` upon success.
+ *
+ *
+ * @see{@link exists}
+ * @see{@link mkdir}
+ * @see{@link writeFile}
  */
 export function write(
 	file: PathLike | FileHandle,
@@ -132,8 +148,54 @@ export function write(
 	});
 }
 
-export function of<T>(data?: T): Promise<T> {
-	return new Promise((resolve, _reject) => {
-		resolve(data);
-	});
+/**
+ * Asynchronously reads the entire contents of a file that contains a valid JSON string, and converts the content into an object.
+ *
+ * @param file filename or `FileHandle`
+ * @param options
+ * @param reviver A function that transforms the results. This function is called for each member of the object.
+ * If a member contains nested objects, the nested objects are transformed before the parent object is.
+ *
+ * @see{@link readFile}
+ * @see{@link JSON.parse}
+ */
+export function readJson<T>(
+	file: PathLike | FileHandle,
+	options?:
+		| ({
+				encoding?: null | undefined;
+				flag?: OpenMode | undefined;
+		  } & Abortable)
+		| null,
+	reviver?: Reviver<any>
+): Promise<T> {
+	return readFile(file, options).then(fileContent => JSON.parse(fileContent.toString(), reviver) as T);
+}
+
+/**
+ * Converts a JavaScript value to a JavaScript Object Notation (JSON) string, and asynchronously writes data to a file, replacing the file if it already exists.
+ *
+ * @param file filename or `FileHandle`
+ * @param obj A JavaScript value, usually an object or array, to be converted.
+ * @param replacer A function that transforms the results.
+ * @param space Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read.
+ * @returns
+ * @see {@link JSON.stringify}
+ * @see
+ */
+export function writeJson(
+	file: PathLike | FileHandle,
+	obj: any,
+	options?:
+		| (ObjectEncodingOptions & {
+				mode?: Mode | undefined;
+				flag?: OpenMode | undefined;
+		  } & Abortable)
+		| BufferEncoding
+		| null,
+	replacer?: Replacer<any>,
+	space?: string | number
+): Promise<void> {
+	const data = JSON.stringify(obj, replacer as any, space);
+	return write(file, data, options);
 }
