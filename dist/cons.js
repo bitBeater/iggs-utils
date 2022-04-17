@@ -25,7 +25,7 @@ exports.logColors = {
         magenta: '\x1b[35m',
         cyan: '\x1b[36m',
         white: '\x1b[37m',
-        crimson: '\x1b[38m'
+        crimson: '\x1b[38m',
     },
     // Background colors
     bg: {
@@ -37,8 +37,8 @@ exports.logColors = {
         magenta: '\x1b[45m',
         cyan: '\x1b[46m',
         white: '\x1b[47m',
-        crimson: '\x1b[48m'
-    }
+        crimson: '\x1b[48m',
+    },
 };
 function printObj(obj) {
     for (const key of Object.keys(obj)) {

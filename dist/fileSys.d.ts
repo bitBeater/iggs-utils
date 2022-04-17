@@ -14,10 +14,14 @@ export declare function readJson<T>(path: string, reviver?: Reviver<any>): T;
 export declare function insertBetweenPlacweHoldersSync(filePath: string, data: string, beginPlaceHolder: string, endPlaceHolder: string): void;
 export declare function fileLinesSync(path: string, lineSeparator?: RegExp): string[];
 export declare function writeGZipSync(filePath: string, data: string | Buffer, writeFileOptions?: WriteFileOptions, zLibOptions?: ZlibOptions): void;
-export declare function readGZip(path: string, readFileOptions?: {
-    encoding?: null;
-    flag?: string;
-}, zlibOptions?: ZlibOptions): Buffer;
+export declare function readGZip(
+	path: string,
+	readFileOptions?: {
+		encoding?: null;
+		flag?: string;
+	},
+	zlibOptions?: ZlibOptions
+): Buffer;
 export declare function serealizeObjectSync(filePath: string, object: any): void;
 export declare function deserealizeObject(filePath: string): any;
 export declare const exists: (path: string) => Promise<boolean>;
@@ -36,9 +40,16 @@ export declare function appendFile(path: PathLike | FileHandle, data: string | U
  * @param options
  * @returns
  */
-export declare function write(file: PathLike | FileHandle, data: string | NodeJS.ArrayBufferView | Iterable<string | NodeJS.ArrayBufferView> | AsyncIterable<string | NodeJS.ArrayBufferView> | Stream, options?: (ObjectEncodingOptions & {
-    mode?: Mode | undefined;
-    flag?: OpenMode | undefined;
-} & Abortable) | BufferEncoding | null): Promise<void>;
+export declare function write(
+	file: PathLike | FileHandle,
+	data: string | NodeJS.ArrayBufferView | Iterable<string | NodeJS.ArrayBufferView> | AsyncIterable<string | NodeJS.ArrayBufferView> | Stream,
+	options?:
+		| (ObjectEncodingOptions & {
+				mode?: Mode | undefined;
+				flag?: OpenMode | undefined;
+		  } & Abortable)
+		| BufferEncoding
+		| null
+): Promise<void>;
 export declare function of<T>(data?: T): Promise<T>;
 //# sourceMappingURL=fileSys.d.ts.map
