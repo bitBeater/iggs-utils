@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.of = exports.write = exports.appendFile = exports.exists = exports.deserealizeObject = exports.serealizeObjectSync = exports.readGZip = exports.writeGZipSync = exports.fileLinesSync = exports.insertBetweenPlacweHoldersSync = exports.readJson = exports.writeJsonSync = exports.writeSync = exports.writeToDesktopSync = exports.writeObjectToDesktopSync = exports.DESKTOP_PATH = void 0;
+exports.writeJson = exports.readJson = exports.write = exports.append = exports.exists = exports.deserealizeObjectSync = exports.serealizeObjectSync = exports.readGZipSync = exports.writeGZipSync = exports.fileLinesSync = exports.insertBetweenPlacweHoldersSync = exports.readJsonSync = exports.writeJsonSync = exports.writeSync = exports.writeToDesktopSync = exports.writeObjectToDesktopSync = exports.DESKTOP_PATH = void 0;
 const fs_1 = require("fs");
 const promises_1 = require("fs/promises");
 const os_1 = require("os");
 const path_1 = require("path");
 const zlib_1 = require("zlib");
+const promises_2 = require("./promises");
 exports.DESKTOP_PATH = (0, path_1.join)((0, os_1.homedir)(), 'Desktop');
 function writeObjectToDesktopSync(fileName, object) {
     (0, fs_1.writeFileSync)(`${exports.DESKTOP_PATH}/${fileName}`, JSON.stringify(object));
@@ -26,14 +27,14 @@ function writeJsonSync(path, object) {
     (0, fs_1.writeFileSync)(path, JSON.stringify(object));
 }
 exports.writeJsonSync = writeJsonSync;
-function readJson(path, reviver) {
+function readJsonSync(path, reviver) {
     const data = (0, fs_1.readFileSync)(path);
     if (!data)
         return;
     const retVal = JSON.parse(data.toString(), reviver);
     return retVal;
 }
-exports.readJson = readJson;
+exports.readJsonSync = readJsonSync;
 function insertBetweenPlacweHoldersSync(filePath, data, beginPlaceHolder, endPlaceHolder) {
     var _a, _b, _c, _d, _e, _f;
     const writeData = (0, fs_1.readFileSync)(filePath);
@@ -67,23 +68,32 @@ function writeGZipSync(filePath, data, writeFileOptions, zLibOptions) {
     (0, fs_1.writeFileSync)(filePath, zippBuffer, writeFileOptions);
 }
 exports.writeGZipSync = writeGZipSync;
-function readGZip(path, readFileOptions, zlibOptions) {
+function readGZipSync(path, readFileOptions, zlibOptions) {
     const data = (0, fs_1.readFileSync)(path, readFileOptions);
     return (0, zlib_1.unzipSync)(data, zlibOptions);
 }
-exports.readGZip = readGZip;
+exports.readGZipSync = readGZipSync;
 function serealizeObjectSync(filePath, object) {
     writeGZipSync(filePath, JSON.stringify(object));
 }
 exports.serealizeObjectSync = serealizeObjectSync;
-function deserealizeObject(filePath) {
-    return JSON.parse(readGZip(filePath).toString());
+function deserealizeObjectSync(filePath) {
+    return JSON.parse(readGZipSync(filePath).toString());
 }
-exports.deserealizeObject = deserealizeObject;
+exports.deserealizeObjectSync = deserealizeObjectSync;
+/**
+ * check if file exists
+ *
+ *
+ * @param path file path
+ * @returns true if exists false otherwise
+ *
+ * @see{@link stat}
+ */
 const exists = (path) => (0, promises_1.stat)(path)
     .then(() => true)
     .catch(e => {
-    if (e.code === 'ENOENT')
+    if ((e === null || e === void 0 ? void 0 : e.code) === 'ENOENT')
         return false;
     throw e;
 });
@@ -95,36 +105,67 @@ exports.exists = exists;
  * @param options
  * @returns
  */
-function appendFile(path, data, options) {
+function append(path, data, options) {
     return (0, promises_1.appendFile)(path, data, options).catch(error => {
         if (error.code === 'ENOENT')
-            return (0, promises_1.mkdir)((0, path_1.dirname)(path.toString()), { recursive: true }).then(() => (0, promises_1.appendFile)(path, data, options));
+            return (0, promises_1.mkdir)((0, path_1.dirname)(path.toString()), { recursive: true }).then(() => append(path, data, options));
         return error;
     });
 }
-exports.appendFile = appendFile;
+exports.append = append;
 /**
  * write to file, if the folder does not exist it will be recursively created
- * @param path
+ *
+ * @param file filename or `FileHandle`
  * @param data
  * @param options
- * @returns
+ * @return Fulfills with `undefined` upon success.
+ *
+ *
+ * @see{@link exists}
+ * @see{@link mkdir}
+ * @see{@link writeFile}
  */
 function write(file, data, options) {
     const dirPath = (0, path_1.dirname)(file.toString());
     return (0, exports.exists)(dirPath).then(exist => {
         const _opt = typeof options === 'string' ? { encoding: options } : options;
-        let promise = of();
+        let promise = (0, promises_2.of)();
         if (!exist)
             promise = (0, promises_1.mkdir)(dirPath, Object.assign(Object.assign({}, _opt), { recursive: true }));
         return promise.then(() => (0, promises_1.writeFile)(file, data, options));
     });
 }
 exports.write = write;
-function of(data) {
-    return new Promise((resolve, _reject) => {
-        resolve(data);
-    });
+/**
+ * Asynchronously reads the entire contents of a file that contains a valid JSON string, and converts the content into an object.
+ *
+ * @param file filename or `FileHandle`
+ * @param options
+ * @param reviver A function that transforms the results. This function is called for each member of the object.
+ * If a member contains nested objects, the nested objects are transformed before the parent object is.
+ *
+ * @see{@link readFile}
+ * @see{@link JSON.parse}
+ */
+function readJson(file, options, reviver) {
+    return (0, promises_1.readFile)(file, options).then(fileContent => JSON.parse(fileContent.toString(), reviver));
 }
-exports.of = of;
+exports.readJson = readJson;
+/**
+ * Converts a JavaScript value to a JavaScript Object Notation (JSON) string, and asynchronously writes data to a file, replacing the file if it already exists.
+ *
+ * @param file filename or `FileHandle`
+ * @param obj A JavaScript value, usually an object or array, to be converted.
+ * @param replacer A function that transforms the results.
+ * @param space Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read.
+ * @returns
+ * @see {@link JSON.stringify}
+ * @see
+ */
+function writeJson(file, obj, options, replacer, space) {
+    const data = JSON.stringify(obj, replacer, space);
+    return write(file, data, options);
+}
+exports.writeJson = writeJson;
 //# sourceMappingURL=files.js.map
