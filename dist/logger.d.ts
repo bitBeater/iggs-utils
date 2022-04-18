@@ -1,11 +1,11 @@
 export declare enum LogLevel {
-    OFF = 0,
-    FATAL = 1,
-    ERROR = 2,
+    TRACE = 0,
+    DEBUG = 1,
+    INFO = 2,
     WARN = 3,
-    INFO = 4,
-    DEBUG = 5,
-    TRACE = 6
+    ERROR = 4,
+    FATAL = 5,
+    OFF = 6
 }
 export interface Logger {
     /**

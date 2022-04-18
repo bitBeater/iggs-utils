@@ -3,13 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.setLogLevel = exports.setLogger = exports.getLogger = exports.trace = exports.fatal = exports.error = exports.warn = exports.info = exports.debug = exports.LogLevel = void 0;
 var LogLevel;
 (function (LogLevel) {
-    LogLevel[LogLevel["OFF"] = 0] = "OFF";
-    LogLevel[LogLevel["FATAL"] = 1] = "FATAL";
-    LogLevel[LogLevel["ERROR"] = 2] = "ERROR";
+    LogLevel[LogLevel["TRACE"] = 0] = "TRACE";
+    LogLevel[LogLevel["DEBUG"] = 1] = "DEBUG";
+    LogLevel[LogLevel["INFO"] = 2] = "INFO";
     LogLevel[LogLevel["WARN"] = 3] = "WARN";
-    LogLevel[LogLevel["INFO"] = 4] = "INFO";
-    LogLevel[LogLevel["DEBUG"] = 5] = "DEBUG";
-    LogLevel[LogLevel["TRACE"] = 6] = "TRACE";
+    LogLevel[LogLevel["ERROR"] = 4] = "ERROR";
+    LogLevel[LogLevel["FATAL"] = 5] = "FATAL";
+    LogLevel[LogLevel["OFF"] = 6] = "OFF";
 })(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
 var actualLogger = {
     debug: (...data) => console.debug(`[${new Date().toJSON()}] DEBUG:`, ...data),
