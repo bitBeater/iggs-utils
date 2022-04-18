@@ -72,12 +72,12 @@ const _logger: Logger = {
 	},
 };
 
-export const debug = (...data: any[]) => _logger.debug(data);
-export const info = (...data: any[]) => _logger.info(data);
-export const warn = (...data: any[]) => _logger.warn(data);
-export const error = (...data: any[]) => _logger.error(data);
-export const fatal = (...data: any[]) => _logger.fatal(data);
-export const trace = (...data: any[]) => _logger.trace(data);
+export const debug = (...data: any[]) => _logger.debug(...data);
+export const info = (...data: any[]) => _logger.info(...data);
+export const warn = (...data: any[]) => _logger.warn(...data);
+export const error = (...data: any[]) => _logger.error(...data);
+export const fatal = (...data: any[]) => _logger.fatal(...data);
+export const trace = (...data: any[]) => _logger.trace(...data);
 export const getLogger = () => ({ ..._logger });
 
 export const setLogger = (logger: Logger) => {

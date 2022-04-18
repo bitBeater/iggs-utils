@@ -50,17 +50,17 @@ const _logger = {
             actualLogger === null || actualLogger === void 0 ? void 0 : actualLogger.error(...data);
     },
 };
-const debug = (...data) => _logger.debug(data);
+const debug = (...data) => _logger.debug(...data);
 exports.debug = debug;
-const info = (...data) => _logger.info(data);
+const info = (...data) => _logger.info(...data);
 exports.info = info;
-const warn = (...data) => _logger.warn(data);
+const warn = (...data) => _logger.warn(...data);
 exports.warn = warn;
-const error = (...data) => _logger.error(data);
+const error = (...data) => _logger.error(...data);
 exports.error = error;
-const fatal = (...data) => _logger.fatal(data);
+const fatal = (...data) => _logger.fatal(...data);
 exports.fatal = fatal;
-const trace = (...data) => _logger.trace(data);
+const trace = (...data) => _logger.trace(...data);
 exports.trace = trace;
 const getLogger = () => (Object.assign({}, _logger));
 exports.getLogger = getLogger;
