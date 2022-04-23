@@ -1,5 +1,3 @@
-import { isDate } from 'util/types';
-
 /**
  *
  * @param a1 array to compare
@@ -85,3 +83,16 @@ const genericSortFunction = <T>(item1: T, item2: T) => {
 		return 0;
 	}
 };
+
+/**
+ * get the last element of an aray.
+ *
+ *
+ * simply does:
+ * ```js
+ *  array[array.length - 1];
+ * ```
+ */
+export function lastEl<T>(array: T[]): T {
+	return array?.[array?.length - 1];
+}

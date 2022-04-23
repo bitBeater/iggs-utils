@@ -47,4 +47,14 @@ export declare function forEachConsTouple<T>(array: T[], fn: (item1: T, item2: T
  * @param compareFn function to use for comparison operation
  */
 export declare function isSorted<T>(array: T[], compareFn?: (item1: T, item2: T) => number): boolean;
+/**
+ * get the last element of an aray.
+ *
+ *
+ * simply does:
+ * ```js
+ *  array[array.length - 1];
+ * ```
+ */
+export declare function lastEl<T>(array: T[]): T;
 //# sourceMappingURL=collectionOpperations.d.ts.map

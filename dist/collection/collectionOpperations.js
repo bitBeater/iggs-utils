@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isSorted = exports.forEachConsTouple = exports.arrayDifferences = void 0;
+exports.lastEl = exports.isSorted = exports.forEachConsTouple = exports.arrayDifferences = void 0;
 /**
  *
  * @param a1 array to compare
@@ -84,4 +84,17 @@ const genericSortFunction = (item1, item2) => {
         return 0;
     }
 };
+/**
+ * get the last element of an aray.
+ *
+ *
+ * simply does:
+ * ```js
+ *  array[array.length - 1];
+ * ```
+ */
+function lastEl(array) {
+    return array === null || array === void 0 ? void 0 : array[(array === null || array === void 0 ? void 0 : array.length) - 1];
+}
+exports.lastEl = lastEl;
 //# sourceMappingURL=collectionOpperations.js.map
