@@ -94,11 +94,12 @@ export declare function getNearestMultiple(n: number, multiple: number): number;
  * getNearestLowMultiple(5,  2) // 4
  * getNearestLowMultiple(5,  0) // 0
  * getNearestLowMultiple(0.5, 0.2) // 0.4
- * getNearestLowMultiple(0.7777777777777, 0.00001) // 0.77777
+ * getNearestLowMultiple(0.7777777777777, 0.00001) // 0.7777700000000001   cause j♿ can't deal with decimal module
+ * getNearestLowMultiple(0.7777777777777, 0.00001, 5) // 0.77777
  *
  * ```
  */
-export declare function getNearestLowMultiple(n: number, multiple: number): number;
+export declare function getNearestLowMultiple(n: number, multiple: number, precision?: number): number;
 /**
  * truncate decimal numbers to decimal places, without rounding
  * @example

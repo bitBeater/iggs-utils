@@ -133,12 +133,15 @@ exports.getNearestMultiple = getNearestMultiple;
  * getNearestLowMultiple(5,  2) // 4
  * getNearestLowMultiple(5,  0) // 0
  * getNearestLowMultiple(0.5, 0.2) // 0.4
- * getNearestLowMultiple(0.7777777777777, 0.00001) // 0.77777
+ * getNearestLowMultiple(0.7777777777777, 0.00001) // 0.7777700000000001   cause j♿ can't deal with decimal module
+ * getNearestLowMultiple(0.7777777777777, 0.00001, 5) // 0.77777
  *
  * ```
  */
-function getNearestLowMultiple(n, multiple) {
-    return n - (n % multiple);
+function getNearestLowMultiple(n, multiple, precision = 0) {
+    var multiplier = Math.pow(10, precision);
+    var integer = n * multiplier;
+    return (integer - (integer % (multiple * multiplier))) / multiplier;
 }
 exports.getNearestLowMultiple = getNearestLowMultiple;
 /**
