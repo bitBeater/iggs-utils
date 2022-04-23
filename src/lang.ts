@@ -21,8 +21,6 @@ export function benchmarkFn(fn: Function, iterations = 1): { min: number; max: n
 	var _iterations = iterations + 1;
 
 	while (--_iterations) {
-		console.log(_iterations);
-
 		const start = Date.now();
 		fn();
 		const end = Date.now();
