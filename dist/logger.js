@@ -26,27 +26,27 @@ var actualLogger = {
 let _logLevel = LogLevel.OFF;
 const _logger = {
     trace: (...data) => {
-        if (_logLevel >= LogLevel.TRACE)
+        if (_logLevel <= LogLevel.TRACE)
             actualLogger === null || actualLogger === void 0 ? void 0 : actualLogger.trace(...data);
     },
     debug: (...data) => {
-        if (_logLevel >= LogLevel.DEBUG)
+        if (_logLevel <= LogLevel.DEBUG)
             actualLogger === null || actualLogger === void 0 ? void 0 : actualLogger.debug(...data);
     },
     info: (...data) => {
-        if (_logLevel >= LogLevel.INFO)
+        if (_logLevel <= LogLevel.INFO)
             actualLogger === null || actualLogger === void 0 ? void 0 : actualLogger.info(...data);
     },
     warn: (...data) => {
-        if (_logLevel >= LogLevel.WARN)
+        if (_logLevel <= LogLevel.WARN)
             actualLogger === null || actualLogger === void 0 ? void 0 : actualLogger.warn(...data);
     },
     error: (...data) => {
-        if (_logLevel >= LogLevel.ERROR)
+        if (_logLevel <= LogLevel.ERROR)
             actualLogger === null || actualLogger === void 0 ? void 0 : actualLogger.error(...data);
     },
     fatal: (...data) => {
-        if (_logLevel >= LogLevel.FATAL)
+        if (_logLevel <= LogLevel.FATAL)
             actualLogger === null || actualLogger === void 0 ? void 0 : actualLogger.error(...data);
     },
 };
@@ -73,7 +73,7 @@ exports.setLogger = setLogger;
 const setLogLevel = (logLevel) => {
     if (_logLevel == null)
         (0, exports.warn)('[LOGGER]', 'setting undefined log level');
-    logLevel = _logLevel;
+    _logLevel = logLevel;
 };
 exports.setLogLevel = setLogLevel;
 function printStack(errors) {
