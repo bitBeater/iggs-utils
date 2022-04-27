@@ -109,4 +109,25 @@ export declare function getNearestLowMultiple(n: number, multiple: number, preci
  * ```
  */
 export declare function truncateDecimals(n: number, digits: number): number;
+/**
+ *
+ * Create a sequence of numbers, from start value to end value with span
+ *
+ * @example
+ * ```js
+ * numberSequence(1, 5, 1)	//	[1,2,3,4,5]
+ * numberSequence(1, 10, 2)	//	[1,3,5,7,9]
+ * numberSequence(1, 5, 2)	//	[1,3,5]
+ * numberSequence(5, 1, 1)	//	[5,4,3,2,1]
+ * numberSequence(-5, -1, 1)	//	[-5,-4,-3,-2,-1]
+ * numberSequence(-1, -5, 1)	//	[-1,-2,-3,-4,-5]
+ * numberSequence(1, -5, 1)	//	[1,0,-1,-2,-3,-4,-5]
+ * numberSequence(-1, 5, 1)	//	[-1,0,1,2,3,4,5]
+ * numberSequence(5, -1, 1)	//	[5,4,3,2,1,0,-1]
+ * numberSequence(0, 1, 0.2)	//	[0,0.2,0.4,0.6000000000000001,0.8,1]
+ * numberSequence(0, -1, 0.2)	//	[0,-0.2,-0.4,-0.6000000000000001,-0.8,-1]
+ * numberSequence(1, -1, 0.3)	//	[1,0.7,0.4,0.10000000000000009,-0.2,-0.5,-0.7999999999999998]
+ * ```
+ */
+export declare function numberSequence(startValue: number, endVAlue: number, span: number): number[];
 //# sourceMappingURL=math.d.ts.map

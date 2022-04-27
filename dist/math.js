@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.truncateDecimals = exports.getNearestLowMultiple = exports.getNearestMultiple = exports.getPrecision = exports.weightedArithmeticMean = exports.calculatePercent = exports.percDiff = exports.round = void 0;
+exports.numberSequence = exports.truncateDecimals = exports.getNearestLowMultiple = exports.getNearestMultiple = exports.getPrecision = exports.weightedArithmeticMean = exports.calculatePercent = exports.percDiff = exports.round = void 0;
 /**
  *
  * @param n number to be rounded round
@@ -157,4 +157,36 @@ function truncateDecimals(n, digits) {
     return Math.floor(n * multiplier) / multiplier;
 }
 exports.truncateDecimals = truncateDecimals;
+/**
+ *
+ * Create a sequence of numbers, from start value to end value with span
+ *
+ * @example
+ * ```js
+ * numberSequence(1, 5, 1)	//	[1,2,3,4,5]
+ * numberSequence(1, 10, 2)	//	[1,3,5,7,9]
+ * numberSequence(1, 5, 2)	//	[1,3,5]
+ * numberSequence(5, 1, 1)	//	[5,4,3,2,1]
+ * numberSequence(-5, -1, 1)	//	[-5,-4,-3,-2,-1]
+ * numberSequence(-1, -5, 1)	//	[-1,-2,-3,-4,-5]
+ * numberSequence(1, -5, 1)	//	[1,0,-1,-2,-3,-4,-5]
+ * numberSequence(-1, 5, 1)	//	[-1,0,1,2,3,4,5]
+ * numberSequence(5, -1, 1)	//	[5,4,3,2,1,0,-1]
+ * numberSequence(0, 1, 0.2)	//	[0,0.2,0.4,0.6000000000000001,0.8,1]
+ * numberSequence(0, -1, 0.2)	//	[0,-0.2,-0.4,-0.6000000000000001,-0.8,-1]
+ * numberSequence(1, -1, 0.3)	//	[1,0.7,0.4,0.10000000000000009,-0.2,-0.5,-0.7999999999999998]
+ * ```
+ */
+function numberSequence(startValue, endVAlue, span) {
+    const length = Math.floor(Math.abs(startValue - endVAlue) / span);
+    const retVal = new Array(length);
+    if (startValue < endVAlue)
+        for (var i = length + 1; i;)
+            retVal[--i] = startValue + span * i;
+    else
+        for (var i = length + 1; i;)
+            retVal[--i] = startValue - span * i;
+    return retVal;
+}
+exports.numberSequence = numberSequence;
 //# sourceMappingURL=math.js.map
