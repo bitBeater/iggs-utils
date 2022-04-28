@@ -1,17 +1,65 @@
-/**chilo--byte*/
+/**
+ * one chilo byte as bytes.
+ *
+ * ```
+ * 2 ** 10
+ * ```
+ * */
 export declare const kB: number;
-/**mega-byte*/
+/**
+ * one mega byte as bytes.
+ *
+ * ```
+ * 2 ** 20
+ * ```
+ * */
 export declare const MB: number;
-/**giga-byte*/
+/**
+ * one giga byte as bytes.
+ *
+ * ```
+ * 2 ** 30
+ * ```
+ * */
 export declare const GB: number;
-/**tera-byte*/
+/**
+ * one tera byte as bytes.
+ *
+ * ```
+ * 2 ** 40
+ * ```
+ * */
 export declare const TB: number;
-/**peta-byte*/
+/**
+ * one peta byte as bytes.
+ *
+ * ```
+ * 2 ** 50
+ * ```
+ * */
 export declare const PB: number;
-/**exa-byte*/
+/**
+ * one exa byte as bytes.
+ *
+ * ```
+ * 2 ** 60
+ * ```
+ * */
 export declare const EB: number;
-/**zetta-byte*/
+/**
+ * one zetta byte as bytes.
+ *
+ * ```
+ * 2 ** 70
+ * ```
+ * */
 export declare const ZB: number;
-/**yotta-byte*/
+/**
+ * one yotta byte as bytes.
+ *
+ * ```
+ * 2 ** 80
+ * ```
+ * */
 export declare const YB: number;
 //# sourceMappingURL=bytes.d.ts.map

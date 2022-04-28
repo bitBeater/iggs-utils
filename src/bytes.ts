@@ -1,23 +1,71 @@
-/**chilo--byte*/
+/**
+ * one chilo byte as bytes.
+ *
+ * ```
+ * 2 ** 10
+ * ```
+ * */
 export const kB = 2 ** 10;
 
-/**mega-byte*/
+/**
+ * one mega byte as bytes.
+ *
+ * ```
+ * 2 ** 20
+ * ```
+ * */
 export const MB = 2 ** 20;
 
-/**giga-byte*/
+/**
+ * one giga byte as bytes.
+ *
+ * ```
+ * 2 ** 30
+ * ```
+ * */
 export const GB = 2 ** 30;
 
-/**tera-byte*/
+/**
+ * one tera byte as bytes.
+ *
+ * ```
+ * 2 ** 40
+ * ```
+ * */
 export const TB = 2 ** 40;
 
-/**peta-byte*/
+/**
+ * one peta byte as bytes.
+ *
+ * ```
+ * 2 ** 50
+ * ```
+ * */
 export const PB = 2 ** 50;
 
-/**exa-byte*/
+/**
+ * one exa byte as bytes.
+ *
+ * ```
+ * 2 ** 60
+ * ```
+ * */
 export const EB = 2 ** 60;
 
-/**zetta-byte*/
+/**
+ * one zetta byte as bytes.
+ *
+ * ```
+ * 2 ** 70
+ * ```
+ * */
 export const ZB = 2 ** 70;
 
-/**yotta-byte*/
+/**
+ * one yotta byte as bytes.
+ *
+ * ```
+ * 2 ** 80
+ * ```
+ * */
 export const YB = 2 ** 80;
