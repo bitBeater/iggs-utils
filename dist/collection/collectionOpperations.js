@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.lastEl = exports.isSorted = exports.forEachConsTouple = exports.arrayDifferences = void 0;
+exports.gen = exports.lastEl = exports.isSorted = exports.forEachConsTouple = exports.arrayDifferences = void 0;
 /**
  *
  * @param a1 array to compare
@@ -87,7 +87,7 @@ const genericSortFunction = (item1, item2) => {
 /**
  * get the last element of an aray.
  *
- *
+ * @example <caption>simply does:</caption>
  * simply does:
  * ```js
  *  array[array.length - 1];
@@ -97,4 +97,19 @@ function lastEl(array) {
     return array === null || array === void 0 ? void 0 : array[(array === null || array === void 0 ? void 0 : array.length) - 1];
 }
 exports.lastEl = lastEl;
+/**
+ * generate an array, of specified length using the generate function
+ *
+ * @example <caption>Generate an array with numbers from 0 to 9</caption>
+ * ```js
+ *  gen(10, i => i); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+ * ```
+ */
+function gen(length, genFn) {
+    const retVal = new Array(length);
+    for (var i = 0; i < length; i++)
+        retVal[i] = genFn(i);
+    return retVal;
+}
+exports.gen = gen;
 //# sourceMappingURL=collectionOpperations.js.map

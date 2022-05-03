@@ -87,7 +87,7 @@ const genericSortFunction = <T>(item1: T, item2: T) => {
 /**
  * get the last element of an aray.
  *
- *
+ * @example <caption>simply does:</caption>
  * simply does:
  * ```js
  *  array[array.length - 1];
@@ -95,4 +95,20 @@ const genericSortFunction = <T>(item1: T, item2: T) => {
  */
 export function lastEl<T>(array: T[]): T {
 	return array?.[array?.length - 1];
+}
+
+/**
+ * generate an array, of specified length using the generate function
+ *
+ * @example <caption>Generate an array with numbers from 0 to 9</caption>
+ * ```js
+ *  gen(10, i => i); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+ * ```
+ */
+export function gen<T>(length: number, genFn: (index: number) => T): T[] {
+	const retVal = new Array<T>(length);
+
+	for (var i = 0; i < length; i++) retVal[i] = genFn(i);
+
+	return retVal;
 }

@@ -50,11 +50,20 @@ export declare function isSorted<T>(array: T[], compareFn?: (item1: T, item2: T)
 /**
  * get the last element of an aray.
  *
- *
+ * @example <caption>simply does:</caption>
  * simply does:
  * ```js
  *  array[array.length - 1];
  * ```
  */
 export declare function lastEl<T>(array: T[]): T;
+/**
+ * generate an array, of specified length using the generate function
+ *
+ * @example <caption>Generate an array with numbers from 0 to 9</caption>
+ * ```js
+ *  gen(10, i => i); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+ * ```
+ */
+export declare function gen<T>(length: number, genFn: (index: number) => T): T[];
 //# sourceMappingURL=collectionOpperations.d.ts.map
