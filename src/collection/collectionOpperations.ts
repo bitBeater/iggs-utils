@@ -19,7 +19,7 @@ export function arrayDifferences(a1: number[] = [], a2: number[] = []): number[]
  * ```js
  * const array=[1,2,3,4];
  *
- * forEachConsTouple(array,console.log);
+ * forEachConsPairs(array,console.log);
  *
  * // prints
  * // 1 2
@@ -28,7 +28,7 @@ export function arrayDifferences(a1: number[] = [], a2: number[] = []): number[]
  * ```
  *
  */
-export function forEachConsTouple<T>(array: T[], fn: (item1: T, item2: T) => void) {
+export function forEachConsPairs<T>(array: T[], fn: (item1: T, item2: T) => void) {
 	if (!array?.length || typeof fn !== 'function') return;
 
 	for (let i = 1; i < array.length; i++) {
