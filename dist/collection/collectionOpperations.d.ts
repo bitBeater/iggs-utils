@@ -12,7 +12,7 @@ export declare function arrayDifferences(a1?: number[], a2?: number[]): number[]
  * ```js
  * const array=[1,2,3,4];
  *
- * forEachConsTouple(array,console.log);
+ * forEachConsPairs(array,console.log);
  *
  * // prints
  * // 1 2
@@ -21,7 +21,7 @@ export declare function arrayDifferences(a1?: number[], a2?: number[]): number[]
  * ```
  *
  */
-export declare function forEachConsTouple<T>(array: T[], fn: (item1: T, item2: T) => void): void;
+export declare function forEachConsPairs<T>(array: T[], fn: (item1: T, item2: T) => void): void;
 /**
  * check if the givven array is sorted or not.
  *

@@ -115,19 +115,42 @@ export declare function truncateDecimals(n: number, digits: number): number;
  *
  * @example
  * ```js
- * numberSequence(1, 5, 1)	//	[1,2,3,4,5]
- * numberSequence(1, 10, 2)	//	[1,3,5,7,9]
- * numberSequence(1, 5, 2)	//	[1,3,5]
- * numberSequence(5, 1, 1)	//	[5,4,3,2,1]
- * numberSequence(-5, -1, 1)	//	[-5,-4,-3,-2,-1]
- * numberSequence(-1, -5, 1)	//	[-1,-2,-3,-4,-5]
- * numberSequence(1, -5, 1)	//	[1,0,-1,-2,-3,-4,-5]
- * numberSequence(-1, 5, 1)	//	[-1,0,1,2,3,4,5]
- * numberSequence(5, -1, 1)	//	[5,4,3,2,1,0,-1]
- * numberSequence(0, 1, 0.2)	//	[0,0.2,0.4,0.6000000000000001,0.8,1]
- * numberSequence(0, -1, 0.2)	//	[0,-0.2,-0.4,-0.6000000000000001,-0.8,-1]
- * numberSequence(1, -1, 0.3)	//	[1,0.7,0.4,0.10000000000000009,-0.2,-0.5,-0.7999999999999998]
+ * numberSequence({start:1, end: 5, span:1})	//	[1,2,3,4,5]
+ * numberSequence({start:1, end: 10, span:2})	//	[1,3,5,7,9]
+ * numberSequence({start:1, end: 5, span:2})	//	[1,3,5]
+ * numberSequence({start:5, end: 1, span:1})	//	[5,4,3,2,1]
+ * numberSequence({start:1, end: -5, span:1})	//	[1,0,-1,-2,-3,-4,-5]
+ * numberSequence({start:5, end: -1, span:1})	//	[5,4,3,2,1,0,-1]
+ * numberSequence({start:0, end: 1, span:0.2})	//	[0,0.2,0.4,0.6000000000000001,0.8,1]
+ * numberSequence({start:0, end: -1, span:0.2})	//	[0,-0.2,-0.4,-0.6000000000000001,-0.8,-1]
+ * numberSequence({start:1, end: -1, span:0.3})	//	[1,0.7,0.4,0.10000000000000009,-0.2,-0.5,-0.7999999999999998]
+ * numberSequence({start:-1, end:-5, span:1})	//	[-1,-2,-3,-4,-5]
+ * numberSequence({start:-5, end:-1, span:1})	//	[-5,-4,-3,-2,-1]
+ * numberSequence({start:-1, end:5, span:1})	//	[-1,0,1,2,3,4,5]
  * ```
  */
-export declare function numberSequence(startValue: number, endVAlue: number, span: number): number[];
+export declare function numberSequenceRange(range: {
+    start: number;
+    end: number;
+    span: number;
+}): number[];
+/**
+ *
+ * Create a sequence of numbers, from start value to end value with span
+ *
+ * @example
+ * ```js
+ * numberSequenceByLength({ start: 0, span: 1, length: 10 })	// (10) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+ * numberSequenceByLength({ start: 0, span: 1, length: 10, direction: '-' })	// (10) [0, -1, -2, -3, -4, -5, -6, -7, -8, -9]
+ * numberSequenceByLength({ start: 0, span: 0.3, length: 10 })	// (10) [0, 0.3, 0.6, 0.8999999999999999, 1.2, 1.5, 1.7999999999999998, 2.1, 2.4, 2.6999999999999997]
+ * numberSequenceByLength({ start: 1.5, span: 0.3, length: 10, direction: '-' })	// (10) [1.5, 1.2, 0.9, 0.6000000000000001, 0.30000000000000004, 0, -0.2999999999999998, -0.6000000000000001, -0.8999999999999999, -1.1999999999999997]
+ * numberSequenceByLength({ start: -1.5, span: 0.3, length: 10, direction: '+' })	// (10) [-1.5, -1.2, -0.9, -0.6000000000000001, -0.30000000000000004, 0, 0.2999999999999998, 0.6000000000000001, 0.8999999999999999, 1.1999999999999997]
+ * ```
+ */
+export declare function numberSequenceByLength(len: {
+    start: number;
+    span: number;
+    length: number;
+    direction?: '+' | '-';
+}): number[];
 //# sourceMappingURL=math.d.ts.map

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.gen = exports.lastEl = exports.isSorted = exports.forEachConsTouple = exports.arrayDifferences = void 0;
+exports.gen = exports.lastEl = exports.isSorted = exports.forEachConsPairs = exports.arrayDifferences = void 0;
 /**
  *
  * @param a1 array to compare
@@ -21,7 +21,7 @@ exports.arrayDifferences = arrayDifferences;
  * ```js
  * const array=[1,2,3,4];
  *
- * forEachConsTouple(array,console.log);
+ * forEachConsPairs(array,console.log);
  *
  * // prints
  * // 1 2
@@ -30,7 +30,7 @@ exports.arrayDifferences = arrayDifferences;
  * ```
  *
  */
-function forEachConsTouple(array, fn) {
+function forEachConsPairs(array, fn) {
     if (!(array === null || array === void 0 ? void 0 : array.length) || typeof fn !== 'function')
         return;
     for (let i = 1; i < array.length; i++) {
@@ -39,7 +39,7 @@ function forEachConsTouple(array, fn) {
         fn(item1, item2);
     }
 }
-exports.forEachConsTouple = forEachConsTouple;
+exports.forEachConsPairs = forEachConsPairs;
 /**
  * check if the givven array is sorted or not.
  *
