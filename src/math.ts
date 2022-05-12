@@ -220,10 +220,10 @@ export function fibonacis(start: number, end: number): number[] {
 	var currentFib = start * 2 || 1;
 
 	while (true) {
+		if (lastFib > end) return retVal;
 		const tmpLast = lastFib;
 		lastFib = currentFib;
 		currentFib = currentFib + tmpLast;
-		if (lastFib > end) return retVal;
-		retVal.push(lastFib);
+		retVal.push(tmpLast);
 	}
 }

@@ -225,12 +225,12 @@ function fibonacis(start, end) {
     var lastFib = start || 1;
     var currentFib = start * 2 || 1;
     while (true) {
+        if (lastFib > end)
+            return retVal;
         const tmpLast = lastFib;
         lastFib = currentFib;
         currentFib = currentFib + tmpLast;
-        if (lastFib > end)
-            return retVal;
-        retVal.push(lastFib);
+        retVal.push(tmpLast);
     }
 }
 exports.fibonacis = fibonacis;
