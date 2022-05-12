@@ -208,3 +208,22 @@ export function numberSequenceByLength(len: { start: number; span: number; lengt
 
 	return retVal;
 }
+
+/**
+ *
+ * Create a sequence of fibonaci numbers, from start value to end value
+ *
+ */
+export function fibonacis(start: number, end: number): number[] {
+	const retVal: number[] = [];
+	var lastFib = start || 1;
+	var currentFib = start * 2 || 1;
+
+	while (true) {
+		const tmpLast = lastFib;
+		lastFib = currentFib;
+		currentFib = currentFib + tmpLast;
+		if (lastFib > end) return retVal;
+		retVal.push(lastFib);
+	}
+}

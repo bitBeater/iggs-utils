@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.numberSequenceByLength = exports.numberSequenceRange = exports.truncateDecimals = exports.getNearestLowMultiple = exports.getNearestMultiple = exports.getPrecision = exports.weightedArithmeticMean = exports.calculatePercent = exports.percDiff = exports.round = void 0;
+exports.fibonacis = exports.numberSequenceByLength = exports.numberSequenceRange = exports.truncateDecimals = exports.getNearestLowMultiple = exports.getNearestMultiple = exports.getPrecision = exports.weightedArithmeticMean = exports.calculatePercent = exports.percDiff = exports.round = void 0;
 /**
  *
  * @param n number to be rounded round
@@ -215,4 +215,23 @@ function numberSequenceByLength(len) {
     return retVal;
 }
 exports.numberSequenceByLength = numberSequenceByLength;
+/**
+ *
+ * Create a sequence of fibonaci numbers, from start value to end value
+ *
+ */
+function fibonacis(start, end) {
+    const retVal = [];
+    var lastFib = start || 1;
+    var currentFib = start * 2 || 1;
+    while (true) {
+        const tmpLast = lastFib;
+        lastFib = currentFib;
+        currentFib = currentFib + tmpLast;
+        if (lastFib > end)
+            return retVal;
+        retVal.push(lastFib);
+    }
+}
+exports.fibonacis = fibonacis;
 //# sourceMappingURL=math.js.map

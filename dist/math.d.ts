@@ -153,4 +153,10 @@ export declare function numberSequenceByLength(len: {
     length: number;
     direction?: '+' | '-';
 }): number[];
+/**
+ *
+ * Create a sequence of fibonaci numbers, from start value to end value
+ *
+ */
+export declare function fibonacis(start: number, end: number): number[];
 //# sourceMappingURL=math.d.ts.map
