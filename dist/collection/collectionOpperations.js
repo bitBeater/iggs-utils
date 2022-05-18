@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.gen = exports.lastEl = exports.isSorted = exports.forEachConsPairs = exports.arrayDifferences = void 0;
+exports.takeRight = exports.gen = exports.lastEl = exports.isSorted = exports.forEachConsPairs = exports.arrayDifferences = void 0;
 /**
  *
  * @param a1 array to compare
@@ -112,4 +112,35 @@ function gen(length, genFn) {
     return retVal;
 }
 exports.gen = gen;
+/**
+ *
+ * like {@link https://lodash.com/docs/4.17.15#takeRight lodash's takeRight}, but also with offset.
+ *
+ *
+ *
+ *
+ ** * *
+ * simply does
+ * ```js
+ * array?.slice(array.length - n - offset , array.length - offset);
+ * ```
+ * * * *
+ *
+ *
+ * @example
+ * ```js
+ *	takeRight([0, 1, 2, 3])			//=> [3]
+ *	takeRight([0, 1, 2, 3], 2)		 //=> [2, 3]
+ *	takeRight([0, 1, 2, 3], 2, 1)	  //=> [1, 2]
+ * ```
+ *
+ * @param array The array to query.
+ * @param n The number of elements to take.
+ * @param offset The offset to apply for elements to take.
+ * @returns Returns the slice of array.
+ */
+function takeRight(array, n = 1, offset = 0) {
+    return array === null || array === void 0 ? void 0 : array.slice(array.length - offset - n, array.length - offset);
+}
+exports.takeRight = takeRight;
 //# sourceMappingURL=collectionOpperations.js.map

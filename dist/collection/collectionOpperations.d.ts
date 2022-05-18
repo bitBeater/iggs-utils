@@ -66,4 +66,32 @@ export declare function lastEl<T>(array: T[]): T;
  * ```
  */
 export declare function gen<T>(length: number, genFn: (index: number) => T): T[];
+/**
+ *
+ * like {@link https://lodash.com/docs/4.17.15#takeRight lodash's takeRight}, but also with offset.
+ *
+ *
+ *
+ *
+ ** * *
+ * simply does
+ * ```js
+ * array?.slice(array.length - n - offset , array.length - offset);
+ * ```
+ * * * *
+ *
+ *
+ * @example
+ * ```js
+ *	takeRight([0, 1, 2, 3])			//=> [3]
+ *	takeRight([0, 1, 2, 3], 2)		 //=> [2, 3]
+ *	takeRight([0, 1, 2, 3], 2, 1)	  //=> [1, 2]
+ * ```
+ *
+ * @param array The array to query.
+ * @param n The number of elements to take.
+ * @param offset The offset to apply for elements to take.
+ * @returns Returns the slice of array.
+ */
+export declare function takeRight<T>(array: T[], n?: number, offset?: number): T[];
 //# sourceMappingURL=collectionOpperations.d.ts.map
