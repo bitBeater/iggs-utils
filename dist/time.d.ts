@@ -139,5 +139,6 @@ export declare function multiplyDuration(duration: Duration, multiplier: number)
  * ```
  */
 export declare function addDurations(...durations: Duration[]): Duration;
+export declare function isValidDate(value: any): value is Date;
 export {};
 //# sourceMappingURL=time.d.ts.map

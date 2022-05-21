@@ -209,3 +209,7 @@ export function addDurations(...durations: Duration[]): Duration {
 
 	return retval;
 }
+
+export function isValidDate(value: any): value is Date {
+	return value instanceof Date && !isNaN(value.valueOf());
+}
