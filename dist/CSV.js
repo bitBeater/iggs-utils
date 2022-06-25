@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 // import { Reviver } from './revivers';
 // import { math } from '.';
 // import { union, get, set, unescape } from 'lodash';

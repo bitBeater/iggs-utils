@@ -1,9 +1,6 @@
 export * as bytes from './bytes';
 export * as collection from './collection/collection';
-export * as conf from './conf';
 export * as cons from './cons';
-export * as files from './files';
-export * as http from './http';
 export * as lang from './lang';
 export * as log from './logger';
 export * as math from './math';

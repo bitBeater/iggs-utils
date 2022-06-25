@@ -25,10 +25,14 @@ export declare function readJsonSync<T>(path: string, reviver?: Reviver<any>): T
 export declare function insertBetweenPlacweHoldersSync(filePath: string, data: string, beginPlaceHolder: string, endPlaceHolder: string): void;
 export declare function fileLinesSync(path: string, lineSeparator?: RegExp): string[];
 export declare function writeGZipSync(filePath: string, data: string | Buffer, writeFileOptions?: WriteFileOptions, zLibOptions?: ZlibOptions): void;
-export declare function readGZipSync(path: string, readFileOptions?: {
-    encoding?: null;
-    flag?: string;
-}, zlibOptions?: ZlibOptions): Buffer;
+export declare function readGZipSync(
+	path: string,
+	readFileOptions?: {
+		encoding?: null;
+		flag?: string;
+	},
+	zlibOptions?: ZlibOptions
+): Buffer;
 export declare function serealizeObjectSync(filePath: string, object: any): void;
 export declare function deserealizeObjectSync(filePath: string): any;
 /**
@@ -68,10 +72,17 @@ export declare function append(path: PathLike | FileHandle, data: string | Uint8
  * @see{@link mkdir}
  * @see{@link writeFile}
  */
-export declare function write(file: PathLike | FileHandle, data?: string | NodeJS.ArrayBufferView | Iterable<string | NodeJS.ArrayBufferView> | AsyncIterable<string | NodeJS.ArrayBufferView> | Stream, options?: (ObjectEncodingOptions & {
-    mode?: Mode | undefined;
-    flag?: OpenMode | undefined;
-} & Abortable) | BufferEncoding | null): Promise<void>;
+export declare function write(
+	file: PathLike | FileHandle,
+	data?: string | NodeJS.ArrayBufferView | Iterable<string | NodeJS.ArrayBufferView> | AsyncIterable<string | NodeJS.ArrayBufferView> | Stream,
+	options?:
+		| (ObjectEncodingOptions & {
+				mode?: Mode | undefined;
+				flag?: OpenMode | undefined;
+		  } & Abortable)
+		| BufferEncoding
+		| null
+): Promise<void>;
 /**
  * Asynchronously reads the entire contents of a file that contains a valid JSON string, and converts the content into an object.
  *
@@ -83,10 +94,16 @@ export declare function write(file: PathLike | FileHandle, data?: string | NodeJ
  * @see{@link readFile}
  * @see{@link JSON.parse}
  */
-export declare function readJson<T>(file: PathLike | FileHandle, options?: ({
-    encoding?: null | undefined;
-    flag?: OpenMode | undefined;
-} & Abortable) | null, reviver?: Reviver<any>): Promise<T>;
+export declare function readJson<T>(
+	file: PathLike | FileHandle,
+	options?:
+		| ({
+				encoding?: null | undefined;
+				flag?: OpenMode | undefined;
+		  } & Abortable)
+		| null,
+	reviver?: Reviver<any>
+): Promise<T>;
 /**
  * Converts a JavaScript value to a JavaScript Object Notation (JSON) string, and asynchronously writes data to a file, replacing the file if it already exists.
  *
@@ -98,10 +115,19 @@ export declare function readJson<T>(file: PathLike | FileHandle, options?: ({
  * @see {@link JSON.stringify}
  * @see {@link write}
  */
-export declare function writeJson(file: PathLike | FileHandle, obj: any, options?: (ObjectEncodingOptions & {
-    mode?: Mode | undefined;
-    flag?: OpenMode | undefined;
-} & Abortable) | BufferEncoding | null, replacer?: Replacer<any>, space?: string | number): Promise<void>;
+export declare function writeJson(
+	file: PathLike | FileHandle,
+	obj: any,
+	options?:
+		| (ObjectEncodingOptions & {
+				mode?: Mode | undefined;
+				flag?: OpenMode | undefined;
+		  } & Abortable)
+		| BufferEncoding
+		| null,
+	replacer?: Replacer<any>,
+	space?: string | number
+): Promise<void>;
 /**
  * If `path` refers to a symbolic link, then the link is removed without affecting
  * the file or directory to which that link refers. If the `path` refers to a file
