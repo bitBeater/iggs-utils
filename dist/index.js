@@ -22,9 +22,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.time = exports.reviver = exports.promises = exports.object = exports.math = exports.log = exports.lang = exports.cons = exports.collection = exports.bytes = void 0;
 exports.bytes = __importStar(require("./bytes"));
@@ -37,5 +34,4 @@ exports.object = __importStar(require("./object"));
 exports.promises = __importStar(require("./promises"));
 exports.reviver = __importStar(require("./revivers"));
 exports.time = __importStar(require("./time"));
-__exportStar(require("./types/paginated-search"), exports);
 //# sourceMappingURL=index.js.map

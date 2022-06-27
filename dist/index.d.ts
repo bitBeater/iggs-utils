@@ -8,5 +8,4 @@ export * as object from './object';
 export * as promises from './promises';
 export * as reviver from './revivers';
 export * as time from './time';
-export * from './types/paginated-search';
 //# sourceMappingURL=index.d.ts.map
