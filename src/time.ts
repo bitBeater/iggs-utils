@@ -213,3 +213,17 @@ export function addDurations(...durations: Duration[]): Duration {
 export function isValidDate(value: any): value is Date {
 	return value instanceof Date && !isNaN(value.valueOf());
 }
+
+/**
+ * Format a date into sql datetime value
+ * @param date
+ * @returns
+ *  * @example
+ * ```js
+ * const date = new Date();
+ * toSqlDate() // => "2017-06-29 17:54:04"
+ *
+ */
+export function toSqlDate(date: Date): string {
+	return date.toISOString().slice(0, 19).replace('T', ' ');
+}

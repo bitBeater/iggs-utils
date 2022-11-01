@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isValidDate = exports.addDurations = exports.multiplyDuration = exports.splitIntervalByDuration = exports.isDurationBiggerThanInterval = exports.durationToSeconds = exports.durationToMilliSeconds = exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.seccond = exports.millis = void 0;
+exports.toSqlDate = exports.isValidDate = exports.addDurations = exports.multiplyDuration = exports.splitIntervalByDuration = exports.isDurationBiggerThanInterval = exports.durationToSeconds = exports.durationToMilliSeconds = exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.seccond = exports.millis = void 0;
 /** in millis */
 exports.millis = 1;
 /** in millis */
@@ -192,4 +192,18 @@ function isValidDate(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
 exports.isValidDate = isValidDate;
+/**
+ * Format a date into sql datetime value
+ * @param date
+ * @returns
+ *  * @example
+ * ```js
+ * const date = new Date();
+ * toSqlDate() // => "2017-06-29 17:54:04"
+ *
+ */
+function toSqlDate(date) {
+    return date.toISOString().slice(0, 19).replace('T', ' ');
+}
+exports.toSqlDate = toSqlDate;
 //# sourceMappingURL=time.js.map

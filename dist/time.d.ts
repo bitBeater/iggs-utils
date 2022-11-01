@@ -140,5 +140,16 @@ export declare function multiplyDuration(duration: Duration, multiplier: number)
  */
 export declare function addDurations(...durations: Duration[]): Duration;
 export declare function isValidDate(value: any): value is Date;
+/**
+ * Format a date into sql datetime value
+ * @param date
+ * @returns
+ *  * @example
+ * ```js
+ * const date = new Date();
+ * toSqlDate() // => "2017-06-29 17:54:04"
+ *
+ */
+export declare function toSqlDate(date: Date): string;
 export {};
 //# sourceMappingURL=time.d.ts.map
