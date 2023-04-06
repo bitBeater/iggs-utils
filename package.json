@@ -1,6 +1,6 @@
 {
 	"name": "iggs-utils",
-	"version": "1.2.5",
+	"version": "1.2.6",
 	"main": "dist/index.js",
 	"files": [
 		"dist",
@@ -22,7 +22,7 @@
 	"homepage": "https://github.com/alexrr2iggs/iggs-utils#readme",
 	"description": "",
 	"devDependencies": {
-		"@types/node": "^17.0.5",
+		"@types/node": "^18.15.11",
 		"pretier": "^0.0.1",
 		"typedoc": "^0.22.10"
 	}
