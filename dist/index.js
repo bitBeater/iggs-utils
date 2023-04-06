@@ -23,13 +23,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.time = exports.reviver = exports.promises = exports.object = exports.math = exports.log = exports.lang = exports.cons = exports.collection = exports.bytes = void 0;
+exports.time = exports.reviver = exports.promises = exports.object = exports.net = exports.math = exports.log = exports.lang = exports.cons = exports.collection = exports.bytes = void 0;
 exports.bytes = __importStar(require("./bytes"));
 exports.collection = __importStar(require("./collection/collection"));
 exports.cons = __importStar(require("./cons"));
 exports.lang = __importStar(require("./lang"));
 exports.log = __importStar(require("./logger"));
 exports.math = __importStar(require("./math"));
+exports.net = __importStar(require("./net/http"));
 exports.object = __importStar(require("./object"));
 exports.promises = __importStar(require("./promises"));
 exports.reviver = __importStar(require("./revivers"));

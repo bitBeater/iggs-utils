@@ -159,4 +159,36 @@ export declare function numberSequenceByLength(len: {
  *
  */
 export declare function fibonacis(start: number, end: number): number[];
+/**
+ * @example
+ * ```
+ * null			=>	 0
+ *
+ * undefined		=>	 0
+ *
+ * NaN			=>	 0
+ *
+ * Infinity		=>	 0
+ *
+ * -Infinity		=>	 0
+ *
+ * new Date()		=>	 0
+ *
+ * ''			=>	 0
+ *
+ * ' '			=>	 0
+ *
+ * '123'			=>	 123
+ *
+ * '-123'			=>	 -123
+ *
+ * '123.456'		=>	 123
+ *
+ * 'abc'			=>	 0
+ *
+ *```
+ * @param val any value
+ * @returns {number}
+ */
+export declare function parseIntOrZero(val: unknown, radix?: number): number;
 //# sourceMappingURL=math.d.ts.map

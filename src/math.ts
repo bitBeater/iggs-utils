@@ -227,3 +227,44 @@ export function fibonacis(start: number, end: number): number[] {
 		retVal.push(tmpLast);
 	}
 }
+
+/**
+ * @example
+ * ```
+ * null			=>	 0
+ *
+ * undefined		=>	 0
+ *
+ * NaN			=>	 0
+ *
+ * Infinity		=>	 0
+ *
+ * -Infinity		=>	 0
+ *
+ * new Date()		=>	 0
+ *
+ * ''			=>	 0
+ *
+ * ' '			=>	 0
+ *
+ * '123'			=>	 123
+ *
+ * '-123'			=>	 -123
+ *
+ * '123.456'		=>	 123
+ *
+ * 'abc'			=>	 0
+ *
+ *```
+ * @param val any value
+ * @returns {number}
+ */
+
+export function parseIntOrZero(val: unknown, radix?: number): number {
+	//@ts-ignore
+	const retVal = Number.parseInt(val, radix);
+
+	if (isNaN(retVal)) return 0;
+
+	return retVal;
+}

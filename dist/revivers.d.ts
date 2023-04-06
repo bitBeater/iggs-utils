@@ -1,11 +1,11 @@
 /**
  * @link  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#using_the_reviver_parameter
  */
-export declare type Reviver<T> = (key: string, value: any) => T;
+export type Reviver<T> = (key: string, value: any) => T;
 /**
  * @link  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#using_the_reviver_parameter
  */
-export declare type Replacer<T> = Reviver<T> | (number | string)[] | null;
+export type Replacer<T> = Reviver<T> | (number | string)[] | null;
 /**
  * revive
  * @param _key

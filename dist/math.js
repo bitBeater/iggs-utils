@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fibonacis = exports.numberSequenceByLength = exports.numberSequenceRange = exports.truncateDecimals = exports.getNearestLowMultiple = exports.getNearestMultiple = exports.getPrecision = exports.weightedArithmeticMean = exports.calculatePercent = exports.percDiff = exports.round = void 0;
+exports.parseIntOrZero = exports.fibonacis = exports.numberSequenceByLength = exports.numberSequenceRange = exports.truncateDecimals = exports.getNearestLowMultiple = exports.getNearestMultiple = exports.getPrecision = exports.weightedArithmeticMean = exports.calculatePercent = exports.percDiff = exports.round = void 0;
 /**
  *
  * @param n number to be rounded round
@@ -234,4 +234,43 @@ function fibonacis(start, end) {
     }
 }
 exports.fibonacis = fibonacis;
+/**
+ * @example
+ * ```
+ * null			=>	 0
+ *
+ * undefined		=>	 0
+ *
+ * NaN			=>	 0
+ *
+ * Infinity		=>	 0
+ *
+ * -Infinity		=>	 0
+ *
+ * new Date()		=>	 0
+ *
+ * ''			=>	 0
+ *
+ * ' '			=>	 0
+ *
+ * '123'			=>	 123
+ *
+ * '-123'			=>	 -123
+ *
+ * '123.456'		=>	 123
+ *
+ * 'abc'			=>	 0
+ *
+ *```
+ * @param val any value
+ * @returns {number}
+ */
+function parseIntOrZero(val, radix) {
+    //@ts-ignore
+    const retVal = Number.parseInt(val, radix);
+    if (isNaN(retVal))
+        return 0;
+    return retVal;
+}
+exports.parseIntOrZero = parseIntOrZero;
 //# sourceMappingURL=math.js.map
