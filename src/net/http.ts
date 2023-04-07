@@ -1,6 +1,18 @@
 import { parseIntOrZero } from '../math';
 import { delay } from '../promises';
 
+export interface HttpRetryOptions {
+	retryCount?: number;
+	retryDelay?: number;
+	maxRetries?: number;
+	onRetry?: (error: Error, request: Request | string | URL, response?: Response, retry?: HttpRetryOptions) => void;
+}
+export interface HttpOptions {
+	retry?: HttpRetryOptions;
+}
+
+export type HttpRequest = Request | string | URL;
+
 export function cookieStringToObject(cookie: string): { [key: string]: string } {
 	const cookies: { [key: string]: string } = {};
 	const parts = cookie.split(';');
@@ -28,23 +40,13 @@ export function cookieArrayToString(cookies: [string, string]): string {
 	return parts.join('; ');
 }
 
-export interface HttpRetryOptions {
-	retryCount?: number;
-	retryDelay?: number;
-	maxRetries?: number;
-	onRetry?: (error: Error, request: Request | string | URL, response?: Response, retry?: HttpRetryOptions) => void;
-}
-export interface HttpOptions {
-	retry?: HttpRetryOptions;
-}
-
 class HttpError extends Error {
 	constructor(public response: Response) {
 		super(response.statusText);
 	}
 }
 
-export function http(req: Request | string | URL, init?: RequestInit, options?: HttpOptions): Promise<Response> {
+export function http(req: HttpRequest, init?: RequestInit, options?: HttpOptions): Promise<Response> {
 	// @ts-ignore
 	return fetch(req, init)
 		.then((response: Response) => {
@@ -59,4 +61,9 @@ export function http(req: Request | string | URL, init?: RequestInit, options?: 
 			options?.retry?.onRetry?.(error, req, error?.response, options?.retry);
 			return delay(parseIntOrZero(options?.retry?.retryDelay)).then(() => http(req, init, options));
 		});
+}
+
+export function toURL(httpRequest: HttpRequest): URL {
+	// @ts-ignore
+	return new URL(httpRequest?.url || httpRequest.toString());
 }

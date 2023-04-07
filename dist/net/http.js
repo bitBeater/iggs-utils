@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.http = exports.cookieArrayToString = exports.cookieObjectToString = exports.cookieStringToObject = void 0;
+exports.toURL = exports.http = exports.cookieArrayToString = exports.cookieObjectToString = exports.cookieStringToObject = void 0;
 const math_1 = require("../math");
 const promises_1 = require("../promises");
 function cookieStringToObject(cookie) {
@@ -55,4 +55,9 @@ function http(req, init, options) {
     });
 }
 exports.http = http;
+function toURL(httpRequest) {
+    // @ts-ignore
+    return new URL((httpRequest === null || httpRequest === void 0 ? void 0 : httpRequest.url) || httpRequest.toString());
+}
+exports.toURL = toURL;
 //# sourceMappingURL=http.js.map
