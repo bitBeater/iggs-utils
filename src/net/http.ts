@@ -54,8 +54,8 @@ export function http(req: HttpRequest, init?: RequestInit, options?: HttpOptions
 			throw new HttpError(response);
 		})
 		.catch((error: HttpError) => {
+			error?.response.body?.cancel();
 			if (parseIntOrZero(options?.retry?.retryCount) >= parseIntOrZero(options?.retry?.maxRetries) - 1) throw error;
-
 			options.retry.retryCount = parseIntOrZero(options?.retry?.retryCount);
 			options.retry.retryCount++;
 			options?.retry?.onRetry?.(error, req, error?.response, options?.retry);
