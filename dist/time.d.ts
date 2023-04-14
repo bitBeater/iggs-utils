@@ -49,7 +49,7 @@ export declare const november: number;
 export declare const december: number;
 export declare const months: number[];
 export declare const leapMonths: number[];
-interface Duration {
+export interface Duration {
     years?: number;
     months?: number;
     weeks?: number;
@@ -58,9 +58,9 @@ interface Duration {
     minutes?: number;
     seconds?: number;
 }
-interface Interval {
-    start: Date;
-    end: Date;
+export interface Interval {
+    start?: Date;
+    end?: Date;
 }
 /**
  * parse a duration into millisecconds
@@ -151,5 +151,4 @@ export declare function isValidDate(value: any): value is Date;
  *
  */
 export declare function toSqlDate(date: Date): string;
-export {};
 //# sourceMappingURL=time.d.ts.map

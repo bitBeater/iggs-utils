@@ -53,7 +53,7 @@ export const months = [january, february, march, april, may, june, july, august,
 
 export const leapMonths = [january, leapFebruary, march, april, may, june, july, august, september, october, november, december];
 
-interface Duration {
+export interface Duration {
 	years?: number;
 	months?: number;
 	weeks?: number;
@@ -63,9 +63,9 @@ interface Duration {
 	seconds?: number;
 }
 
-interface Interval {
-	start: Date;
-	end: Date;
+export interface Interval {
+	start?: Date;
+	end?: Date;
 }
 /**
  * parse a duration into millisecconds
