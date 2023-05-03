@@ -92,12 +92,13 @@ function printStack(errors) {
 }
 class Logger {
     constructor(conf) {
+        var _a, _b, _c;
         this.logLevel = LogLevel.WARN;
         this.logWriter = defaultLogWriter;
         this.prefix = '';
-        this.logLevel || (this.logLevel = conf === null || conf === void 0 ? void 0 : conf.logLevel);
-        this.logWriter || (this.logWriter = conf === null || conf === void 0 ? void 0 : conf.logWriter);
-        this.prefix || (this.prefix = conf === null || conf === void 0 ? void 0 : conf.prefix);
+        this.logLevel = (_a = conf === null || conf === void 0 ? void 0 : conf.logLevel) !== null && _a !== void 0 ? _a : this.logLevel;
+        this.logWriter = (_b = conf === null || conf === void 0 ? void 0 : conf.logWriter) !== null && _b !== void 0 ? _b : this.logWriter;
+        this.prefix = (_c = conf === null || conf === void 0 ? void 0 : conf.prefix) !== null && _c !== void 0 ? _c : this.prefix;
     }
     trace(...data) {
         var _a;
