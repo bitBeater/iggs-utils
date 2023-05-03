@@ -111,9 +111,9 @@ export class Logger implements LogWriter {
 	logWriter = defaultLogWriter;
 	prefix = '';
 	constructor(conf?: { logWriter?: LogWriter; logLevel?: LogLevel; prefix?: string }) {
-		this.logLevel ||= conf?.logLevel;
-		this.logWriter ||= conf?.logWriter;
-		this.prefix ||= conf?.prefix;
+		this.logLevel = conf?.logLevel ?? this.logLevel;
+		this.logWriter = conf?.logWriter ?? this.logWriter;
+		this.prefix = conf?.prefix ?? this.prefix;
 	}
 
 	trace(...data: Loggable[]) {
