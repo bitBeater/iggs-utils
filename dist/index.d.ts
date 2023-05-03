@@ -8,5 +8,6 @@ export * as net from './net/http';
 export * as object from './object';
 export * as promises from './promises';
 export * as reviver from './revivers';
+export * as strings from './strings';
 export * as time from './time';
 //# sourceMappingURL=index.d.ts.map

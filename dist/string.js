@@ -1,11 +1,10 @@
-"use strict";
+'use strict';
 function isJson(str) {
-    try {
-        JSON.parse(str);
-    }
-    catch (e) {
-        return false;
-    }
-    return true;
+	try {
+		JSON.parse(str);
+	} catch (e) {
+		return false;
+	}
+	return true;
 }
 //# sourceMappingURL=string.js.map
