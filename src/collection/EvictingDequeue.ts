@@ -17,7 +17,7 @@ export class EvictingDequeue<T> extends Array<T> {
 	constructor(maxLenght: number, items: T[] = []) {
 		super();
 		this.#maxLenght = maxLenght;
-		this.push(...(items || []));
+		this.push(...items);
 	}
 
 	push(...item: T[]) {

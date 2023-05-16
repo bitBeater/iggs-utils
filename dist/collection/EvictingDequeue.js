@@ -32,7 +32,7 @@ class EvictingDequeue extends Array {
         super();
         _EvictingDequeue_maxLenght.set(this, void 0);
         __classPrivateFieldSet(this, _EvictingDequeue_maxLenght, maxLenght, "f");
-        this.push(...(items || []));
+        this.push(...items);
     }
     push(...item) {
         super.push(...item);
