@@ -28,7 +28,7 @@ exports.EvictingDequeue = void 0;
  * ```
  */
 class EvictingDequeue extends Array {
-    constructor(maxLenght, items) {
+    constructor(maxLenght, items = []) {
         super();
         _EvictingDequeue_maxLenght.set(this, void 0);
         __classPrivateFieldSet(this, _EvictingDequeue_maxLenght, maxLenght, "f");
@@ -36,14 +36,14 @@ class EvictingDequeue extends Array {
     }
     push(...item) {
         super.push(...item);
-        var overflow = this.length - __classPrivateFieldGet(this, _EvictingDequeue_maxLenght, "f");
+        let overflow = this.length - __classPrivateFieldGet(this, _EvictingDequeue_maxLenght, "f");
         for (; overflow > 0; overflow--)
             this.shift();
         return this.length;
     }
     unshift(...item) {
         super.unshift(...item);
-        var overflow = this.length - __classPrivateFieldGet(this, _EvictingDequeue_maxLenght, "f");
+        let overflow = this.length - __classPrivateFieldGet(this, _EvictingDequeue_maxLenght, "f");
         for (; overflow > 0; overflow--)
             this.pop();
         return this.length;

@@ -14,7 +14,7 @@
  */
 export declare class EvictingDequeue<T> extends Array<T> {
     #private;
-    constructor(maxLenght: number, items: T[]);
+    constructor(maxLenght: number, items?: T[]);
     push(...item: T[]): number;
     unshift(...item: T[]): number;
     get maxLenght(): number;

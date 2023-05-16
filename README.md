@@ -1,6 +1,6 @@
 # iggs-utils
 
-simple, lightweight, dependenciesless, nodejs generic helper library
+simple, lightweight, dependenciesless, javascript generic helper library
 
 ## Installation
 

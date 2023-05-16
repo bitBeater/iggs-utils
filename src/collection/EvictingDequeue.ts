@@ -14,7 +14,7 @@
  */
 export class EvictingDequeue<T> extends Array<T> {
 	readonly #maxLenght: number;
-	constructor(maxLenght: number, items: T[]) {
+	constructor(maxLenght: number, items: T[] = []) {
 		super();
 		this.#maxLenght = maxLenght;
 		this.push(...(items || []));
@@ -22,7 +22,7 @@ export class EvictingDequeue<T> extends Array<T> {
 
 	push(...item: T[]) {
 		super.push(...item);
-		var overflow = this.length - this.#maxLenght;
+		let overflow = this.length - this.#maxLenght;
 		for (; overflow > 0; overflow--) this.shift();
 
 		return this.length;
@@ -30,7 +30,7 @@ export class EvictingDequeue<T> extends Array<T> {
 
 	unshift(...item: T[]) {
 		super.unshift(...item);
-		var overflow = this.length - this.#maxLenght;
+		let overflow = this.length - this.#maxLenght;
 		for (; overflow > 0; overflow--) this.pop();
 
 		return this.length;
