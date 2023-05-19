@@ -13,6 +13,19 @@
 			"cwd": "${workspaceRoot}",
 			"internalConsoleOptions": "openOnSessionStart",
 			"skipFiles": ["<node_internals>/**", "node_modules/**"]
+		},
+		{
+			"name": "test debug",
+			"type": "pwa-node",
+			"request": "launch",
+			"runtimeExecutable": "node",
+			"runtimeArgs": ["--test", "--nolazy", "-r", "./node_modules/ts-node/register/transpile-only.js"],
+
+			"args": ["${file}"],
+
+			"cwd": "${workspaceRoot}",
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": ["<node_internals>/**", "node_modules/**"]
 		}
 	]
 }

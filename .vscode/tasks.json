@@ -5,15 +5,15 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"command": ["npx prettier --write --config ./.prettierrc.json . && tsc && npm version patch -f && npx typedoc --options typedoc.json &&  git commit -a -m'${input:comment}' && git push && npm publish"],
+			"command": ["npm test && npm run prettify && tsc && npm version patch -f && npx typedoc --options typedoc.json &&  git commit -a -m'${input:commitComment}' && git push && npm publish"],
 			"label": "publish"
 		}
 	],
 	"inputs": [
 		{
-			"id": "comment",
+			"id": "commitComment",
 			"type": "promptString",
-			"description": "comment"
+			"description": "commit comment"
 		}
 	]
 }

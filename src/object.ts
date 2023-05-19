@@ -7,8 +7,7 @@ export interface PathKeysOptions {
 /**
  * Returns an array of a given object's keys paths (own and nested key names) in a reccursive manner, iterated in the same order that a normal loop would.
  *
- * @example <caption>Simple usage</caption>
- * ```js
+ * @example ```ts
  * const object={
  * 	str:"hello",
  * 	nr:1,
@@ -36,8 +35,7 @@ export interface PathKeysOptions {
  * //	 'nestedObject.arr' ]
  * ```
  *
- *@example <caption>Omitting first level</caption>
- * ```js
+ * @example ```ts
  * const object={
  * 	str:"hello",
  * 	nestedObject:{

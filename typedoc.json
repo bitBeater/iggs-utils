@@ -1,5 +1,6 @@
 {
 	"entryPoints": ["src/index.ts"],
+	"basePath": "src",
 	"out": "docs",
 	"readme": "README.md",
 	"includeVersion": true,

@@ -8,7 +8,9 @@
 	],
 	"scripts": {
 		"build": "tsc",
-		"genDocs": "npx typedoc --options typedoc.json"
+		"genDocs": "npx typedoc --options typedoc.json",
+		"prettify": "prettier --config ./.prettierrc.json --write \"src/**/*.ts\"",
+		"test": "node --test -r ./node_modules/ts-node/register/transpile-only.js ./tests/**/*"
 	},
 	"author": "",
 	"license": "ISC",
@@ -22,8 +24,8 @@
 	"homepage": "https://github.com/alexrr2iggs/iggs-utils#readme",
 	"description": "",
 	"devDependencies": {
-		"@types/node": "^18.15.11",
-		"pretier": "^0.0.1",
-		"typedoc": "^0.22.10"
+		"@types/node": "^20.2.1",
+		"ts-node": "^10.9.1",
+		"typedoc": "^0.24.7"
 	}
 }

@@ -1,14 +1,17 @@
 import { parseIntOrZero } from '../math';
 import { delay } from '../promises';
 
+export type RetryCallBack = (error: Error, request: Request | string | URL, response?: Response, retry?: HttpRetryOptions) => void;
+
 export interface HttpRetryOptions {
 	retryCount?: number;
 	retryDelay?: number;
 	maxRetries?: number;
-	onRetry?: (error: Error, request: Request | string | URL, response?: Response, retry?: HttpRetryOptions) => void;
+	onRetry?: RetryCallBack;
 }
-export interface HttpOptions {
+export interface RequestOptions {
 	retry?: HttpRetryOptions;
+	timeout?: number;
 }
 
 export type HttpRequest = Request | string | URL;
@@ -46,15 +49,20 @@ class HttpError extends Error {
 	}
 }
 
-export function http(req: HttpRequest, init?: RequestInit, options?: HttpOptions): Promise<Response> {
-	// @ts-ignore
+export function http(req: HttpRequest, init: RequestInit = {}, options?: RequestOptions): Promise<Response> {
+	const { reqTimeOutTimer, controller } = requestTimeout(options);
+
+	if (init.signal) controller?.signal?.addEventListener('abort', e => init.signal?.dispatchEvent(e));
+	else init.signal = controller?.signal;
+
 	return fetch(req, init)
+		.finally(() => clearTimeout(reqTimeOutTimer))
 		.then((response: Response) => {
 			if (response.ok) return response;
 			throw new HttpError(response);
 		})
 		.catch((error: HttpError) => {
-			error?.response.body?.cancel();
+			error?.response?.body?.cancel();
 			if (parseIntOrZero(options?.retry?.retryCount) >= parseIntOrZero(options?.retry?.maxRetries) - 1) throw error;
 			options.retry.retryCount = parseIntOrZero(options?.retry?.retryCount);
 			options.retry.retryCount++;
@@ -66,4 +74,11 @@ export function http(req: HttpRequest, init?: RequestInit, options?: HttpOptions
 export function toURL(httpRequest: HttpRequest): URL {
 	// @ts-ignore
 	return new URL(httpRequest?.url || httpRequest.toString());
+}
+
+function requestTimeout(options?: RequestOptions) {
+	if (!options?.timeout) return {};
+	const controller = new AbortController();
+	const reqTimeOutTimer = setTimeout(() => controller.abort(), options.timeout);
+	return { reqTimeOutTimer, controller };
 }
