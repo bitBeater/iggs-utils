@@ -18,7 +18,7 @@ exports.arrayDifferences = arrayDifferences;
  * executes the provided function fn once for each pair of consecutive elements of the provided array.
  *
  * @example
- * ```js
+ * ```ts
  * const array=[1,2,3,4];
  *
  * forEachConsPairs(array,console.log);
@@ -43,20 +43,20 @@ exports.forEachConsPairs = forEachConsPairs;
 /**
  * check if the givven array is sorted or not.
  *
- * @example <caption>check array of numbers </caption>
- * ```js
+ * @example check array of numbers
+ * ```ts
  *  isSorted([1,2,3])	//true
  *  isSorted([1,3,2])	//false
  * ```
  *
- *  @example <caption>check array of strings</caption>
- *```js
+ *  @example check array of strings
+ *```ts
  *  isSorted(['a','b','c'])	//true
  *  isSorted(['a','c','b'])	//false
  * ```
  *
- *   @example <caption>check array of objects, with compareFn</caption>
- * ```js
+ *   @example check array of objects, with compareFn
+ * ```ts
  *  isSorted([{ x:1}, { x:2}, { x:3}], (o1,o2)=> o1.x-o2.x) // true
  *  isSorted([{ x:1}, { x:3}, { x:2}], (o1,o2)=> o1.x-o2.x) // false
  * ```
@@ -87,9 +87,8 @@ const genericSortFunction = (item1, item2) => {
 /**
  * get the last element of an aray.
  *
- * @example <caption>simply does:</caption>
- * simply does:
- * ```js
+ * @example simply does:
+ * ```ts
  *  array[array.length - 1];
  * ```
  */
@@ -100,8 +99,8 @@ exports.lastEl = lastEl;
 /**
  * generate an array, of specified length using the generate function
  *
- * @example <caption>Generate an array with numbers from 0 to 9</caption>
- * ```js
+ * @example Generate an array with numbers from 0 to 9
+ * ```ts
  *  gen(10, i => i); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  * ```
  */
@@ -121,14 +120,14 @@ exports.gen = gen;
  *
  ** * *
  * simply does
- * ```js
+ * ```ts
  * array?.slice(array.length - n - offset , array.length - offset);
  * ```
  * * * *
  *
  *
  * @example
- * ```js
+ * ```ts
  *	takeRight([0, 1, 2, 3])			//=> [3]
  *	takeRight([0, 1, 2, 3], 2)		 //=> [2, 3]
  *	takeRight([0, 1, 2, 3], 2, 1)	  //=> [1, 2]

@@ -1,11 +1,13 @@
+export type RetryCallBack = (error: Error, request: Request | string | URL, response?: Response, retry?: HttpRetryOptions) => void;
 export interface HttpRetryOptions {
     retryCount?: number;
     retryDelay?: number;
     maxRetries?: number;
-    onRetry?: (error: Error, request: Request | string | URL, response?: Response, retry?: HttpRetryOptions) => void;
+    onRetry?: RetryCallBack;
 }
-export interface HttpOptions {
+export interface RequestOptions {
     retry?: HttpRetryOptions;
+    timeout?: number;
 }
 export type HttpRequest = Request | string | URL;
 export declare function cookieStringToObject(cookie: string): {
@@ -15,6 +17,6 @@ export declare function cookieObjectToString(cookie: {
     [key: string]: string;
 }): string;
 export declare function cookieArrayToString(cookies: [string, string]): string;
-export declare function http(req: HttpRequest, init?: RequestInit, options?: HttpOptions): Promise<Response>;
+export declare function http(req: HttpRequest, init?: RequestInit, options?: RequestOptions): Promise<Response>;
 export declare function toURL(httpRequest: HttpRequest): URL;
 //# sourceMappingURL=http.d.ts.map

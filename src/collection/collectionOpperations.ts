@@ -42,7 +42,7 @@ export function forEachConsPairs<T>(array: T[], fn: (item1: T, item2: T) => void
 /**
  * check if the givven array is sorted or not.
  *
- * @example check array of numbers 
+ * @example check array of numbers
  * ```ts
  *  isSorted([1,2,3])	//true
  *  isSorted([1,3,2])	//false
