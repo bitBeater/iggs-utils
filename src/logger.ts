@@ -106,11 +106,22 @@ function printStack(errors: any[]) {
 	errors?.filter(e => e?.stack)?.forEach(e => console.error(e?.stack));
 }
 
+export interface LoggerConfig {
+	logWriter?: LogWriter;
+	logLevel?: LogLevel;
+	prefix?: string;
+}
+
 export class Logger implements LogWriter {
 	logLevel = LogLevel.WARN;
 	logWriter = defaultLogWriter;
 	prefix = '';
-	constructor(conf?: { logWriter?: LogWriter; logLevel?: LogLevel; prefix?: string }) {
+	constructor(conf?: LoggerConfig | string) {
+		if (typeof conf === 'string') {
+			this.prefix = conf;
+			return;
+		}
+
 		this.logLevel = conf?.logLevel ?? this.logLevel;
 		this.logWriter = conf?.logWriter ?? this.logWriter;
 		this.prefix = conf?.prefix ?? this.prefix;
@@ -135,5 +146,59 @@ export class Logger implements LogWriter {
 	}
 	fatal(...data: Loggable[]) {
 		if (this.logLevel <= LogLevel.FATAL) this.logWriter?.error(this.prefix, ...data);
+	}
+
+	/**
+	 * @unstable
+	 * @todo needs testing
+	 *
+	 * Creates a new StepLogger with the given name.
+	 * @example
+	 * ```ts
+	 * const logger = new Logger('[main]');
+	 *
+	 * logger.info('creating a step logger');
+	 *
+	 * const step = logger.step('[step]');
+	 * step.info('doing something...');
+	 * step.finish();
+	 *
+	 *
+	 * logger.info('after step logger has finished');
+	 *
+	 * // Output:
+	 * // [2021-08-31T14:00:00.000Z] INFO: [main] creating a step logger
+	 * // [2021-08-31T14:00:00.000Z] INFO: [main]:[step] started
+	 * // [2021-08-31T14:00:00.000Z] INFO: [main]:[step] doing something...
+	 * // [2021-08-31T14:00:00.000Z] INFO: [main]:[step] finished in 0ms
+	 * // [2021-08-31T14:00:00.000Z] INFO: [main] after step logger has finished
+	 * ```
+	 *
+	 * @param name
+	 * @returns a new StepLogger wrapping this logger.
+	 *
+	 */
+	step(name: string): StepLogger {
+		return new StepLogger(this, name);
+	}
+}
+
+/**
+ * Wrapper Logger that logs the start and end of a step.
+ * When it is created, it logs the start of the step.
+ * When the finish method is called, it logs the end of the step, and the logWriter is set to null to prevent further logging.
+ */
+export class StepLogger extends Logger {
+	readonly startTime = Date.now();
+	constructor(logger: Logger, stepName: string) {
+		super(logger);
+		this.prefix = (logger.prefix ? logger.prefix + ':' : '') + stepName;
+		this.info(`started`);
+	}
+
+	finish() {
+		const duration = Date.now() - this.startTime;
+		this.info(`finished in ${duration}ms`);
+		this.logWriter = null;
 	}
 }
