@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Logger = exports.setLogLevel = exports.setLogger = exports.getLogger = exports.trace = exports.fatal = exports.error = exports.warn = exports.info = exports.debug = exports.LogLevel = void 0;
+exports.StepLogger = exports.Logger = exports.setLogLevel = exports.setLogger = exports.getLogger = exports.trace = exports.fatal = exports.error = exports.warn = exports.info = exports.debug = exports.LogLevel = void 0;
 var LogLevel;
 (function (LogLevel) {
     LogLevel[LogLevel["TRACE"] = 0] = "TRACE";
@@ -96,6 +96,10 @@ class Logger {
         this.logLevel = LogLevel.WARN;
         this.logWriter = defaultLogWriter;
         this.prefix = '';
+        if (typeof conf === 'string') {
+            this.prefix = conf;
+            return;
+        }
         this.logLevel = (_a = conf === null || conf === void 0 ? void 0 : conf.logLevel) !== null && _a !== void 0 ? _a : this.logLevel;
         this.logWriter = (_b = conf === null || conf === void 0 ? void 0 : conf.logWriter) !== null && _b !== void 0 ? _b : this.logWriter;
         this.prefix = (_c = conf === null || conf === void 0 ? void 0 : conf.prefix) !== null && _c !== void 0 ? _c : this.prefix;
@@ -130,6 +134,58 @@ class Logger {
         if (this.logLevel <= LogLevel.FATAL)
             (_a = this.logWriter) === null || _a === void 0 ? void 0 : _a.error(this.prefix, ...data);
     }
+    /**
+     * @unstable
+     * @todo needs testing
+     *
+     * Creates a new StepLogger with the given name.
+     * @example
+     * ```ts
+     * const logger = new Logger('[main]');
+     *
+     * logger.info('creating a step logger');
+     *
+     * const step = logger.step('[step]');
+     * step.info('doing something...');
+     * step.finish();
+     *
+     *
+     * logger.info('after step logger has finished');
+     *
+     * // Output:
+     * // [2021-08-31T14:00:00.000Z] INFO: [main] creating a step logger
+     * // [2021-08-31T14:00:00.000Z] INFO: [main]:[step] started
+     * // [2021-08-31T14:00:00.000Z] INFO: [main]:[step] doing something...
+     * // [2021-08-31T14:00:00.000Z] INFO: [main]:[step] finished in 0ms
+     * // [2021-08-31T14:00:00.000Z] INFO: [main] after step logger has finished
+     * ```
+     *
+     * @param name
+     * @returns a new StepLogger wrapping this logger.
+     *
+     */
+    step(name) {
+        return new StepLogger(this, name);
+    }
 }
 exports.Logger = Logger;
+/**
+ * Wrapper Logger that logs the start and end of a step.
+ * When it is created, it logs the start of the step.
+ * When the finish method is called, it logs the end of the step, and the logWriter is set to null to prevent further logging.
+ */
+class StepLogger extends Logger {
+    constructor(logger, stepName) {
+        super(logger);
+        this.startTime = Date.now();
+        this.prefix = (logger.prefix ? logger.prefix + ':' : '') + stepName;
+        this.info(`started`);
+    }
+    finish() {
+        const duration = Date.now() - this.startTime;
+        this.info(`finished in ${duration}ms`);
+        this.logWriter = null;
+    }
+}
+exports.StepLogger = StepLogger;
 //# sourceMappingURL=logger.js.map
