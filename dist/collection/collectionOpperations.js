@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.randomElement = exports.takeRight = exports.gen = exports.lastEl = exports.isSorted = exports.forEachConsPairs = exports.arrayDifferences = void 0;
+exports.takeRandomElement = exports.pickRandomElement = exports.takeRight = exports.gen = exports.lastEl = exports.isSorted = exports.forEachConsPairs = exports.arrayDifferences = void 0;
 /**
  *
  * @param a1 array to compare
@@ -147,10 +147,21 @@ exports.takeRight = takeRight;
  * Returns a random element from the provided array.
  *
  * @param array
- * @returns
+ * @returns a random element from the provided array.
  */
-function randomElement(array) {
+function pickRandomElement(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
-exports.randomElement = randomElement;
+exports.pickRandomElement = pickRandomElement;
+/**
+ * Returns a random element from the provided array,
+ * and **removes** the element from the array.
+ *
+ * @param array
+ * @returns a random element from the provided array.
+ */
+function takeRandomElement(array) {
+    return array.splice(Math.floor(Math.random() * array.length), 1)[0];
+}
+exports.takeRandomElement = takeRandomElement;
 //# sourceMappingURL=collectionOpperations.js.map
