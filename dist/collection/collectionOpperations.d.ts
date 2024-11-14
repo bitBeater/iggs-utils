@@ -93,4 +93,12 @@ export declare function gen<T>(length: number, genFn: (index: number) => T): T[]
  * @returns Returns the slice of array.
  */
 export declare function takeRight<T>(array: T[], n?: number, offset?: number): T[];
+/**
+ *
+ * Returns a random element from the provided array.
+ *
+ * @param array
+ * @returns
+ */
+export declare function randomElement<T>(array: T[]): T;
 //# sourceMappingURL=collectionOpperations.d.ts.map

@@ -10,7 +10,7 @@ var LogLevel;
     LogLevel[LogLevel["ERROR"] = 4] = "ERROR";
     LogLevel[LogLevel["FATAL"] = 5] = "FATAL";
     LogLevel[LogLevel["OFF"] = 6] = "OFF";
-})(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
+})(LogLevel || (exports.LogLevel = LogLevel = {}));
 const defaultLogWriter = {
     debug: (...data) => console.debug(`[${new Date().toJSON()}] DEBUG:`, ...data),
     info: (...data) => console.info(`[${new Date().toJSON()}] INFO:`, ...data),

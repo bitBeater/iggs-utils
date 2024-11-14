@@ -142,3 +142,25 @@ export function gen<T>(length: number, genFn: (index: number) => T): T[] {
 export function takeRight<T>(array: T[], n = 1, offset = 0): T[] {
 	return array?.slice(array.length - offset - n, array.length - offset);
 }
+
+/**
+ *
+ * Returns a random element from the provided array.
+ *
+ * @param array
+ * @returns a random element from the provided array.
+ */
+export function pickRandomElement<T>(array: T[]): T {
+	return array[Math.floor(Math.random() * array.length)];
+}
+
+/**
+ * Returns a random element from the provided array,
+ * and **removes** the element from the array.
+ *
+ * @param array
+ * @returns a random element from the provided array.
+ */
+export function takeRandomElement<T>(array: T[]): T {
+	return array.splice(Math.floor(Math.random() * array.length), 1)[0];
+}

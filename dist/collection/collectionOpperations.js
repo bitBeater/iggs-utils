@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.takeRight = exports.gen = exports.lastEl = exports.isSorted = exports.forEachConsPairs = exports.arrayDifferences = void 0;
+exports.randomElement = exports.takeRight = exports.gen = exports.lastEl = exports.isSorted = exports.forEachConsPairs = exports.arrayDifferences = void 0;
 /**
  *
  * @param a1 array to compare
@@ -142,4 +142,15 @@ function takeRight(array, n = 1, offset = 0) {
     return array === null || array === void 0 ? void 0 : array.slice(array.length - offset - n, array.length - offset);
 }
 exports.takeRight = takeRight;
+/**
+ *
+ * Returns a random element from the provided array.
+ *
+ * @param array
+ * @returns
+ */
+function randomElement(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+exports.randomElement = randomElement;
 //# sourceMappingURL=collectionOpperations.js.map
