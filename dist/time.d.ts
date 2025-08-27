@@ -1,7 +1,7 @@
 /** in millis */
 export declare const millis = 1;
 /** in millis */
-export declare const seccond: number;
+export declare const second: number;
 /** in millis */
 export declare const minute: number;
 /** in millis */
@@ -57,6 +57,7 @@ export interface Duration {
     hours?: number;
     minutes?: number;
     seconds?: number;
+    milliseconds?: number;
 }
 export interface Interval {
     start?: Date;
@@ -75,6 +76,7 @@ export interface Interval {
  * ```
  */
 export declare function durationToMilliSeconds(duration: Duration): number;
+export declare function millisecondsToDuration(millis: number): Duration;
 /**
  * parse a duration into millisecconds
  *
@@ -151,4 +153,36 @@ export declare function isValidDate(value: any): value is Date;
  *
  */
 export declare function toSqlDate(date: Date): string;
+/**
+ * Convert an interval to a duration
+ * @param interval
+ * @returns
+ *
+ * @example
+ * ```ts
+ * const interval = { start: new Date('2000-01-01'), end: new Date('2000-01-10') };
+ * const duration = IntervalToDuration(interval);
+ * // { years: 0, months: 0, weeks: 0, days: 9, hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }
+ * ```
+ */
+export declare function intervalToDuration(interval: Interval): Duration;
+/**
+ * Humanize a duration object into a human-readable string.
+ * @example
+ * ```js
+ * const duration = { years: 1, months: 2, days: 3, hours: 4, minutes: 5, seconds: 6 };
+ * humanizeDuration(duration) // => "1 year, 2 months, 3 days, 4 hours, 5 minutes and 6 seconds"
+ * ```
+ *  * @example
+ * ```js
+ * const duration = { seconds: 4000 };
+ * humanizeDuration(duration) // => "1 hour, 6 minutes and 40 seconds"
+ * ```
+ * @param inDuration
+ * @param options
+ * @returns
+ */
+export declare function humanizeDuration(inDuration: Duration, options?: {
+    reduce?: boolean;
+}): string;
 //# sourceMappingURL=time.d.ts.map

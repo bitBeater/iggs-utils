@@ -4,8 +4,9 @@
 	"out": "docs",
 	"readme": "README.md",
 	"includeVersion": true,
-	"markedOptions": {
-		"gfm": true,
-		"breaks": true
-	}
+		"groupOrder": ["Variables", "Functions", "*"]
+	// "markedOptions": {
+	// 	"gfm": true,
+	// 	"breaks": true
+	// }
 }

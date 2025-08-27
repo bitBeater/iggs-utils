@@ -1,12 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toSqlDate = exports.isValidDate = exports.addDurations = exports.multiplyDuration = exports.splitIntervalByDuration = exports.isDurationBiggerThanInterval = exports.durationToSeconds = exports.durationToMilliSeconds = exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.seccond = exports.millis = void 0;
+exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.second = exports.millis = void 0;
+exports.durationToMilliSeconds = durationToMilliSeconds;
+exports.millisecondsToDuration = millisecondsToDuration;
+exports.durationToSeconds = durationToSeconds;
+exports.isDurationBiggerThanInterval = isDurationBiggerThanInterval;
+exports.splitIntervalByDuration = splitIntervalByDuration;
+exports.multiplyDuration = multiplyDuration;
+exports.addDurations = addDurations;
+exports.isValidDate = isValidDate;
+exports.toSqlDate = toSqlDate;
+exports.intervalToDuration = intervalToDuration;
+exports.humanizeDuration = humanizeDuration;
 /** in millis */
 exports.millis = 1;
 /** in millis */
-exports.seccond = 1000 * exports.millis;
+exports.second = 1000 * exports.millis;
 /** in millis */
-exports.minute = 60 * exports.seccond;
+exports.minute = 60 * exports.second;
 /** in millis */
 exports.hour = 60 * exports.minute;
 /** in millis */
@@ -65,9 +76,27 @@ exports.leapMonths = [exports.january, exports.leapFebruary, exports.march, expo
  * ```
  */
 function durationToMilliSeconds(duration) {
-    return ((duration === null || duration === void 0 ? void 0 : duration.years) || 0) * exports.year + ((duration === null || duration === void 0 ? void 0 : duration.months) || 0) * exports.month + ((duration === null || duration === void 0 ? void 0 : duration.weeks) || 0) * exports.week + ((duration === null || duration === void 0 ? void 0 : duration.days) || 0) * exports.day + ((duration === null || duration === void 0 ? void 0 : duration.hours) || 0) * exports.hour + ((duration === null || duration === void 0 ? void 0 : duration.minutes) || 0) * exports.minute + ((duration === null || duration === void 0 ? void 0 : duration.seconds) || 0) * exports.seccond;
+    return (duration?.years || 0) * exports.year + (duration?.months || 0) * exports.month + (duration?.weeks || 0) * exports.week + (duration?.days || 0) * exports.day + (duration?.hours || 0) * exports.hour + (duration?.minutes || 0) * exports.minute + (duration?.seconds || 0) * exports.second + (duration?.milliseconds || 0) * exports.millis;
 }
-exports.durationToMilliSeconds = durationToMilliSeconds;
+function millisecondsToDuration(millis) {
+    const duration = {};
+    duration.years = Math.floor(millis / exports.year);
+    millis %= exports.year;
+    duration.months = Math.floor(millis / exports.month);
+    millis %= exports.month;
+    duration.weeks = Math.floor(millis / exports.week);
+    millis %= exports.week;
+    duration.days = Math.floor(millis / exports.day);
+    millis %= exports.day;
+    duration.hours = Math.floor(millis / exports.hour);
+    millis %= exports.hour;
+    duration.minutes = Math.floor(millis / exports.minute);
+    millis %= exports.minute;
+    duration.seconds = Math.floor(millis / exports.second);
+    millis %= exports.second;
+    duration.milliseconds = millis;
+    return duration;
+}
 /**
  * parse a duration into millisecconds
  *
@@ -81,9 +110,8 @@ exports.durationToMilliSeconds = durationToMilliSeconds;
  * ```
  */
 function durationToSeconds(duration) {
-    return durationToMilliSeconds(duration) / exports.seccond;
+    return durationToMilliSeconds(duration) / exports.second;
 }
-exports.durationToSeconds = durationToSeconds;
 /**
  * check if the duration is larger than the interval
  */
@@ -92,7 +120,6 @@ function isDurationBiggerThanInterval(interval, duration) {
     const durationSeconds = durationToSeconds(duration);
     return durationSeconds > intervalSeconds;
 }
-exports.isDurationBiggerThanInterval = isDurationBiggerThanInterval;
 /**
  * divide the given interval into smaller intervals, each having the duration equal to the given duration
  *
@@ -116,7 +143,7 @@ exports.isDurationBiggerThanInterval = isDurationBiggerThanInterval;
  * ```
  */
 function splitIntervalByDuration(interval, duration) {
-    if (!(interval === null || interval === void 0 ? void 0 : interval.start) || !(interval === null || interval === void 0 ? void 0 : interval.end))
+    if (!interval?.start || !interval?.end)
         return;
     if (isDurationBiggerThanInterval(interval, duration))
         return [interval];
@@ -131,7 +158,6 @@ function splitIntervalByDuration(interval, duration) {
     }
     return intervals;
 }
-exports.splitIntervalByDuration = splitIntervalByDuration;
 /**
  * multiply the given duration
  *
@@ -153,7 +179,6 @@ function multiplyDuration(duration, multiplier) {
         seconds: duration.seconds * multiplier,
     };
 }
-exports.multiplyDuration = multiplyDuration;
 /**
  * add the given durations
  *
@@ -187,11 +212,9 @@ function addDurations(...durations) {
     }
     return retval;
 }
-exports.addDurations = addDurations;
 function isValidDate(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
-exports.isValidDate = isValidDate;
 /**
  * Format a date into sql datetime value
  * @param date
@@ -205,5 +228,80 @@ exports.isValidDate = isValidDate;
 function toSqlDate(date) {
     return date.toISOString().slice(0, 19).replace('T', ' ');
 }
-exports.toSqlDate = toSqlDate;
+/**
+ * Convert an interval to a duration
+ * @param interval
+ * @returns
+ *
+ * @example
+ * ```ts
+ * const interval = { start: new Date('2000-01-01'), end: new Date('2000-01-10') };
+ * const duration = IntervalToDuration(interval);
+ * // { years: 0, months: 0, weeks: 0, days: 9, hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }
+ * ```
+ */
+function intervalToDuration(interval) {
+    if (interval.end === undefined) {
+        throw new Error('Invalid interval, end date is missing: ' + JSON.stringify(interval));
+    }
+    if (interval.start === undefined) {
+        throw new Error('Invalid interval, start date is missing: ' + JSON.stringify(interval));
+    }
+    const start = interval.start.getTime();
+    const end = interval.end.getTime();
+    if (start > end) {
+        throw new Error('Invalid interval, end date is before start date: ' + JSON.stringify(interval));
+    }
+    let durationInMs = end - start;
+    const duration = millisecondsToDuration(durationInMs);
+    return duration;
+}
+/**
+ * Humanize a duration object into a human-readable string.
+ * @example
+ * ```js
+ * const duration = { years: 1, months: 2, days: 3, hours: 4, minutes: 5, seconds: 6 };
+ * humanizeDuration(duration) // => "1 year, 2 months, 3 days, 4 hours, 5 minutes and 6 seconds"
+ * ```
+ *  * @example
+ * ```js
+ * const duration = { seconds: 4000 };
+ * humanizeDuration(duration) // => "1 hour, 6 minutes and 40 seconds"
+ * ```
+ * @param inDuration
+ * @param options
+ * @returns
+ */
+function humanizeDuration(inDuration, options) {
+    let duration = { ...inDuration };
+    if (options?.reduce) {
+        duration = millisecondsToDuration(durationToMilliSeconds(duration));
+    }
+    const parts = [];
+    if (duration.years)
+        parts.push(`${duration.years} year${duration.years > 1 ? 's' : ''}`);
+    if (duration.months)
+        parts.push(`${duration.months} month${duration.months > 1 ? 's' : ''}`);
+    if (duration.weeks)
+        parts.push(`${duration.weeks} week${duration.weeks > 1 ? 's' : ''}`);
+    if (duration.days)
+        parts.push(`${duration.days} day${duration.days > 1 ? 's' : ''}`);
+    if (duration.hours)
+        parts.push(`${duration.hours} hour${duration.hours > 1 ? 's' : ''}`);
+    if (duration.minutes)
+        parts.push(`${duration.minutes} minute${duration.minutes > 1 ? 's' : ''}`);
+    if (duration.seconds)
+        parts.push(`${duration.seconds} second${duration.seconds > 1 ? 's' : ''}`);
+    if (duration.milliseconds)
+        parts.push(`${duration.milliseconds} millisecond${duration.milliseconds > 1 ? 's' : ''}`);
+    // handle singular case
+    if (parts.length === 1) {
+        return parts[0];
+    }
+    if (parts.length === 0) {
+        return '0 milliseconds';
+    }
+    const last = parts.pop();
+    return parts.join(', ') + ' and ' + last;
+}
 //# sourceMappingURL=time.js.map

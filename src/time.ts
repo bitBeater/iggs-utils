@@ -1,9 +1,9 @@
 /** in millis */
 export const millis = 1;
 /** in millis */
-export const seccond = 1000 * millis;
+export const second = 1000 * millis;
 /** in millis */
-export const minute = 60 * seccond;
+export const minute = 60 * second;
 /** in millis */
 export const hour = 60 * minute;
 /** in millis */
@@ -61,6 +61,7 @@ export interface Duration {
 	hours?: number;
 	minutes?: number;
 	seconds?: number;
+	milliseconds?: number;
 }
 
 export interface Interval {
@@ -80,7 +81,37 @@ export interface Interval {
  * ```
  */
 export function durationToMilliSeconds(duration: Duration): number {
-	return (duration?.years || 0) * year + (duration?.months || 0) * month + (duration?.weeks || 0) * week + (duration?.days || 0) * day + (duration?.hours || 0) * hour + (duration?.minutes || 0) * minute + (duration?.seconds || 0) * seccond;
+	return (duration?.years || 0) * year + (duration?.months || 0) * month + (duration?.weeks || 0) * week + (duration?.days || 0) * day + (duration?.hours || 0) * hour + (duration?.minutes || 0) * minute + (duration?.seconds || 0) * second + (duration?.milliseconds || 0) * millis;
+}
+
+
+export function millisecondsToDuration(millis: number): Duration {
+	const duration: Duration = {};
+
+	duration.years = Math.floor(millis / year);
+	millis %= year;
+
+	duration.months = Math.floor(millis / month);
+	millis %= month;
+
+	duration.weeks = Math.floor(millis / week);
+	millis %= week;
+
+	duration.days = Math.floor(millis / day);
+	millis %= day;
+
+	duration.hours = Math.floor(millis / hour);
+	millis %= hour;
+
+	duration.minutes = Math.floor(millis / minute);
+	millis %= minute;
+
+	duration.seconds = Math.floor(millis / second);
+	millis %= second;
+
+	duration.milliseconds = millis;
+
+	return duration;
 }
 
 /**
@@ -96,7 +127,7 @@ export function durationToMilliSeconds(duration: Duration): number {
  * ```
  */
 export function durationToSeconds(duration: Duration): number {
-	return durationToMilliSeconds(duration) / seccond;
+	return durationToMilliSeconds(duration) / second;
 }
 
 /**
@@ -226,4 +257,89 @@ export function isValidDate(value: any): value is Date {
  */
 export function toSqlDate(date: Date): string {
 	return date.toISOString().slice(0, 19).replace('T', ' ');
+}
+
+/**
+ * Convert an interval to a duration
+ * @param interval 
+ * @returns
+ *  
+ * @example
+ * ```ts
+ * const interval = { start: new Date('2000-01-01'), end: new Date('2000-01-10') };
+ * const duration = IntervalToDuration(interval);
+ * // { years: 0, months: 0, weeks: 0, days: 9, hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }
+ * ```
+ */
+export function intervalToDuration(interval: Interval): Duration {
+
+	if (interval.end === undefined) {
+		throw new Error('Invalid interval, end date is missing: ' + JSON.stringify(interval));
+	}
+
+	if (interval.start === undefined) {
+		throw new Error('Invalid interval, start date is missing: ' + JSON.stringify(interval));
+	}
+
+	const start = interval.start.getTime();
+	const end = interval.end.getTime();
+
+
+
+	if (start > end) {
+		throw new Error('Invalid interval, end date is before start date: ' + JSON.stringify(interval));
+	}
+
+	let durationInMs = end - start;
+
+	const duration = millisecondsToDuration(durationInMs);
+
+	return duration;
+}
+
+/**
+ * Humanize a duration object into a human-readable string.
+ * @example
+ * ```js
+ * const duration = { years: 1, months: 2, days: 3, hours: 4, minutes: 5, seconds: 6 };
+ * humanizeDuration(duration) // => "1 year, 2 months, 3 days, 4 hours, 5 minutes and 6 seconds"
+ * ```
+ *  * @example
+ * ```js
+ * const duration = { seconds: 4000 };
+ * humanizeDuration(duration) // => "1 hour, 6 minutes and 40 seconds"
+ * ```
+ * @param inDuration
+ * @param options
+ * @returns
+ */
+export function humanizeDuration(inDuration: Duration, options?: { reduce?: boolean }): string {
+	let duration = { ...inDuration };
+
+	if (options?.reduce) {
+		duration = millisecondsToDuration(durationToMilliSeconds(duration));
+	}
+
+	const parts = [];
+	if (duration.years) parts.push(`${duration.years} year${duration.years > 1 ? 's' : ''}`);
+	if (duration.months) parts.push(`${duration.months} month${duration.months > 1 ? 's' : ''}`);
+	if (duration.weeks) parts.push(`${duration.weeks} week${duration.weeks > 1 ? 's' : ''}`);
+	if (duration.days) parts.push(`${duration.days} day${duration.days > 1 ? 's' : ''}`);
+	if (duration.hours) parts.push(`${duration.hours} hour${duration.hours > 1 ? 's' : ''}`);
+	if (duration.minutes) parts.push(`${duration.minutes} minute${duration.minutes > 1 ? 's' : ''}`);
+	if (duration.seconds) parts.push(`${duration.seconds} second${duration.seconds > 1 ? 's' : ''}`);
+	if (duration.milliseconds) parts.push(`${duration.milliseconds} millisecond${duration.milliseconds > 1 ? 's' : ''}`);
+
+
+	// handle singular case
+	if (parts.length === 1) {
+		return parts[0];
+	}
+
+	if (parts.length === 0) {
+		return '0 milliseconds';
+	}
+
+	const last = parts.pop();
+	return parts.join(', ') + ' and ' + last;
 }

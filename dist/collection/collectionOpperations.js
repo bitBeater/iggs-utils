@@ -1,8 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.takeRandomElement = exports.pickRandomElement = exports.takeRight = exports.gen = exports.lastEl = exports.isSorted = exports.forEachConsPairs = exports.arrayDifferences = void 0;
+exports.arrayDifferences = arrayDifferences;
+exports.forEachConsPairs = forEachConsPairs;
+exports.isSorted = isSorted;
+exports.lastEl = lastEl;
+exports.takeRight = takeRight;
+exports.pickRandomElement = pickRandomElement;
+exports.takeRandomElement = takeRandomElement;
 /**
  *
+ * Compute the element-wise absolute differences between two arrays of numbers.
+ * @example
+ * ```ts
+ *  arrayDifferences([1,2,3],[3,2,1]); // [2,0,2]
+ * ```
  * @param a1 array to compare
  * @param a2 array to compare
  * @returns return the array difference a1-a2
@@ -13,7 +24,6 @@ function arrayDifferences(a1 = [], a2 = []) {
         retVal.push(Math.abs((a1[i] || 0) - (a2[i] || 0)));
     return retVal;
 }
-exports.arrayDifferences = arrayDifferences;
 /**
  * executes the provided function fn once for each pair of consecutive elements of the provided array.
  *
@@ -31,7 +41,7 @@ exports.arrayDifferences = arrayDifferences;
  *
  */
 function forEachConsPairs(array, fn) {
-    if (!(array === null || array === void 0 ? void 0 : array.length) || typeof fn !== 'function')
+    if (!array?.length || typeof fn !== 'function')
         return;
     for (let i = 1; i < array.length; i++) {
         const item1 = array[i - 1];
@@ -39,7 +49,6 @@ function forEachConsPairs(array, fn) {
         fn(item1, item2);
     }
 }
-exports.forEachConsPairs = forEachConsPairs;
 /**
  * check if the givven array is sorted or not.
  *
@@ -65,7 +74,7 @@ exports.forEachConsPairs = forEachConsPairs;
  * @param compareFn function to use for comparison operation
  */
 function isSorted(array, compareFn = genericSortFunction) {
-    if (!(array === null || array === void 0 ? void 0 : array.length))
+    if (!array?.length)
         return;
     for (let i = 1; i < array.length; i++) {
         const item1 = array[i - 1];
@@ -75,7 +84,6 @@ function isSorted(array, compareFn = genericSortFunction) {
     }
     return true;
 }
-exports.isSorted = isSorted;
 const genericSortFunction = (item1, item2) => {
     try {
         return item1 === item2 ? 0 : item1 > item2 ? 1 : -1;
@@ -93,24 +101,21 @@ const genericSortFunction = (item1, item2) => {
  * ```
  */
 function lastEl(array) {
-    return array === null || array === void 0 ? void 0 : array[(array === null || array === void 0 ? void 0 : array.length) - 1];
+    return array?.[array?.length - 1];
 }
-exports.lastEl = lastEl;
-/**
- * generate an array, of specified length using the generate function
- *
- * @example Generate an array with numbers from 0 to 9
- * ```ts
- *  gen(10, i => i); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
- * ```
- */
-function gen(length, genFn) {
-    const retVal = new Array(length);
-    for (var i = 0; i < length; i++)
-        retVal[i] = genFn(i);
-    return retVal;
-}
-exports.gen = gen;
+// /**
+//  * generate an array, of specified length using the generate function
+//  *
+//  * @example Generate an array with numbers from 0 to 9
+//  * ```ts
+//  *  gen(10, i => i); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+//  * ```
+//  */
+// export function gen<T>(length: number, genFn: (index: number) => T): T[] {
+// 	const retVal = new Array<T>(length);
+// 	for (var i = 0; i < length; i++) retVal[i] = genFn(i);
+// 	return retVal;
+// }
 /**
  *
  * like {@link https://lodash.com/docs/4.17.15#takeRight lodash's takeRight}, but also with offset.
@@ -139,9 +144,8 @@ exports.gen = gen;
  * @returns Returns the slice of array.
  */
 function takeRight(array, n = 1, offset = 0) {
-    return array === null || array === void 0 ? void 0 : array.slice(array.length - offset - n, array.length - offset);
+    return array?.slice(array.length - offset - n, array.length - offset);
 }
-exports.takeRight = takeRight;
 /**
  *
  * Returns a random element from the provided array.
@@ -152,7 +156,6 @@ exports.takeRight = takeRight;
 function pickRandomElement(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
-exports.pickRandomElement = pickRandomElement;
 /**
  * Returns a random element from the provided array,
  * and **removes** the element from the array.
@@ -163,5 +166,4 @@ exports.pickRandomElement = pickRandomElement;
 function takeRandomElement(array) {
     return array.splice(Math.floor(Math.random() * array.length), 1)[0];
 }
-exports.takeRandomElement = takeRandomElement;
 //# sourceMappingURL=collectionOpperations.js.map

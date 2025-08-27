@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPathKeys = void 0;
+exports.getPathKeys = getPathKeys;
 /**
  * Returns an array of a given object's keys paths (own and nested key names) in a reccursive manner, iterated in the same order that a normal loop would.
  *
@@ -65,17 +65,17 @@ function getPathKeys(obj, options) {
     const pathKeys = [];
     for (const rawKey of Object.keys(obj)) {
         const value = obj[rawKey];
-        if (typeof value === 'function' && (options === null || options === void 0 ? void 0 : options.ignoreFunctions))
+        if (typeof value === 'function' && options?.ignoreFunctions)
             continue;
         const key = Array.isArray(obj) ? '[' + rawKey + ']' : rawKey;
-        if (Array.isArray(value) || typeof value !== 'object' || !(options === null || options === void 0 ? void 0 : options.omitFirstLevel))
+        if (Array.isArray(value) || typeof value !== 'object' || !options?.omitFirstLevel)
             pathKeys.push(key);
         if (typeof value === 'object') {
-            if (Array.isArray(value) && !(options === null || options === void 0 ? void 0 : options.unfoldArrays))
+            if (Array.isArray(value) && !options?.unfoldArrays)
                 continue;
             const secondLevelSeparator = Array.isArray(value) ? '' : '.';
             const secondLevelKeys = getPathKeys(value, options);
-            if (!(secondLevelKeys === null || secondLevelKeys === void 0 ? void 0 : secondLevelKeys.length))
+            if (!secondLevelKeys?.length)
                 continue;
             const secondLevelPathKeys = secondLevelKeys.map(k => key + secondLevelSeparator + k);
             pathKeys.push(...secondLevelPathKeys);
@@ -83,5 +83,4 @@ function getPathKeys(obj, options) {
     }
     return pathKeys;
 }
-exports.getPathKeys = getPathKeys;
 //# sourceMappingURL=object.js.map

@@ -34,49 +34,6 @@ export interface LogWriter {
      */
     trace: (...msg: Loggable[]) => void;
 }
-/** @deprecated */
-export declare const debug: (...data: Loggable[]) => void;
-/** @deprecated */
-export declare const info: (...data: Loggable[]) => void;
-/** @deprecated */
-export declare const warn: (...data: Loggable[]) => void;
-/** @deprecated */
-export declare const error: (...data: Loggable[]) => void;
-/** @deprecated */
-export declare const fatal: (...data: Loggable[]) => void;
-/** @deprecated */
-export declare const trace: (...data: Loggable[]) => void;
-/** @deprecated */
-export declare const getLogger: () => {
-    /**
-     * Designates fine-grained informational events that are most useful to debug an application.
-     */
-    debug: (...msg: Loggable[]) => void;
-    /**
-     * Designates informational messages that highlight the progress of the application at coarse-grained level.
-     */
-    info: (...msg: Loggable[]) => void;
-    /**
-     * Designates potentially harmful situations.
-     */
-    warn: (...msg: Loggable[]) => void;
-    /**
-     * Designates error events that might still allow the application to continue running.
-     */
-    error: (...msg: Loggable[]) => void;
-    /**
-     * Designates very severe error events that will presumably lead the application to abort.
-     */
-    fatal: (...msg: Loggable[]) => void;
-    /**
-     * Designates finer-grained informational events than the DEBUG.
-     */
-    trace: (...msg: Loggable[]) => void;
-};
-/** @deprecated */
-export declare const setLogger: (logger: LogWriter) => void;
-/** @deprecated */
-export declare const setLogLevel: (logLevel: LogLevel) => void;
 export interface LoggerConfig {
     logWriter?: LogWriter;
     logLevel?: LogLevel;

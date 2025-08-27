@@ -1,13 +1,19 @@
 import { lastEl } from './collection/collectionOpperations';
 
 /**
- * Execute a functio n times
- *
+ * @description Executes a function a specified number of times and collects the results in an array.
+ * @example
+ * ```ts
+ * const results = forEach(5, i => i * 2);
+ * console.log(results); // [0, 2, 4, 6, 8]
+ * ```
  * @param execs number of executions
- * @param fn function to be executed
+ * @param fn function to be executed 
  */
-export function fors(execs: number, fn: (i: number) => any): void {
-	for (var i = 0; execs; i++, execs--) fn(i);
+export function forEach<T>(execs: number, fn: (i: number) => T): T[] {
+	const results: T[] = [];
+	for (var i = 0; execs; i++, execs--) results.push(fn(i));
+	return results;
 }
 
 /**

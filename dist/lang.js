@@ -1,18 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.benchmarkFn = exports.fors = void 0;
+exports.forEach = forEach;
+exports.benchmarkFn = benchmarkFn;
 const collectionOpperations_1 = require("./collection/collectionOpperations");
 /**
- * Execute a functio n times
- *
+ * @description Executes a function a specified number of times and collects the results in an array.
+ * @example
+ * ```ts
+ * const results = forEach(5, i => i * 2);
+ * console.log(results); // [0, 2, 4, 6, 8]
+ * ```
  * @param execs number of executions
  * @param fn function to be executed
  */
-function fors(execs, fn) {
+function forEach(execs, fn) {
+    const results = [];
     for (var i = 0; execs; i++, execs--)
-        fn(i);
+        results.push(fn(i));
+    return results;
 }
-exports.fors = fors;
 /**
  *
  * benchamrks a function execution,
@@ -35,5 +41,4 @@ function benchmarkFn(fn, iterations = 1) {
     const mean = execTimes.reduce((pre, cur) => pre + cur, 0) / execTimes.length;
     return { min, max, mean };
 }
-exports.benchmarkFn = benchmarkFn;
 //# sourceMappingURL=lang.js.map

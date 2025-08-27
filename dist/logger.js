@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StepLogger = exports.Logger = exports.setLogLevel = exports.setLogger = exports.getLogger = exports.trace = exports.fatal = exports.error = exports.warn = exports.info = exports.debug = exports.LogLevel = void 0;
+exports.StepLogger = exports.Logger = exports.LogLevel = void 0;
 var LogLevel;
 (function (LogLevel) {
     LogLevel[LogLevel["TRACE"] = 0] = "TRACE";
@@ -23,76 +23,63 @@ const defaultLogWriter = {
     },
     trace: (...data) => console.info(`[${new Date().toJSON()}] TRACE:`, ...data),
 };
-let actualLogWriter = Object.assign({}, defaultLogWriter);
+let actualLogWriter = { ...defaultLogWriter };
 let _logLevel = LogLevel.OFF;
 const _logger = {
     trace: (...data) => {
         if (_logLevel <= LogLevel.TRACE)
-            actualLogWriter === null || actualLogWriter === void 0 ? void 0 : actualLogWriter.trace(...data);
+            actualLogWriter?.trace(...data);
     },
     debug: (...data) => {
         if (_logLevel <= LogLevel.DEBUG)
-            actualLogWriter === null || actualLogWriter === void 0 ? void 0 : actualLogWriter.debug(...data);
+            actualLogWriter?.debug(...data);
     },
     info: (...data) => {
         if (_logLevel <= LogLevel.INFO)
-            actualLogWriter === null || actualLogWriter === void 0 ? void 0 : actualLogWriter.info(...data);
+            actualLogWriter?.info(...data);
     },
     warn: (...data) => {
         if (_logLevel <= LogLevel.WARN)
-            actualLogWriter === null || actualLogWriter === void 0 ? void 0 : actualLogWriter.warn(...data);
+            actualLogWriter?.warn(...data);
     },
     error: (...data) => {
         if (_logLevel <= LogLevel.ERROR)
-            actualLogWriter === null || actualLogWriter === void 0 ? void 0 : actualLogWriter.error(...data);
+            actualLogWriter?.error(...data);
     },
     fatal: (...data) => {
         if (_logLevel <= LogLevel.FATAL)
-            actualLogWriter === null || actualLogWriter === void 0 ? void 0 : actualLogWriter.error(...data);
+            actualLogWriter?.error(...data);
     },
 };
-/** @deprecated */
-const debug = (...data) => _logger.debug(...data);
-exports.debug = debug;
-/** @deprecated */
-const info = (...data) => _logger.info(...data);
-exports.info = info;
-/** @deprecated */
-const warn = (...data) => _logger.warn(...data);
-exports.warn = warn;
-/** @deprecated */
-const error = (...data) => _logger.error(...data);
-exports.error = error;
-/** @deprecated */
-const fatal = (...data) => _logger.fatal(...data);
-exports.fatal = fatal;
-/** @deprecated */
-const trace = (...data) => _logger.trace(...data);
-exports.trace = trace;
-/** @deprecated */
-const getLogger = () => (Object.assign({}, _logger));
-exports.getLogger = getLogger;
-/** @deprecated */
-const setLogger = (logger) => {
-    if (!logger)
-        console.warn('[LOGGER]', 'setting undefined logger');
-    actualLogWriter = logger;
-};
-exports.setLogger = setLogger;
-/** @deprecated */
-const setLogLevel = (logLevel) => {
-    if (_logLevel == null)
-        console.warn('[LOGGER]', 'setting undefined log level');
-    _logLevel = logLevel;
-};
-exports.setLogLevel = setLogLevel;
+// /** @deprecated */
+// export const debug = (...data: Loggable[]) => _logger.debug(...data);
+// /** @deprecated */
+// export const info = (...data: Loggable[]) => _logger.info(...data);
+// /** @deprecated */
+// export const warn = (...data: Loggable[]) => _logger.warn(...data);
+// /** @deprecated */
+// export const error = (...data: Loggable[]) => _logger.error(...data);
+// /** @deprecated */
+// export const fatal = (...data: Loggable[]) => _logger.fatal(...data);
+// /** @deprecated */
+// export const trace = (...data: Loggable[]) => _logger.trace(...data);
+// /** @deprecated */
+// export const getLogger = () => ({ ..._logger });
+// /** @deprecated */
+// export const setLogger = (logger: LogWriter) => {
+// 	if (!logger) console.warn('[LOGGER]', 'setting undefined logger');
+// 	actualLogWriter = logger;
+// };
+// /** @deprecated */
+// export const setLogLevel = (logLevel: LogLevel) => {
+// 	if (_logLevel == null) console.warn('[LOGGER]', 'setting undefined log level');
+// 	_logLevel = logLevel;
+// };
 function printStack(errors) {
-    var _a;
-    (_a = errors === null || errors === void 0 ? void 0 : errors.filter(e => e === null || e === void 0 ? void 0 : e.stack)) === null || _a === void 0 ? void 0 : _a.forEach(e => console.error(e === null || e === void 0 ? void 0 : e.stack));
+    errors?.filter(e => e?.stack)?.forEach(e => console.error(e?.stack));
 }
 class Logger {
     constructor(conf) {
-        var _a, _b, _c;
         this.logLevel = LogLevel.WARN;
         this.logWriter = defaultLogWriter;
         this.prefix = '';
@@ -100,39 +87,33 @@ class Logger {
             this.prefix = conf;
             return;
         }
-        this.logLevel = (_a = conf === null || conf === void 0 ? void 0 : conf.logLevel) !== null && _a !== void 0 ? _a : this.logLevel;
-        this.logWriter = (_b = conf === null || conf === void 0 ? void 0 : conf.logWriter) !== null && _b !== void 0 ? _b : this.logWriter;
-        this.prefix = (_c = conf === null || conf === void 0 ? void 0 : conf.prefix) !== null && _c !== void 0 ? _c : this.prefix;
+        this.logLevel = conf?.logLevel ?? this.logLevel;
+        this.logWriter = conf?.logWriter ?? this.logWriter;
+        this.prefix = conf?.prefix ?? this.prefix;
     }
     trace(...data) {
-        var _a;
         if (this.logLevel <= LogLevel.TRACE)
-            (_a = this.logWriter) === null || _a === void 0 ? void 0 : _a.trace(this.prefix, ...data);
+            this.logWriter?.trace(this.prefix, ...data);
     }
     debug(...data) {
-        var _a;
         if (this.logLevel <= LogLevel.DEBUG)
-            (_a = this.logWriter) === null || _a === void 0 ? void 0 : _a.debug(this.prefix, ...data);
+            this.logWriter?.debug(this.prefix, ...data);
     }
     info(...data) {
-        var _a;
         if (this.logLevel <= LogLevel.INFO)
-            (_a = this.logWriter) === null || _a === void 0 ? void 0 : _a.info(this.prefix, ...data);
+            this.logWriter?.info(this.prefix, ...data);
     }
     warn(...data) {
-        var _a;
         if (this.logLevel <= LogLevel.WARN)
-            (_a = this.logWriter) === null || _a === void 0 ? void 0 : _a.warn(this.prefix, ...data);
+            this.logWriter?.warn(this.prefix, ...data);
     }
     error(...data) {
-        var _a;
         if (this.logLevel <= LogLevel.ERROR)
-            (_a = this.logWriter) === null || _a === void 0 ? void 0 : _a.error(this.prefix, ...data);
+            this.logWriter?.error(this.prefix, ...data);
     }
     fatal(...data) {
-        var _a;
         if (this.logLevel <= LogLevel.FATAL)
-            (_a = this.logWriter) === null || _a === void 0 ? void 0 : _a.error(this.prefix, ...data);
+            this.logWriter?.error(this.prefix, ...data);
     }
     /**
      * @unstable

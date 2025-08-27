@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isJson = void 0;
+exports.isJson = isJson;
 function isJson(str) {
     try {
         JSON.parse(str);
@@ -10,5 +10,4 @@ function isJson(str) {
     }
     return true;
 }
-exports.isJson = isJson;
 //# sourceMappingURL=strings.js.map

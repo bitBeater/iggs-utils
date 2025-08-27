@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mergeRevivers = exports.ISO_8601StringtoDate = void 0;
+exports.ISO_8601StringtoDate = void 0;
+exports.mergeRevivers = mergeRevivers;
 const consts_1 = require("./consts");
 /**
  * revive
@@ -19,7 +20,7 @@ exports.ISO_8601StringtoDate = ISO_8601StringtoDate;
  * @link  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#using_the_reviver_parameter
  */
 function mergeRevivers(...revivers) {
-    if (!(revivers === null || revivers === void 0 ? void 0 : revivers.length))
+    if (!revivers?.length)
         return;
     return (key, value) => {
         for (const reviver of revivers) {
@@ -30,5 +31,4 @@ function mergeRevivers(...revivers) {
         return value;
     };
 }
-exports.mergeRevivers = mergeRevivers;
 //# sourceMappingURL=revivers.js.map

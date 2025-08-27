@@ -1,10 +1,14 @@
 /**
- * Execute a functio n times
- *
+ * @description Executes a function a specified number of times and collects the results in an array.
+ * @example
+ * ```ts
+ * const results = forEach(5, i => i * 2);
+ * console.log(results); // [0, 2, 4, 6, 8]
+ * ```
  * @param execs number of executions
  * @param fn function to be executed
  */
-export declare function fors(execs: number, fn: (i: number) => any): void;
+export declare function forEach<T>(execs: number, fn: (i: number) => T): T[];
 /**
  *
  * benchamrks a function execution,

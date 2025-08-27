@@ -1,5 +1,10 @@
 /**
  *
+ * Compute the element-wise absolute differences between two arrays of numbers.
+ * @example
+ * ```ts
+ *  arrayDifferences([1,2,3],[3,2,1]); // [2,0,2]
+ * ```
  * @param a1 array to compare
  * @param a2 array to compare
  * @returns return the array difference a1-a2
@@ -96,21 +101,21 @@ export function lastEl<T>(array: T[]): T {
 	return array?.[array?.length - 1];
 }
 
-/**
- * generate an array, of specified length using the generate function
- *
- * @example Generate an array with numbers from 0 to 9
- * ```ts
- *  gen(10, i => i); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
- * ```
- */
-export function gen<T>(length: number, genFn: (index: number) => T): T[] {
-	const retVal = new Array<T>(length);
+// /**
+//  * generate an array, of specified length using the generate function
+//  *
+//  * @example Generate an array with numbers from 0 to 9
+//  * ```ts
+//  *  gen(10, i => i); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+//  * ```
+//  */
+// export function gen<T>(length: number, genFn: (index: number) => T): T[] {
+// 	const retVal = new Array<T>(length);
 
-	for (var i = 0; i < length; i++) retVal[i] = genFn(i);
+// 	for (var i = 0; i < length; i++) retVal[i] = genFn(i);
 
-	return retVal;
-}
+// 	return retVal;
+// }
 
 /**
  *

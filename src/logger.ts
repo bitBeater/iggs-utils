@@ -76,31 +76,31 @@ const _logger: LogWriter = {
 	},
 };
 
-/** @deprecated */
-export const debug = (...data: Loggable[]) => _logger.debug(...data);
-/** @deprecated */
-export const info = (...data: Loggable[]) => _logger.info(...data);
-/** @deprecated */
-export const warn = (...data: Loggable[]) => _logger.warn(...data);
-/** @deprecated */
-export const error = (...data: Loggable[]) => _logger.error(...data);
-/** @deprecated */
-export const fatal = (...data: Loggable[]) => _logger.fatal(...data);
-/** @deprecated */
-export const trace = (...data: Loggable[]) => _logger.trace(...data);
-/** @deprecated */
-export const getLogger = () => ({ ..._logger });
+// /** @deprecated */
+// export const debug = (...data: Loggable[]) => _logger.debug(...data);
+// /** @deprecated */
+// export const info = (...data: Loggable[]) => _logger.info(...data);
+// /** @deprecated */
+// export const warn = (...data: Loggable[]) => _logger.warn(...data);
+// /** @deprecated */
+// export const error = (...data: Loggable[]) => _logger.error(...data);
+// /** @deprecated */
+// export const fatal = (...data: Loggable[]) => _logger.fatal(...data);
+// /** @deprecated */
+// export const trace = (...data: Loggable[]) => _logger.trace(...data);
+// /** @deprecated */
+// export const getLogger = () => ({ ..._logger });
 
-/** @deprecated */
-export const setLogger = (logger: LogWriter) => {
-	if (!logger) console.warn('[LOGGER]', 'setting undefined logger');
-	actualLogWriter = logger;
-};
-/** @deprecated */
-export const setLogLevel = (logLevel: LogLevel) => {
-	if (_logLevel == null) console.warn('[LOGGER]', 'setting undefined log level');
-	_logLevel = logLevel;
-};
+// /** @deprecated */
+// export const setLogger = (logger: LogWriter) => {
+// 	if (!logger) console.warn('[LOGGER]', 'setting undefined logger');
+// 	actualLogWriter = logger;
+// };
+// /** @deprecated */
+// export const setLogLevel = (logLevel: LogLevel) => {
+// 	if (_logLevel == null) console.warn('[LOGGER]', 'setting undefined log level');
+// 	_logLevel = logLevel;
+// };
 
 function printStack(errors: any[]) {
 	errors?.filter(e => e?.stack)?.forEach(e => console.error(e?.stack));

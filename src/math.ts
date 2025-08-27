@@ -180,8 +180,8 @@ export function numberSequenceRange(range: { start: number; end: number; span: n
 	const length = Math.floor(Math.abs(start - end) / span);
 	const retVal = new Array<number>(length);
 
-	if (start < end) for (var i = length + 1; i; ) retVal[--i] = start + span * i;
-	else for (var i = length + 1; i; ) retVal[--i] = start - span * i;
+	if (start < end) for (var i = length + 1; i;) retVal[--i] = start + span * i;
+	else for (var i = length + 1; i;) retVal[--i] = start - span * i;
 	return retVal;
 }
 
@@ -232,27 +232,16 @@ export function fibonacis(start: number, end: number): number[] {
  * @example
  * ```
  * null			=>	 0
- *
  * undefined		=>	 0
- *
  * NaN			=>	 0
- *
  * Infinity		=>	 0
- *
  * -Infinity		=>	 0
- *
  * new Date()		=>	 0
- *
  * ''			=>	 0
- *
  * ' '			=>	 0
- *
  * '123'			=>	 123
- *
  * '-123'			=>	 -123
- *
  * '123.456'		=>	 123
- *
  * 'abc'			=>	 0
  *
  *```

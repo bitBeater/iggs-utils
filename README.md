@@ -1,11 +1,24 @@
 # iggs-utils
 
-simple, lightweight, dependenciesless, javascript generic helper library
+[See Documentation](https://bitbeater.github.io/iggs-utils)
+
+Simple, lightweight, dependenciesless, TypeScript generic helper library.
+
+---
+Compatible with:
+- Node.js
+- Deno
+- Browser
 
 ## Installation
 
+npm
 ```bash
 npm i iggs-utils
 ```
 
-[Documentation](https://alexrr2iggs.github.io/iggs-utils/index.html)
+deno
+```bash
+deno install npm:iggs-utils
+```
+

@@ -6,8 +6,8 @@
  * const maxSize=3;
  * const evictingDequeue = new EvictingDequeue<number>(maxSize,[1,2,3]);
  *
- *	evictingDequeue;			// [1,2,3]
- *	evictingDequeue.push(4);	// [2,3,4]
+ *	evictingDequeue;            // [1,2,3]
+ *	evictingDequeue.push(4);    // [2,3,4]
  *	evictingDequeue.unshift(5); // [5,2,3]
  *
  * ```

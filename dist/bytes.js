@@ -8,7 +8,7 @@ exports.YB = exports.ZB = exports.EB = exports.PB = exports.TB = exports.GB = ex
  * 2 ** 10
  * ```
  * */
-exports.kB = Math.pow(2, 10);
+exports.kB = 2 ** 10;
 /**
  * one mega byte as bytes.
  *
@@ -16,7 +16,7 @@ exports.kB = Math.pow(2, 10);
  * 2 ** 20
  * ```
  * */
-exports.MB = Math.pow(2, 20);
+exports.MB = 2 ** 20;
 /**
  * one giga byte as bytes.
  *
@@ -24,7 +24,7 @@ exports.MB = Math.pow(2, 20);
  * 2 ** 30
  * ```
  * */
-exports.GB = Math.pow(2, 30);
+exports.GB = 2 ** 30;
 /**
  * one tera byte as bytes.
  *
@@ -32,7 +32,7 @@ exports.GB = Math.pow(2, 30);
  * 2 ** 40
  * ```
  * */
-exports.TB = Math.pow(2, 40);
+exports.TB = 2 ** 40;
 /**
  * one peta byte as bytes.
  *
@@ -40,7 +40,7 @@ exports.TB = Math.pow(2, 40);
  * 2 ** 50
  * ```
  * */
-exports.PB = Math.pow(2, 50);
+exports.PB = 2 ** 50;
 /**
  * one exa byte as bytes.
  *
@@ -48,7 +48,7 @@ exports.PB = Math.pow(2, 50);
  * 2 ** 60
  * ```
  * */
-exports.EB = Math.pow(2, 60);
+exports.EB = 2 ** 60;
 /**
  * one zetta byte as bytes.
  *
@@ -56,7 +56,7 @@ exports.EB = Math.pow(2, 60);
  * 2 ** 70
  * ```
  * */
-exports.ZB = Math.pow(2, 70);
+exports.ZB = 2 ** 70;
 /**
  * one yotta byte as bytes.
  *
@@ -64,5 +64,5 @@ exports.ZB = Math.pow(2, 70);
  * 2 ** 80
  * ```
  * */
-exports.YB = Math.pow(2, 80);
+exports.YB = 2 ** 80;
 //# sourceMappingURL=bytes.js.map

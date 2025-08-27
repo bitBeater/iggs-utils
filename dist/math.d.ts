@@ -163,27 +163,16 @@ export declare function fibonacis(start: number, end: number): number[];
  * @example
  * ```
  * null			=>	 0
- *
  * undefined		=>	 0
- *
  * NaN			=>	 0
- *
  * Infinity		=>	 0
- *
  * -Infinity		=>	 0
- *
  * new Date()		=>	 0
- *
  * ''			=>	 0
- *
  * ' '			=>	 0
- *
  * '123'			=>	 123
- *
  * '-123'			=>	 -123
- *
  * '123.456'		=>	 123
- *
  * 'abc'			=>	 0
  *
  *```
