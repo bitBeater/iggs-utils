@@ -1,16 +1,34 @@
 {
 	"name": "iggs-utils",
-	"version": "1.5.0",
+	"version": "2.0.0",
 	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"default": "./dist/index.js"
+		},
+		"./collection": {
+			"default": "./dist/collection/collection.js"
+		},
+		"./bytes": {
+			"default": "./dist/bytes.js"
+		},
+		"./http": {
+			"default": "./dist/net/http.js"
+		},
+		"./utils": {
+			"default": "./dist/utils/utils.js"
+		}
+	},
 	"files": [
-		"dist",
-		"src"
+		"dist"
 	],
 	"scripts": {
 		"build": "tsc",
 		"genDocs": "npx typedoc --options typedoc.json",
 		"prettify": "prettier --config ./.prettierrc.json --write \"src/**/*.ts\"",
-		"test": "node --test -r ./node_modules/ts-node/register/transpile-only.js ./tests/**/*"
+		"test": "tsc && node --test -r ./node_modules/ts-node/register/transpile-only.js ./tests/**/*"
 	},
 	"author": "",
 	"license": "ISC",
@@ -23,6 +41,14 @@
 	},
 	"homepage": "https://github.com/alexrr2iggs/iggs-utils#readme",
 	"description": "",
+	"typesVersions": {
+		"*": {
+			"*": [
+				"dist/*",
+				"dist/*/index.d.ts"
+			]
+		}
+	},
 	"devDependencies": {
 		"@types/node": "^24.3.0",
 		"ts-node": "^10.9.1",

@@ -1,4 +1,5 @@
-import { lastEl } from './collection/collectionOpperations';
+import { lastEl } from '../collection/collectionOperations';
+export { TaskDurationTracker } from './task_duration_tracker';
 
 /**
  * @description Executes a function a specified number of times and collects the results in an array.
@@ -18,7 +19,7 @@ export function forEach<T>(execs: number, fn: (i: number) => T): T[] {
 
 /**
  *
- * benchamrks a function execution,
+ * @description A simple utility that benchmarks a function execution,
  *
  * @returns an object with min, max and mean time execution, in millis.
  */
@@ -42,3 +43,4 @@ export function benchmarkFn(fn: Function, iterations = 1): { min: number; max: n
 
 	return { min, max, mean };
 }
+

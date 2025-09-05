@@ -19,5 +19,5 @@ var CircularArray_1 = require("./CircularArray");
 Object.defineProperty(exports, "CircularArray", { enumerable: true, get: function () { return CircularArray_1.CircularArray; } });
 var EvictingDequeue_1 = require("./EvictingDequeue");
 Object.defineProperty(exports, "EvictingDequeue", { enumerable: true, get: function () { return EvictingDequeue_1.EvictingDequeue; } });
-__exportStar(require("./collectionOpperations"), exports);
+__exportStar(require("./collectionOperations"), exports);
 //# sourceMappingURL=collection.js.map
