@@ -1,3 +1,4 @@
+export declare const MAX_JS_DATE = 8640000000000000;
 /** in millis */
 export declare const millis = 1;
 /** in millis */

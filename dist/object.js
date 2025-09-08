@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPathKeys = getPathKeys;
+exports.getPathKeys = void 0;
 /**
  * Returns an array of a given object's keys paths (own and nested key names) in a reccursive manner, iterated in the same order that a normal loop would.
  *
@@ -83,4 +83,5 @@ function getPathKeys(obj, options) {
     }
     return pathKeys;
 }
+exports.getPathKeys = getPathKeys;
 //# sourceMappingURL=object.js.map

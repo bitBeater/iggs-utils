@@ -1,3 +1,5 @@
+export const MAX_JS_DATE = 8.64e15; // Sat Sep 13 275760 00:00:00 GMT+0000
+
 /** in millis */
 export const millis = 1;
 /** in millis */
