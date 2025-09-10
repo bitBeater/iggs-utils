@@ -1,3 +1,5 @@
+import { forEach } from "../utils/utils";
+
 /**
  *
  * Compute the element-wise absolute differences between two arrays of numbers.
@@ -159,6 +161,20 @@ export function pickRandomElement<T>(array: T[]): T {
 	return array[Math.floor(Math.random() * array.length)];
 }
 
+
+
+/** *
+ * Returns an array of random elements from the provided array.
+ *
+ * @param array
+ * @param legth number of elements to pick
+ * @returns an array of random elements from the provided array.
+ */
+export function pickRandomElements<T>(array: T[], legth: number): T[] {
+	return takeRandomElements([...array], legth);
+}
+
+
 /**
  * Returns a random element from the provided array,
  * and **removes** the element from the array.
@@ -168,4 +184,17 @@ export function pickRandomElement<T>(array: T[]): T {
  */
 export function takeRandomElement<T>(array: T[]): T {
 	return array.splice(Math.floor(Math.random() * array.length), 1)[0];
+}
+
+
+/** *
+ * Returns an array of random elements from the provided array,
+ * and **removes** the elements from the array.
+ *
+ * @param array
+ * @param legth number of elements to pick
+ * @returns an array of random elements from the provided array.
+ */
+export function takeRandomElements<T>(array: T[], legth: number): T[] {
+	return forEach(legth, () => takeRandomElement(array));
 }

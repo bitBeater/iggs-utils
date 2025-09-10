@@ -97,6 +97,14 @@ export declare function takeRight<T>(array: T[], n?: number, offset?: number): T
  * @returns a random element from the provided array.
  */
 export declare function pickRandomElement<T>(array: T[]): T;
+/** *
+ * Returns an array of random elements from the provided array.
+ *
+ * @param array
+ * @param legth number of elements to pick
+ * @returns an array of random elements from the provided array.
+ */
+export declare function pickRandomElements<T>(array: T[], legth: number): T[];
 /**
  * Returns a random element from the provided array,
  * and **removes** the element from the array.
@@ -105,4 +113,13 @@ export declare function pickRandomElement<T>(array: T[]): T;
  * @returns a random element from the provided array.
  */
 export declare function takeRandomElement<T>(array: T[]): T;
+/** *
+ * Returns an array of random elements from the provided array,
+ * and **removes** the elements from the array.
+ *
+ * @param array
+ * @param legth number of elements to pick
+ * @returns an array of random elements from the provided array.
+ */
+export declare function takeRandomElements<T>(array: T[], legth: number): T[];
 //# sourceMappingURL=collectionOperations.d.ts.map

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.takeRandomElement = exports.pickRandomElement = exports.takeRight = exports.lastEl = exports.isSorted = exports.forEachConsPairs = exports.arrayDifferences = void 0;
+exports.takeRandomElements = exports.takeRandomElement = exports.pickRandomElements = exports.pickRandomElement = exports.takeRight = exports.lastEl = exports.isSorted = exports.forEachConsPairs = exports.arrayDifferences = void 0;
+const utils_1 = require("../utils/utils");
 /**
  *
  * Compute the element-wise absolute differences between two arrays of numbers.
@@ -156,6 +157,17 @@ function pickRandomElement(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 exports.pickRandomElement = pickRandomElement;
+/** *
+ * Returns an array of random elements from the provided array.
+ *
+ * @param array
+ * @param legth number of elements to pick
+ * @returns an array of random elements from the provided array.
+ */
+function pickRandomElements(array, legth) {
+    return takeRandomElements([...array], legth);
+}
+exports.pickRandomElements = pickRandomElements;
 /**
  * Returns a random element from the provided array,
  * and **removes** the element from the array.
@@ -167,4 +179,16 @@ function takeRandomElement(array) {
     return array.splice(Math.floor(Math.random() * array.length), 1)[0];
 }
 exports.takeRandomElement = takeRandomElement;
+/** *
+ * Returns an array of random elements from the provided array,
+ * and **removes** the elements from the array.
+ *
+ * @param array
+ * @param legth number of elements to pick
+ * @returns an array of random elements from the provided array.
+ */
+function takeRandomElements(array, legth) {
+    return (0, utils_1.forEach)(legth, () => takeRandomElement(array));
+}
+exports.takeRandomElements = takeRandomElements;
 //# sourceMappingURL=collectionOperations.js.map
