@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.printObj = exports.logColors = exports.printNl = void 0;
+exports.logColors = void 0;
+exports.printNl = printNl;
+exports.printObj = printObj;
 function printNl(n = 5) {
     for (let i = 0; i < n; i++) {
         console.log();
     }
 }
-exports.printNl = printNl;
 exports.logColors = {
     reset: '\x1b[0m',
     bright: '\x1b[1m',
@@ -45,5 +46,4 @@ function printObj(obj) {
         console.log(key, ' : ', obj[key]);
     }
 }
-exports.printObj = printObj;
 //# sourceMappingURL=cons.js.map

@@ -1,6 +1,6 @@
 {
 	"name": "iggs-utils",
-	"version": "2.2.0",
+	"version": "2.3.0",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"sideEffects": false,
@@ -31,7 +31,7 @@
 		"build": "tsc",
 		"genDocs": "npx typedoc --options typedoc.json",
 		"prettify": "prettier --config ./.prettierrc.json --write \"src/**/*.ts\"",
-		"test": "tsc && node --test -r ./node_modules/ts-node/register/transpile-only.js ./tests/**/*"
+		"test": "tsc && node --test -r ./node_modules/ts-node/register/transpile-only.js ./tests/{**/*,*}.test.ts"
 	},
 	"author": "",
 	"license": "ISC",

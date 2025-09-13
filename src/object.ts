@@ -88,3 +88,31 @@ export function getPathKeys(obj: any, options?: PathKeysOptions): string[] {
 
 	return pathKeys;
 }
+
+
+/**
+ * Checks if a value is a plain object (not null, not array, not date, not promise, not function)
+ * 
+ * @param v value to check
+ * @returns boolean indicating if the value is a plain object
+ * 
+ * @example
+ * ```ts
+ * isPlainObject({}) // => true
+ * isPlainObject({ a: 1, b: { c: 2 } }) // => true
+ * isPlainObject(() => {}) // => false
+ * isPlainObject(null) // => false
+ * isPlainObject(undefined) // => false
+ * isPlainObject([]) // => false
+ * isPlainObject(new Date()) // => false
+ * isPlainObject("hello") // => false
+ * isPlainObject(123) // => false
+ * isPlainObject(true) // => false
+ * isPlainObject(Symbol("sym")) // => false
+ * isPlainObject(BigInt(123)) // => false
+ * isPlainObject(Promise.resolve(123)) // => false
+ * ```
+ */
+export function isPlainObject(v: unknown): v is Object {
+	return typeof v === 'object' && v !== null && !(v instanceof Date) && !Array.isArray(v) && !(v instanceof Promise);
+}

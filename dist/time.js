@@ -1,6 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.humanizeDuration = exports.intervalToDuration = exports.toSqlDate = exports.isValidDate = exports.addDurations = exports.multiplyDuration = exports.splitIntervalByDuration = exports.isDurationBiggerThanInterval = exports.durationToSeconds = exports.millisecondsToDuration = exports.durationToMilliSeconds = exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.second = exports.millis = exports.MAX_JS_DATE = void 0;
+exports.leapMonths = exports.months = exports.december = exports.november = exports.october = exports.september = exports.august = exports.july = exports.june = exports.may = exports.april = exports.march = exports.february = exports.january = exports.leapFebruary = exports.leapYear = exports.year = exports.month = exports.solarYear = exports.week = exports.day = exports.hour = exports.minute = exports.second = exports.millis = exports.MAX_JS_DATE = void 0;
+exports.durationToMilliSeconds = durationToMilliSeconds;
+exports.millisecondsToDuration = millisecondsToDuration;
+exports.durationToSeconds = durationToSeconds;
+exports.isDurationBiggerThanInterval = isDurationBiggerThanInterval;
+exports.splitIntervalByDuration = splitIntervalByDuration;
+exports.multiplyDuration = multiplyDuration;
+exports.addDurations = addDurations;
+exports.isValidDate = isValidDate;
+exports.toSqlDate = toSqlDate;
+exports.intervalToDuration = intervalToDuration;
+exports.humanizeDuration = humanizeDuration;
 exports.MAX_JS_DATE = 8.64e15; // Sat Sep 13 275760 00:00:00 GMT+0000
 /** in millis */
 exports.millis = 1;
@@ -68,7 +79,6 @@ exports.leapMonths = [exports.january, exports.leapFebruary, exports.march, expo
 function durationToMilliSeconds(duration) {
     return (duration?.years || 0) * exports.year + (duration?.months || 0) * exports.month + (duration?.weeks || 0) * exports.week + (duration?.days || 0) * exports.day + (duration?.hours || 0) * exports.hour + (duration?.minutes || 0) * exports.minute + (duration?.seconds || 0) * exports.second + (duration?.milliseconds || 0) * exports.millis;
 }
-exports.durationToMilliSeconds = durationToMilliSeconds;
 function millisecondsToDuration(millis) {
     const duration = {};
     duration.years = Math.floor(millis / exports.year);
@@ -88,7 +98,6 @@ function millisecondsToDuration(millis) {
     duration.milliseconds = millis;
     return duration;
 }
-exports.millisecondsToDuration = millisecondsToDuration;
 /**
  * parse a duration into millisecconds
  *
@@ -104,7 +113,6 @@ exports.millisecondsToDuration = millisecondsToDuration;
 function durationToSeconds(duration) {
     return durationToMilliSeconds(duration) / exports.second;
 }
-exports.durationToSeconds = durationToSeconds;
 /**
  * check if the duration is larger than the interval
  */
@@ -113,7 +121,6 @@ function isDurationBiggerThanInterval(interval, duration) {
     const durationSeconds = durationToSeconds(duration);
     return durationSeconds > intervalSeconds;
 }
-exports.isDurationBiggerThanInterval = isDurationBiggerThanInterval;
 /**
  * divide the given interval into smaller intervals, each having the duration equal to the given duration
  *
@@ -152,7 +159,6 @@ function splitIntervalByDuration(interval, duration) {
     }
     return intervals;
 }
-exports.splitIntervalByDuration = splitIntervalByDuration;
 /**
  * multiply the given duration
  *
@@ -174,7 +180,6 @@ function multiplyDuration(duration, multiplier) {
         seconds: duration.seconds * multiplier,
     };
 }
-exports.multiplyDuration = multiplyDuration;
 /**
  * add the given durations
  *
@@ -208,11 +213,9 @@ function addDurations(...durations) {
     }
     return retval;
 }
-exports.addDurations = addDurations;
 function isValidDate(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
-exports.isValidDate = isValidDate;
 /**
  * Format a date into sql datetime value
  * @param date
@@ -226,7 +229,6 @@ exports.isValidDate = isValidDate;
 function toSqlDate(date) {
     return date.toISOString().slice(0, 19).replace('T', ' ');
 }
-exports.toSqlDate = toSqlDate;
 /**
  * Convert an interval to a duration
  * @param interval
@@ -255,7 +257,6 @@ function intervalToDuration(interval) {
     const duration = millisecondsToDuration(durationInMs);
     return duration;
 }
-exports.intervalToDuration = intervalToDuration;
 /**
  * Humanize a duration object into a human-readable string.
  * @example
@@ -304,5 +305,4 @@ function humanizeDuration(inDuration, options) {
     const last = parts.pop();
     return parts.join(', ') + ' and ' + last;
 }
-exports.humanizeDuration = humanizeDuration;
 //# sourceMappingURL=time.js.map

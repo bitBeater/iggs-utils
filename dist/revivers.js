@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mergeRevivers = exports.ISO_8601StringtoDate = void 0;
+exports.ISO_8601StringtoDate = void 0;
+exports.mergeRevivers = mergeRevivers;
 const consts_1 = require("./consts");
 /**
  * revive
@@ -30,5 +31,4 @@ function mergeRevivers(...revivers) {
         return value;
     };
 }
-exports.mergeRevivers = mergeRevivers;
 //# sourceMappingURL=revivers.js.map

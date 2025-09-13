@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPathKeys = void 0;
+exports.getPathKeys = getPathKeys;
+exports.isPlainObject = isPlainObject;
 /**
  * Returns an array of a given object's keys paths (own and nested key names) in a reccursive manner, iterated in the same order that a normal loop would.
  *
@@ -83,5 +84,30 @@ function getPathKeys(obj, options) {
     }
     return pathKeys;
 }
-exports.getPathKeys = getPathKeys;
+/**
+ * Checks if a value is a plain object (not null, not array, not date, not promise, not function)
+ *
+ * @param v value to check
+ * @returns boolean indicating if the value is a plain object
+ *
+ * @example
+ * ```ts
+ * isPlainObject({}) // => true
+ * isPlainObject({ a: 1, b: { c: 2 } }) // => true
+ * isPlainObject(() => {}) // => false
+ * isPlainObject(null) // => false
+ * isPlainObject(undefined) // => false
+ * isPlainObject([]) // => false
+ * isPlainObject(new Date()) // => false
+ * isPlainObject("hello") // => false
+ * isPlainObject(123) // => false
+ * isPlainObject(true) // => false
+ * isPlainObject(Symbol("sym")) // => false
+ * isPlainObject(BigInt(123)) // => false
+ * isPlainObject(Promise.resolve(123)) // => false
+ * ```
+ */
+function isPlainObject(v) {
+    return typeof v === 'object' && v !== null && !(v instanceof Date) && !Array.isArray(v) && !(v instanceof Promise);
+}
 //# sourceMappingURL=object.js.map

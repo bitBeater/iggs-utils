@@ -1,5 +1,3 @@
-/// <reference types="node" />
-/// <reference types="node" />
 export type RetryCallBack = (error: Error, request: Request | string | URL, response?: Response, retry?: HttpRetryOptions) => void;
 export interface HttpRetryOptions {
     retryCount?: number;
