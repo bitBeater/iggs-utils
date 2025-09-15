@@ -1,10 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cookieStringToObject = cookieStringToObject;
-exports.cookieObjectToString = cookieObjectToString;
-exports.cookieArrayToString = cookieArrayToString;
-exports.http = http;
-exports.toURL = toURL;
+exports.toURL = exports.http = exports.cookieArrayToString = exports.cookieObjectToString = exports.cookieStringToObject = void 0;
 const math_1 = require("../math");
 const promises_1 = require("../promises");
 function cookieStringToObject(cookie) {
@@ -17,6 +13,7 @@ function cookieStringToObject(cookie) {
     }
     return cookies;
 }
+exports.cookieStringToObject = cookieStringToObject;
 function cookieObjectToString(cookie) {
     const parts = [];
     for (const key in cookie) {
@@ -24,6 +21,7 @@ function cookieObjectToString(cookie) {
     }
     return parts.join('; ');
 }
+exports.cookieObjectToString = cookieObjectToString;
 function cookieArrayToString(cookies) {
     const parts = [];
     for (const cookie of cookies) {
@@ -31,6 +29,7 @@ function cookieArrayToString(cookies) {
     }
     return parts.join('; ');
 }
+exports.cookieArrayToString = cookieArrayToString;
 class HttpError extends Error {
     constructor(response) {
         super(response.statusText);
@@ -60,10 +59,12 @@ function http(req, init = {}, options) {
         return (0, promises_1.delay)((0, math_1.parseIntOrZero)(options?.retry?.retryDelay)).then(() => http(req, init, options));
     });
 }
+exports.http = http;
 function toURL(httpRequest) {
     // @ts-ignore
     return new URL(httpRequest?.url || httpRequest.toString());
 }
+exports.toURL = toURL;
 function requestTimeout(options) {
     if (!options?.timeout)
         return {};

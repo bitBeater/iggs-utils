@@ -84,4 +84,15 @@ export declare function getPathKeys(obj: any, options?: PathKeysOptions): string
  * ```
  */
 export declare function isPlainObject(v: unknown): v is Object;
+/**
+ * returns the keys of an object as an array, with proper typing.
+ * @example
+ * ```ts
+ * const obj = { a: 1, b: 2, c: 3 };
+ * const keys = keysOf(obj); // ['a', 'b', 'c']
+ * ```
+ * @param o
+ * @returns
+ */
+export declare function keysOf<T extends object>(o: T): (keyof T)[];
 //# sourceMappingURL=object.d.ts.map

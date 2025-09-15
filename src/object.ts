@@ -116,3 +116,20 @@ export function getPathKeys(obj: any, options?: PathKeysOptions): string[] {
 export function isPlainObject(v: unknown): v is Object {
 	return typeof v === 'object' && v !== null && !(v instanceof Date) && !Array.isArray(v) && !(v instanceof Promise);
 }
+
+
+
+
+/**
+ * returns the keys of an object as an array, with proper typing.
+ * @example
+ * ```ts
+ * const obj = { a: 1, b: 2, c: 3 };
+ * const keys = keysOf(obj); // ['a', 'b', 'c']
+ * ```
+ * @param o 
+ * @returns 
+ */
+export function keysOf<T extends object>(o: T): (keyof T)[] {
+	return Object.keys(o) as (keyof T)[];
+}

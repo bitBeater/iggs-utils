@@ -1,17 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.round = round;
-exports.percDiff = percDiff;
-exports.calculatePercent = calculatePercent;
-exports.weightedArithmeticMean = weightedArithmeticMean;
-exports.getPrecision = getPrecision;
-exports.getNearestMultiple = getNearestMultiple;
-exports.getNearestLowMultiple = getNearestLowMultiple;
-exports.truncateDecimals = truncateDecimals;
-exports.numberSequenceRange = numberSequenceRange;
-exports.numberSequenceByLength = numberSequenceByLength;
-exports.fibonacis = fibonacis;
-exports.parseIntOrZero = parseIntOrZero;
+exports.parseIntOrZero = exports.fibonacis = exports.numberSequenceByLength = exports.numberSequenceRange = exports.truncateDecimals = exports.getNearestLowMultiple = exports.getNearestMultiple = exports.getPrecision = exports.weightedArithmeticMean = exports.calculatePercent = exports.percDiff = exports.round = void 0;
 /**
  *
  * @param n number to be rounded round
@@ -22,6 +11,7 @@ function round(n, positions = 0) {
     const exp = Math.pow(10, positions);
     return Math.round(n * exp) / exp;
 }
+exports.round = round;
 /**
  *
  * @param start start value
@@ -40,6 +30,7 @@ function round(n, positions = 0) {
 function percDiff(start, end) {
     return (end - start) / (start / 100);
 }
+exports.percDiff = percDiff;
 /**
  *
  * @param value the value tu be multiplied by the given percent value
@@ -58,6 +49,7 @@ function percDiff(start, end) {
 function calculatePercent(value, percent) {
     return value + value * (percent / 100);
 }
+exports.calculatePercent = calculatePercent;
 /**
  * ```
  * Weighted Mean =  Σwx/Σw
@@ -92,6 +84,7 @@ function weightedArithmeticMean(value, weight) {
     }
     return totWeightedValue / totWeight;
 }
+exports.weightedArithmeticMean = weightedArithmeticMean;
 /**
  * gets the precision of a number (how many decimal digits)
  *
@@ -107,6 +100,7 @@ function weightedArithmeticMean(value, weight) {
 function getPrecision(n = 0) {
     return n?.toString()?.split('.')?.[1]?.length || 0;
 }
+exports.getPrecision = getPrecision;
 /**
  *
  * returns the nearest multiple of a number
@@ -126,6 +120,7 @@ function getNearestMultiple(n, multiple) {
         return n + multiple - log;
     return n - log;
 }
+exports.getNearestMultiple = getNearestMultiple;
 /**
  *
  * returns the nearest low multiple of a number, the result will always be less or equal to input number
@@ -147,6 +142,7 @@ function getNearestLowMultiple(n, multiple, precision = 0) {
     var integer = n * multiplier;
     return (integer - (integer % (multiple * multiplier))) / multiplier;
 }
+exports.getNearestLowMultiple = getNearestLowMultiple;
 /**
  * truncate decimal numbers to decimal places, without rounding
  * @example
@@ -159,6 +155,7 @@ function truncateDecimals(n, digits) {
     const multiplier = Math.pow(10, digits);
     return Math.floor(n * multiplier) / multiplier;
 }
+exports.truncateDecimals = truncateDecimals;
 /**
  *
  * Create a sequence of numbers, from start value to end value with span
@@ -191,6 +188,7 @@ function numberSequenceRange(range) {
             retVal[--i] = start - span * i;
     return retVal;
 }
+exports.numberSequenceRange = numberSequenceRange;
 /**
  *
  * Create a sequence of numbers, from start value to end value with span
@@ -215,6 +213,7 @@ function numberSequenceByLength(len) {
             retVal[i] = start + span * i;
     return retVal;
 }
+exports.numberSequenceByLength = numberSequenceByLength;
 /**
  *
  * Create a sequence of fibonaci numbers, from start value to end value
@@ -233,6 +232,7 @@ function fibonacis(start, end) {
         retVal.push(tmpLast);
     }
 }
+exports.fibonacis = fibonacis;
 /**
  * @example
  * ```
@@ -260,4 +260,5 @@ function parseIntOrZero(val, radix) {
         return 0;
     return retVal;
 }
+exports.parseIntOrZero = parseIntOrZero;
 //# sourceMappingURL=math.js.map

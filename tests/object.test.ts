@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from "node:test";
-import { isPlainObject } from "iggs-utils/object";
+import { isPlainObject, keysOf } from "iggs-utils/object";
 
 
 
@@ -8,7 +8,6 @@ import { isPlainObject } from "iggs-utils/object";
 
 describe("object", () => {
     describe("isPlainObject", () => {
-
 
         it("object should be object", () => {
             assert.strictEqual(isPlainObject({}), true);
@@ -63,5 +62,24 @@ describe("object", () => {
         });
     });
 
+    describe("keysOf", () => {
+        it("object should return keys", () => {
+            const obj = { a: 1, b: 2, c: 3 };
+            const keys = keysOf(obj);
+            assert.deepStrictEqual(keys, ['a', 'b', 'c']);
+        });
 
+        it("array should return indices", () => {
+            const arr = [10, 20, 30];
+            const keys = keysOf(arr);
+            assert.deepStrictEqual(keys, ['0', '1', '2']);
+        });
+
+        it("nested object should return top-level keys", () => {
+            const obj = { a: 1, b: { c: 2, d: 3 }, e: 4 };
+            const keys = keysOf(obj);
+            assert.deepStrictEqual(keys, ['a', 'b', 'e']);
+        });
+
+    });
 });
