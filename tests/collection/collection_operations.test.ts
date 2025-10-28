@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import test, { describe, it } from 'node:test';
+import { describe, it } from 'node:test';
 import { pickRandomElements, takeRandomElements } from 'iggs-utils/collection';
 
 

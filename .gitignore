@@ -1,5 +1,5 @@
 node_modules/
-test.ts
+tmp.ts
 CSV.ts
 local
 .history

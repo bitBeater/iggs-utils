@@ -9,4 +9,4 @@ export * as object from './object';
 export * as promises from './promises';
 export * as reviver from './revivers';
 export * as strings from './strings';
-export * as time from './time';
+export * as time from './time/time';

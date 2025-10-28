@@ -17,7 +17,7 @@ describe('net/http', () => {
     it('response timeout', async () => {
 
         const timeout = 1000;
-        let error: Error | undefined = undefined;
+        let error: Error;
 
 
 
@@ -26,7 +26,7 @@ describe('net/http', () => {
             const response = await (await http(`http://localhost:1338`, {}, { timeout })).text();
             assert(false, `should throw timeout error ${response}`);
         } catch (e) {
-            error = e;
+            error = e as Error;
         }
         const end = Date.now();
         const reqDuration = end - start;

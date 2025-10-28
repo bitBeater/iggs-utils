@@ -1,6 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.takeRandomElements = exports.takeRandomElement = exports.pickRandomElements = exports.pickRandomElement = exports.takeRight = exports.lastEl = exports.isSorted = exports.forEachConsPairs = exports.arrayDifferences = void 0;
+exports.arrayDifferences = arrayDifferences;
+exports.forEachConsPairs = forEachConsPairs;
+exports.isSorted = isSorted;
+exports.lastEl = lastEl;
+exports.takeRight = takeRight;
+exports.pickRandomElement = pickRandomElement;
+exports.pickRandomElements = pickRandomElements;
+exports.takeRandomElement = takeRandomElement;
+exports.takeRandomElements = takeRandomElements;
 const utils_1 = require("../utils/utils");
 /**
  *
@@ -19,7 +27,6 @@ function arrayDifferences(a1 = [], a2 = []) {
         retVal.push(Math.abs((a1[i] || 0) - (a2[i] || 0)));
     return retVal;
 }
-exports.arrayDifferences = arrayDifferences;
 /**
  * executes the provided function fn once for each pair of consecutive elements of the provided array.
  *
@@ -45,7 +52,6 @@ function forEachConsPairs(array, fn) {
         fn(item1, item2);
     }
 }
-exports.forEachConsPairs = forEachConsPairs;
 /**
  * check if the givven array is sorted or not.
  *
@@ -81,7 +87,6 @@ function isSorted(array, compareFn = genericSortFunction) {
     }
     return true;
 }
-exports.isSorted = isSorted;
 const genericSortFunction = (item1, item2) => {
     try {
         return item1 === item2 ? 0 : item1 > item2 ? 1 : -1;
@@ -101,7 +106,6 @@ const genericSortFunction = (item1, item2) => {
 function lastEl(array) {
     return array?.[array?.length - 1];
 }
-exports.lastEl = lastEl;
 // /**
 //  * generate an array, of specified length using the generate function
 //  *
@@ -145,7 +149,6 @@ exports.lastEl = lastEl;
 function takeRight(array, n = 1, offset = 0) {
     return array?.slice(array.length - offset - n, array.length - offset);
 }
-exports.takeRight = takeRight;
 /**
  *
  * Returns a random element from the provided array.
@@ -156,7 +159,6 @@ exports.takeRight = takeRight;
 function pickRandomElement(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
-exports.pickRandomElement = pickRandomElement;
 /** *
  * Returns an array of random elements from the provided array.
  *
@@ -167,7 +169,6 @@ exports.pickRandomElement = pickRandomElement;
 function pickRandomElements(array, legth) {
     return takeRandomElements([...array], legth);
 }
-exports.pickRandomElements = pickRandomElements;
 /**
  * Returns a random element from the provided array,
  * and **removes** the element from the array.
@@ -178,7 +179,6 @@ exports.pickRandomElements = pickRandomElements;
 function takeRandomElement(array) {
     return array.splice(Math.floor(Math.random() * array.length), 1)[0];
 }
-exports.takeRandomElement = takeRandomElement;
 /** *
  * Returns an array of random elements from the provided array,
  * and **removes** the elements from the array.
@@ -190,5 +190,4 @@ exports.takeRandomElement = takeRandomElement;
 function takeRandomElements(array, legth) {
     return (0, utils_1.forEach)(legth, () => takeRandomElement(array));
 }
-exports.takeRandomElements = takeRandomElements;
 //# sourceMappingURL=collectionOperations.js.map

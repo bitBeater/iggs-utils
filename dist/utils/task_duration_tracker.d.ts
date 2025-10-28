@@ -1,4 +1,4 @@
-import { Interval, Duration } from "../time";
+import { Interval, Duration } from "../time/time";
 /**
  * @description A utility class to track the duration of multiple tasks and estimate completion times.
  * - It records the start and end times of each task, calculates elapsed time, estimates remaining time,

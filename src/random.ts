@@ -1,5 +1,5 @@
 import { takeRandomElement } from "./collection/collectionOperations";
-import { MAX_JS_DATE } from "./time";
+import { MAX_JS_DATE } from "./time/time";
 
 
 /**

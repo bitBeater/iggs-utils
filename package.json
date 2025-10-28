@@ -1,6 +1,6 @@
 {
 	"name": "iggs-utils",
-	"version": "2.4.0",
+	"version": "2.5.0",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"sideEffects": false,
@@ -19,6 +19,9 @@
 		},
 		"./utils": {
 			"default": "./dist/utils/utils.js"
+		},
+		"./time": {
+			"default": "./dist/time/time.js"
 		},
 		"./*": {
 			"default": "./dist/*.js"

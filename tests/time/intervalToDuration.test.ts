@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { time } from '../../src/index';
-import { day, hour, Interval, millis, minute, month, second, week, year } from '../../src/time';
+import { day, hour, Interval, millis, minute, month, second, week, year } from 'iggs-utils/time';
 
 
 
@@ -30,9 +30,9 @@ describe('time/intervalToDuration', () => {
 
     it('+1 of each', async () => {
         // years: 1, months: 1, weeks: 1, days: 1, hours: 1, minutes: 1, seconds: 1, milliseconds: 1
-
-        const interval: Interval = { start: new Date('2000-01-01T00:00:00.000Z') };
-        interval.end = new Date(interval.start.getTime() + millis + second + minute + hour + day + week + month + year);
+        const start = new Date('2000-01-01T00:00:00.000Z')
+        const interval: Interval = { start };
+        interval.end = new Date(start.getTime() + millis + second + minute + hour + day + week + month + year);
         const duration = time.intervalToDuration(interval);
         assert.deepEqual(duration, { years: 1, months: 1, weeks: 1, days: 1, hours: 1, minutes: 1, seconds: 1, milliseconds: 1 });
     });

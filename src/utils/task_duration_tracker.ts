@@ -1,5 +1,5 @@
 import { lastEl } from "../collection/collection";
-import { Interval, Duration, millisecondsToDuration, durationToMilliSeconds } from "../time";
+import { Interval, Duration, millisecondsToDuration, durationToMilliSeconds } from "../time/time";
 
 /**
  * @description A utility class to track the duration of multiple tasks and estimate completion times.

@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { time } from '../../src/index';
-import { day, hour, Interval, millis, minute, month, second, week, year } from '../../src/time';
+import { day, hour, millis, minute, month, second, week, year } from 'iggs-utils/time';
 
 
 

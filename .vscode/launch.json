@@ -3,7 +3,7 @@
 	"configurations": [
 		{
 			"name": "ts-node file debug",
-			"type": "pwa-node",
+			"type": "node",
 			"request": "launch",
 			"runtimeExecutable": "ts-node",
 			//"runtimeArgs": ["--nolazy", "-r", "ts-node"],

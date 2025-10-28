@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.benchmarkFn = exports.forEach = exports.TaskDurationTracker = void 0;
+exports.TaskDurationTracker = void 0;
+exports.forEach = forEach;
+exports.benchmarkFn = benchmarkFn;
 const collectionOperations_1 = require("../collection/collectionOperations");
 var task_duration_tracker_1 = require("./task_duration_tracker");
 Object.defineProperty(exports, "TaskDurationTracker", { enumerable: true, get: function () { return task_duration_tracker_1.TaskDurationTracker; } });
@@ -20,7 +22,6 @@ function forEach(execs, fn) {
         results.push(fn(i));
     return results;
 }
-exports.forEach = forEach;
 /**
  *
  * @description A simple utility that benchmarks a function execution,
@@ -43,5 +44,4 @@ function benchmarkFn(fn, iterations = 1) {
     const mean = execTimes.reduce((pre, cur) => pre + cur, 0) / execTimes.length;
     return { min, max, mean };
 }
-exports.benchmarkFn = benchmarkFn;
 //# sourceMappingURL=utils.js.map
