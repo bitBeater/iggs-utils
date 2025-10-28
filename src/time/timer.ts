@@ -33,32 +33,53 @@ export class Timer {
     /**
      * The time when the timer was started for the first time
      */
-    private firstStartTime: number = -1;
+    private startTime: number = -1;
 
-    /** The time when the timer was finished */
+    /** The time when the timer finished */
     private finishedTime: number = -1;
 
+
     /** The time when the timer was started last time */
-    private startTime: number = 0;
+    private lastStartTime: number = 0;
 
-    /** The time when the timer was stopped last time */
-    private stopTime: number = 0;
-
-    /** The total elapsed timer time in milliseconds */
+    /** The running elapsed time*/
     private elapsedMs: number = 0;
 
     /** milliseconds to be timed  */
     private durationMs: number = 0;
 
     private timeoutId: any;
-    #stopped: boolean = true;
+
+    /**
+     *  Indicates whether the timer has been started at least once.
+     */
+    #started: boolean = false;
+
+    /**
+     * Indicates whether the timer is currently paused.
+     */
+    #paused: boolean = false;
+
+    /**
+     * Indicates whether the timer is running.
+     */
+    #running: boolean = false;
+
+    /**
+     * Indicates whether the timer has completed.
+     */
+
     #completed: boolean = false;
 
-    constructor(private duration: Duration | number, private cb: (totalDuration?: number) => void) {
-        if (typeof duration === 'number') {
-            this.durationMs = duration;
+
+    public onPause: (elapsedMs: number) => void;
+    public onStart: (timeLeftMs: number) => void;
+
+    constructor(private duration: Duration | number, public onComplete?: (totalDuration?: number) => void) {
+        if (typeof this.duration === 'number') {
+            this.durationMs = this.duration;
         } else {
-            this.durationMs = durationToMilliSeconds(duration);
+            this.durationMs = durationToMilliSeconds(this.duration);
         }
     }
 
@@ -70,27 +91,35 @@ export class Timer {
      */
     start(): number {
 
-        if (!this.#stopped) return;
+        if (this.#running || this.#completed) return;
 
-        if (this.firstStartTime === -1)
-            this.firstStartTime = Date.now();
+        if (!this.#started) {
+            this.startTime = Date.now();
+            this.#started = true;
+        }
+
+        this.#running = true;
+        this.#paused = false;
+
+        this.lastStartTime = Date.now();
 
         const timeLeftMs = this.durationMs - this.elapsedMs;
 
         this.timeoutId = setTimeout(() => {
-            this.pause();
+            this.#running = this.#paused = false;
             this.#completed = true;
-            const totalDuration = Date.now() - this.firstStartTime;
             this.finishedTime = Date.now()
-            this.cb(totalDuration);
+            const totalDuration = this.finishedTime - this.startTime;
+            this.onComplete?.(totalDuration);
 
         }, timeLeftMs);
 
-        this.startTime = Date.now();
-        this.#stopped = false;
+
+        this.onStart?.(timeLeftMs);
 
         return timeLeftMs;
     }
+
 
     /**
      * Pause the timer.
@@ -98,31 +127,78 @@ export class Timer {
      * @returns The elapsed time in milliseconds
      */
     pause(): number {
-        if (this.#stopped) return;
+        if (!this.#running) return;
+
+        this.#running = false;
+        this.#paused = true;
+
         clearTimeout(this.timeoutId);
-        this.stopTime = Date.now();
-        this.elapsedMs += (Date.now() - this.startTime);
-        this.#stopped = true;
+        this.elapsedMs += (Date.now() - this.lastStartTime);
+
+        this.onPause?.(this.elapsedMs);
 
         return this.elapsedMs;
     }
 
 
-
-    get stopped(): boolean {
-        return this.#stopped;
+    /**
+     * Indicates whether the timer is currently paused.
+     */
+    get paused(): boolean {
+        return this.#paused;
     }
 
+    /**
+     * Indicates whether the timer has completed.
+     */
     get completed(): boolean {
         return this.#completed;
     }
 
-    get elapsedTimeMs(): number {
+    /**
+     * Indicates whether the timer is running.
+     */
+    get running(): boolean {
+        return this.#running;
+    }
 
+    /**
+     *  Indicates whether the timer has been started at least once.
+     */
+    get started(): boolean {
+        return this.#started;
+    }
+
+    /**
+     * Time elapsed while timer was running in milliseconds.
+     * It does not include time while timer was paused.
+     * @return Elapsed time in milliseconds
+     */
+    elapsedTime(): number {
+
+        if (!this.#started) return 0;
+        if (this.#paused) return this.elapsedMs;
         if (this.#completed) return this.durationMs;
-        if (this.#stopped) return this.elapsedMs;
 
+        return this.elapsedMs + (Date.now() - this.lastStartTime);
+    }
 
-        return this.elapsedMs + (Date.now() - this.startTime);
+    /**
+     * Total time elapsed, from when the timer started until it completed in milliseconds.
+     * It includes time while timer was paused.
+     * @return Total elapsed time in milliseconds
+     */
+    totalElapsedTime(): number {
+        if (!this.#started) return 0;
+        if (this.#completed) return this.finishedTime - this.startTime;
+        return Date.now() - this.startTime;
+    }
+
+    /**
+     * Remaining time in milliseconds.
+     * @return Remaining time in milliseconds
+     */
+    remainingTime(): number {
+        return this.durationMs - this.elapsedTime();
     }
 }
