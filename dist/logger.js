@@ -16,10 +16,10 @@ const defaultLogWriter = {
     info: (...data) => console.info(`[${new Date().toJSON()}] INFO:`, ...data),
     warn: (...data) => console.warn(`[${new Date().toJSON()}] WARN:`, ...data),
     error: (...data) => {
-        console.error(`[${new Date().toJSON()}] ERROR:`, ...data), printStack(data);
+        (console.error(`[${new Date().toJSON()}] ERROR:`, ...data), printStack(data));
     },
     fatal: (...data) => {
-        console.error(`[${new Date().toJSON()}] FATAL:`, ...data), printStack(data);
+        (console.error(`[${new Date().toJSON()}] FATAL:`, ...data), printStack(data));
     },
     trace: (...data) => console.info(`[${new Date().toJSON()}] TRACE:`, ...data),
 };

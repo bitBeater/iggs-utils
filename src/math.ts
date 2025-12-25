@@ -180,8 +180,8 @@ export function numberSequenceRange(range: { start: number; end: number; span: n
 	const length = Math.floor(Math.abs(start - end) / span);
 	const retVal = new Array<number>(length);
 
-	if (start < end) for (var i = length + 1; i;) retVal[--i] = start + span * i;
-	else for (var i = length + 1; i;) retVal[--i] = start - span * i;
+	if (start < end) for (var i = length + 1; i; ) retVal[--i] = start + span * i;
+	else for (var i = length + 1; i; ) retVal[--i] = start - span * i;
 	return retVal;
 }
 

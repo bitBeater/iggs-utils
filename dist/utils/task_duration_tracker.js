@@ -136,7 +136,7 @@ class TaskDurationTracker {
     recordTaskEnd() {
         this.intervals.push({
             start: (0, collection_1.lastEl)(this.intervals)?.end || this.creationTime,
-            end: new Date()
+            end: new Date(),
         });
     }
 }

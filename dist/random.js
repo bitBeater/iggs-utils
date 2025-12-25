@@ -28,10 +28,10 @@ function getRandomInt(min, max) {
     return Math.floor(getRandom(min, max));
 }
 /**
-* Returns a random boolean value.
-* @param trueProbability A number between 0 and 1 representing the probability of returning true. Default is 0.5.
-* @returns A random boolean value.
-*/
+ * Returns a random boolean value.
+ * @param trueProbability A number between 0 and 1 representing the probability of returning true. Default is 0.5.
+ * @returns A random boolean value.
+ */
 function getRandomBool(trueProbability = 0.5) {
     return Math.random() < trueProbability;
 }

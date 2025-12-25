@@ -9,7 +9,7 @@ export { TaskDurationTracker } from './task_duration_tracker';
  * console.log(results); // [0, 2, 4, 6, 8]
  * ```
  * @param execs number of executions
- * @param fn function to be executed 
+ * @param fn function to be executed
  */
 export function forEach<T>(execs: number, fn: (i: number) => T): T[] {
 	const results: T[] = [];
@@ -43,4 +43,3 @@ export function benchmarkFn(fn: Function, iterations = 1): { min: number; max: n
 
 	return { min, max, mean };
 }
-

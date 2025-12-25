@@ -77,7 +77,14 @@ exports.leapMonths = [exports.january, exports.leapFebruary, exports.march, expo
  * ```
  */
 function durationToMilliSeconds(duration) {
-    return (duration?.years || 0) * exports.year + (duration?.months || 0) * exports.month + (duration?.weeks || 0) * exports.week + (duration?.days || 0) * exports.day + (duration?.hours || 0) * exports.hour + (duration?.minutes || 0) * exports.minute + (duration?.seconds || 0) * exports.second + (duration?.milliseconds || 0) * exports.millis;
+    return ((duration?.years || 0) * exports.year +
+        (duration?.months || 0) * exports.month +
+        (duration?.weeks || 0) * exports.week +
+        (duration?.days || 0) * exports.day +
+        (duration?.hours || 0) * exports.hour +
+        (duration?.minutes || 0) * exports.minute +
+        (duration?.seconds || 0) * exports.second +
+        (duration?.milliseconds || 0) * exports.millis);
 }
 function millisecondsToDuration(millis) {
     const duration = {};

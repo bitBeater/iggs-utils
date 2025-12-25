@@ -13,10 +13,10 @@ export declare function getRandom(min?: number, max?: number): number;
  */
 export declare function getRandomInt(min?: number, max?: number): number;
 /**
-* Returns a random boolean value.
-* @param trueProbability A number between 0 and 1 representing the probability of returning true. Default is 0.5.
-* @returns A random boolean value.
-*/
+ * Returns a random boolean value.
+ * @param trueProbability A number between 0 and 1 representing the probability of returning true. Default is 0.5.
+ * @returns A random boolean value.
+ */
 export declare function getRandomBool(trueProbability?: number): boolean;
 /**
  * Returns either 1 or -1, with equal probability.

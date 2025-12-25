@@ -115,7 +115,7 @@ class Timer {
         __classPrivateFieldSet(this, _Timer_running, false, "f");
         __classPrivateFieldSet(this, _Timer_paused, true, "f");
         clearTimeout(this.timeoutId);
-        this.elapsedMs += (Date.now() - this.lastStartTime);
+        this.elapsedMs += Date.now() - this.lastStartTime;
         this.onPause?.(this.elapsedMs);
         return this.elapsedMs;
     }

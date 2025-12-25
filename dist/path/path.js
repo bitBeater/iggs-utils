@@ -1,7 +1,7 @@
 function getPathExtension(path) {
-    const lastDotIndex = path.lastIndexOf(".");
+    const lastDotIndex = path.lastIndexOf('.');
     if (lastDotIndex === -1 || lastDotIndex === path.length - 1) {
-        return "";
+        return '';
     }
     return path.substring(lastDotIndex + 1);
 }

@@ -3,9 +3,9 @@
  * @example
  * ```ts
  * import { collection } from 'iggs-utils';
- * 
+ *
  * const circularArray = new collection.CircularArray<string>(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
- * 
+ *
  * // accessing elements by position
  * circularArray.get()   // monday
  * circularArray.get(0)  // monday
@@ -14,7 +14,7 @@
  * circularArray.get(-1) // sunday
  * circularArray.get(7)  // monday
  * circularArray.get(-7) // monday
- * 
+ *
  * // navigating the circular array
  * circularArray.next()       // tuesday
  * circularArray.next()       // wednesday

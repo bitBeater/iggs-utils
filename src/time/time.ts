@@ -83,9 +83,17 @@ export interface Interval {
  * ```
  */
 export function durationToMilliSeconds(duration: Duration): number {
-	return (duration?.years || 0) * year + (duration?.months || 0) * month + (duration?.weeks || 0) * week + (duration?.days || 0) * day + (duration?.hours || 0) * hour + (duration?.minutes || 0) * minute + (duration?.seconds || 0) * second + (duration?.milliseconds || 0) * millis;
+	return (
+		(duration?.years || 0) * year +
+		(duration?.months || 0) * month +
+		(duration?.weeks || 0) * week +
+		(duration?.days || 0) * day +
+		(duration?.hours || 0) * hour +
+		(duration?.minutes || 0) * minute +
+		(duration?.seconds || 0) * second +
+		(duration?.milliseconds || 0) * millis
+	);
 }
-
 
 export function millisecondsToDuration(millis: number): Duration {
 	const duration: Duration = {};
@@ -263,9 +271,9 @@ export function toSqlDate(date: Date): string {
 
 /**
  * Convert an interval to a duration
- * @param interval 
+ * @param interval
  * @returns
- *  
+ *
  * @example
  * ```ts
  * const interval = { start: new Date('2000-01-01'), end: new Date('2000-01-10') };
@@ -274,7 +282,6 @@ export function toSqlDate(date: Date): string {
  * ```
  */
 export function intervalToDuration(interval: Interval): Duration {
-
 	if (interval.end === undefined) {
 		throw new Error('Invalid interval, end date is missing: ' + JSON.stringify(interval));
 	}
@@ -285,8 +292,6 @@ export function intervalToDuration(interval: Interval): Duration {
 
 	const start = interval.start.getTime();
 	const end = interval.end.getTime();
-
-
 
 	if (start > end) {
 		throw new Error('Invalid interval, end date is before start date: ' + JSON.stringify(interval));
@@ -331,7 +336,6 @@ export function humanizeDuration(inDuration: Duration, options?: { reduce?: bool
 	if (duration.minutes) parts.push(`${duration.minutes} minute${duration.minutes > 1 ? 's' : ''}`);
 	if (duration.seconds) parts.push(`${duration.seconds} second${duration.seconds > 1 ? 's' : ''}`);
 	if (duration.milliseconds) parts.push(`${duration.milliseconds} millisecond${duration.milliseconds > 1 ? 's' : ''}`);
-
 
 	// handle singular case
 	if (parts.length === 1) {

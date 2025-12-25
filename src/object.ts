@@ -89,13 +89,12 @@ export function getPathKeys(obj: any, options?: PathKeysOptions): string[] {
 	return pathKeys;
 }
 
-
 /**
  * Checks if a value is a plain object (not null, not array, not date, not promise, not function)
- * 
+ *
  * @param v value to check
  * @returns boolean indicating if the value is a plain object
- * 
+ *
  * @example
  * ```ts
  * isPlainObject({}) // => true
@@ -117,9 +116,6 @@ export function isPlainObject(v: unknown): v is Object {
 	return typeof v === 'object' && v !== null && !(v instanceof Date) && !Array.isArray(v) && !(v instanceof Promise);
 }
 
-
-
-
 /**
  * returns the keys of an object as an array, with proper typing.
  * @example
@@ -127,8 +123,8 @@ export function isPlainObject(v: unknown): v is Object {
  * const obj = { a: 1, b: 2, c: 3 };
  * const keys = keysOf(obj); // ['a', 'b', 'c']
  * ```
- * @param o 
- * @returns 
+ * @param o
+ * @returns
  */
 export function keysOf<T extends object>(o: T): (keyof T)[] {
 	return Object.keys(o) as (keyof T)[];

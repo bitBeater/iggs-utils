@@ -42,10 +42,10 @@ const defaultLogWriter: LogWriter = {
 	info: (...data: Loggable[]) => console.info(`[${new Date().toJSON()}] INFO:`, ...data),
 	warn: (...data: Loggable[]) => console.warn(`[${new Date().toJSON()}] WARN:`, ...data),
 	error: (...data: Loggable[]) => {
-		console.error(`[${new Date().toJSON()}] ERROR:`, ...data), printStack(data);
+		(console.error(`[${new Date().toJSON()}] ERROR:`, ...data), printStack(data));
 	},
 	fatal: (...data: Loggable[]) => {
-		console.error(`[${new Date().toJSON()}] FATAL:`, ...data), printStack(data);
+		(console.error(`[${new Date().toJSON()}] FATAL:`, ...data), printStack(data));
 	},
 	trace: (...data: Loggable[]) => console.info(`[${new Date().toJSON()}] TRACE:`, ...data),
 };
