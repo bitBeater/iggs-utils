@@ -40,12 +40,12 @@
 	"license": "ISC",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/alexrr2iggs/iggs-utils.git"
+		"url": "git+https://github.com/bitBeater/iggs-utils.git"
 	},
 	"bugs": {
-		"url": "https://github.com/alexrr2iggs/iggs-utils/issues"
+		"url": "https://github.com/bitBeater/iggs-utils/issues"
 	},
-	"homepage": "https://github.com/alexrr2iggs/iggs-utils#readme",
+	"homepage": "https://github.com/bitBeater/iggs-utils#readme",
 	"description": "",
 	"typesVersions": {
 		"*": {
