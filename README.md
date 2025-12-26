@@ -1,6 +1,6 @@
-# iggs-utils
+# ecma-utils
 
-[See Documentation](https://bitbeater.github.io/iggs-utils)
+[See Documentation](https://bitbeater.github.io/)
 
 Simple, lightweight, dependenciesless, TypeScript generic helper library.
 
@@ -14,11 +14,10 @@ Compatible with:
 
 npm
 ```bash
-npm i iggs-utils
+npm i @bitBeater/ecma-utils
 ```
 
 deno
 ```bash
-deno install npm:iggs-utils
+deno install npm:@bitBeater/ecma-utils
 ```
-

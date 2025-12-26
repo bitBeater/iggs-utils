@@ -40,12 +40,12 @@
 	"license": "ISC",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/bitBeater/iggs-utils.git"
+		"url": "git+https://github.com/bitBeater/ecma-utils.git"
 	},
 	"bugs": {
-		"url": "https://github.com/bitBeater/iggs-utils/issues"
+		"url": "https://github.com/bitBeater/ecma-utils/issues"
 	},
-	"homepage": "https://github.com/bitBeater/iggs-utils#readme",
+	"homepage": "https://github.com/bitBeater/ecma-utils#readme",
 	"description": "",
 	"typesVersions": {
 		"*": {
