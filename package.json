@@ -1,5 +1,5 @@
 {
-	"name": "iggs-utils",
+	"name": "@bitbeater/ecma-utils",
 	"version": "2.7.0",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -54,6 +54,9 @@
 				"dist/*/index.d.ts"
 			]
 		}
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"devDependencies": {
 		"@types/node": "^24.3.0",
