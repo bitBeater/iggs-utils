@@ -2,7 +2,7 @@
 import assert from 'node:assert';
 import { describe, it, test } from "node:test";
 
-import { Timer } from 'iggs-utils/time/timer';
+import { Timer } from '@bitbeater/ecma-utils/time/timer';
 
 
 

@@ -2,7 +2,7 @@
 import assert from 'node:assert';
 import test, { describe, it } from "node:test";
 
-import { MAX_JS_DATE } from "iggs-utils/time";
+import { MAX_JS_DATE } from "@bitbeater/ecma-utils/time";
 
 
 describe("time", () => {

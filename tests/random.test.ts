@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from "node:test";
 
 
-import { getRandom, getRandomInt, getRandomBool, getRandomSign, getRandomChar, getRandomString, getRandomDate } from "iggs-utils/random";
+import { getRandom, getRandomInt, getRandomBool, getRandomSign, getRandomChar, getRandomString, getRandomDate } from "@bitbeater/ecma-utils/random";
 
 
 describe("Random", () => {

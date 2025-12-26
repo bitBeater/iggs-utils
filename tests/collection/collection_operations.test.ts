@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { pickRandomElements, takeRandomElements } from 'iggs-utils/collection';
+import { pickRandomElements, takeRandomElements } from '@bitbeater/ecma-utils/collection';
 
 
 describe('collection/CollectionOperations', () => {

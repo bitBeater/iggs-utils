@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { TaskDurationTracker } from 'iggs-utils/utils';
-import { durationToMilliSeconds } from 'iggs-utils/time';
+import { TaskDurationTracker } from '@bitbeater/ecma-utils/utils';
+import { durationToMilliSeconds } from '@bitbeater/ecma-utils/time';
 
 
 

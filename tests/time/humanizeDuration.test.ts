@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { time } from '../../src/index';
-import { day, hour, millis, minute, month, second, week, year } from 'iggs-utils/time';
+import { day, hour, millis, minute, month, second, week, year } from '@bitbeater/ecma-utils/time';
 
 
 

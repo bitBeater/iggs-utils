@@ -2,7 +2,7 @@
  * A circular array implementation that allows for wrapping around the ends.
  * @example
  * ```ts
- * import { collection } from 'iggs-utils';
+ * import { collection } from '@bitbeater/ecma-utils';
  *
  * const circularArray = new collection.CircularArray<string>(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
  *

@@ -3,7 +3,7 @@ import { Duration } from './time';
  * A simple timer that can be started, paused, and resumed.
  * @example
  * ```js
- * import { Timer } from 'iggs-utils/time/timer';
+ * import { Timer } from '@bitbeater/ecma-utils/time/timer';
  *
  * const timer = new Timer(5000, (totalDuration) => {
  *     console.log(`Timer completed in ${totalDuration} ms`);

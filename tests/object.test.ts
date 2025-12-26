@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from "node:test";
-import { isPlainObject, keysOf } from "iggs-utils/object";
+import { isPlainObject, keysOf } from "@bitbeater/ecma-utils/object";
 
 
 
