@@ -1,6 +1,6 @@
 # ecma-utils
 
-[See Documentation](https://bitbeater.github.io/)
+[See Documentation](https://bitbeater.github.io/ecma-utils/)
 
 Simple, lightweight, dependenciesless, TypeScript generic helper library.
 
