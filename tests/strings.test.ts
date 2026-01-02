@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from "node:test";
-import { templateToString, spacedWords } from "@bitbeater/ecma-utils/strings";
+import { templateToString, spacedWords, splitRuns } from "@bitbeater/ecma-utils/strings";
 
 
 
@@ -83,6 +83,66 @@ describe('strings', () => {
                 ['', 'HelloWorld']
             ]);
         });
+    });
+
+    describe('split runs', () => {
+
+
+        it('0: no match delimiter', () => {
+
+            const result = splitRuns('Hello world', c => false);
+            assert.deepEqual(result, [
+                ['', 'Hello world']
+            ]);
+
+        });
+
+
+        it('1: midle delimiter', () => {
+
+            const isDelim = (ch: string) => ch === ' ' || ch === '-' || ch === '!';
+
+            const result = splitRuns('hello world', isDelim);
+
+            assert.deepEqual(result,
+                [
+                    ["", "hello"],
+                    [" ", "world"],
+                ]
+            );
+        });
+
+
+        it('2: trailing delimiter', () => {
+
+            const isDelim = (ch: string) => ch === ' ' || ch === '-' || ch === '!';
+
+            const result = splitRuns('hello world!', isDelim);
+
+            assert.deepEqual(result,
+                [
+                    ["", "hello"],
+                    [" ", "world"],
+                    ["!", ""]
+                ]
+            );
+        });
+
+        it('3: leading delimiter', () => {
+
+            const isDelim = (ch: string) => ch === ' ' || ch === '-' || ch === '!';
+
+            const result = splitRuns('- hello world!', isDelim);
+
+            assert.deepEqual(result,
+                [
+                    ["- ", "hello"],
+                    [" ", "world"],
+                    ["!", ""]
+                ]
+            );
+        });
+
     });
 });
 

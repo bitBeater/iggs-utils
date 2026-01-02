@@ -30,6 +30,8 @@ export function templateToString(template: TemplateStringsArray, ...expressions:
 	return merged.join('');
 }
 
+type SplitTuple = [delimiterRun: string, token: string];
+
 /**
  * Separates text into an array of [whitespace, word] tuples, preserving the whitespace.
  * @example
@@ -45,39 +47,94 @@ export function templateToString(template: TemplateStringsArray, ...expressions:
  * @param text
  * @returns [[whitespace, word], ...]
  */
-export function spacedWords(text: string): [string, string][] {
-	const _spacedWords: [string, string][] = [];
+export function spacedWords(text: string): SplitTuple[] {
+	return splitRuns(text, isWhitespace);
+}
 
-	let isPreviousCharWhitespace = null;
-	let [whitespaces, currentWord] = ['', ''];
+/**
+ * Splits a string into pairs of `[delimiterRun, token]`, preserving contiguous
+ * delimiter runs.
+ *
+ * @param {string} text - The input string to split.
+ * @param {(char: string, index: number, text: string) => boolean} isDelimiter
+ *   Predicate to determine whether a character is a delimiter.
+ * @returns {[string, string][]} Array of tuples: `[delimiterRun, token]`.
+ *
+ * @example
+ * ```ts
+ * // Split on spaces and punctuation
+ * const isDelim = (ch) => ch === ' ' || ch === '-' || ch === '!';
+ *
+ * splitRuns('hello world', isDelim);
+ * [
+ *    ["", "hello"],
+ *    [" ", "world"],
+ * ]
+ *
+ * splitRuns('hello world!', isDelim);
+ * [
+ *    ["", "hello"],
+ *    [" ", "world"],
+ *    ["!", ""]
+ * ]
+ *
+ * splitRuns('- hello world!', isDelim);
+ * [
+ *    ["- ", "hello"],
+ *    [" ", "world"],
+ *    ["!", ""]
+ * ]
+ * ```
+ * */
 
-	for (const char of text) {
-		if (isWhitespace(char)) {
-			if (isPreviousCharWhitespace === false) {
-				_spacedWords.push([whitespaces, currentWord]);
-				currentWord = '';
-				whitespaces = '';
-			}
+export function splitRuns(text: string, isDelimiter: (char: string, index?: number, text?: string) => boolean): SplitTuple[] {
+	const result: SplitTuple[] = [];
+	if (!text) return result;
 
-			const whiteSpace = char;
-			whitespaces += whiteSpace;
-			isPreviousCharWhitespace = true;
+	let inDelimiter: boolean | null = null;
+	const delimiterBuf: string[] = [];
+	const wordBuf: string[] = [];
+
+	const flush = () => {
+		result.push([delimiterBuf.join(''), wordBuf.join('')]);
+		delimiterBuf.length = 0;
+		wordBuf.length = 0;
+	};
+
+	for (let i = 0; i < text.length; i++) {
+		const ch = text[i];
+		if (isDelimiter(ch, i, text)) {
+			// entering a delimiter run after a word => flush the word+match pair
+			if (inDelimiter === false) flush();
+
+			delimiterBuf.push(ch);
+			inDelimiter = true;
 			continue;
 		}
 
-		currentWord += char;
-		isPreviousCharWhitespace = false;
+		wordBuf.push(ch);
+		inDelimiter = false;
 	}
 
-	return _spacedWords.concat([[whitespaces, currentWord]]);
+	// flush trailing tuple (captures trailing delimiter run or last word)
+	flush();
+	return result;
+}
+
+export function isUpperCase(str: string): boolean {
+	return str === str.toUpperCase();
 }
 
 export const isWhitespace = (char: string): boolean => {
 	return /\s/.test(char);
 };
 
-export function isUpperCase(str: string): boolean {
-	return str === str.toUpperCase();
+export function isPunctuation(char: string): boolean {
+	return /[.,\/#!$%\^&\*;:{}=\-_`~()]/.test(char);
+}
+
+export function isNumber(char: string): boolean {
+	return /[0-9]/.test(char);
 }
 
 export type TemplateExpression = string | number | Array<string | number>;
